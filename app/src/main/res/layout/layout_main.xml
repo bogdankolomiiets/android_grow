@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_RL"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <EditText
+        android:id="@+id/ET_Field1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/field1"
+        android:inputType="number"
+        android:paddingTop="8dp" />
+
+    <EditText
+        android:id="@+id/ET_Field2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ET_Field1"
+        android:layout_marginTop="8dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/field2"
+        android:inputType="number" />
+
+    <RadioGroup
+        android:id="@+id/Operation_RD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ET_Field2"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/Operation1_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@drawable/radio_select"
+            android:padding="8dp"
+            android:text="@string/radioOperation1Text" />
+
+        <RadioButton
+            android:id="@+id/Operation2_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@drawable/radio_select"
+            android:padding="8dp"
+            android:text="@string/radioOperation2Text" />
+
+        <RadioButton
+            android:id="@+id/Operation3_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@drawable/radio_select"
+            android:padding="8dp"
+            android:text="@string/radioOperation3Text" />
+
+        <RadioButton
+            android:id="@+id/Operation4_radio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@drawable/radio_select"
+            android:padding="8dp"
+            android:text="@string/radioOperation4Text" />
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/Float_checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Operation_RD"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:text="@string/floatCheckBoxText" />
+
+    <CheckBox
+        android:id="@+id/Signed_checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Float_checkBox"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="@string/signedCheckBoxText" />
+
+    <TextView
+        android:id="@+id/TV_Result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Signed_checkBox"
+        android:layout_marginTop="16dp"
+        android:text="@string/ResultText" />
+
+    <Button
+        android:id="@+id/btn_Calculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TV_Result"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="297dp"
+        android:onClick="calculate"
+        android:text="@string/btnCalculateText" />
+</RelativeLayout>

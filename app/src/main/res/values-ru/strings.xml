@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Practice One</string>
+    <string name="ResultText">Результат</string>
+    <string name="field1">Число 1</string>
+    <string name="field2">Число 2</string>
+    <string name="radioOperation1Text">Плюс</string>
+    <string name="radioOperation2Text">Минус</string>
+    <string name="radioOperation3Text">Делить</string>
+    <string name="radioOperation4Text">Умножить</string>
+    <string name="signedCheckBoxText">Использовать знаковые числа</string>
+    <string name="floatCheckBoxText">Использовать дробные числа</string>
+    <string name="btnCalculateText">Вычислить</string>
+</resources>
