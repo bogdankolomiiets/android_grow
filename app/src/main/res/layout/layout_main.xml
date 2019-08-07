@@ -35,36 +35,36 @@
         android:orientation="vertical">
 
         <RadioButton
-            android:id="@+id/Operation1_radio"
+            android:id="@+id/radio_plus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/radio_select"
             android:padding="8dp"
-            android:text="@string/radioOperation1Text" />
+            android:text="@string/radioOperationPlus" />
 
         <RadioButton
-            android:id="@+id/Operation2_radio"
+            android:id="@+id/radio_minus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/radio_select"
             android:padding="8dp"
-            android:text="@string/radioOperation2Text" />
+            android:text="@string/radioOperationMinus" />
 
         <RadioButton
-            android:id="@+id/Operation3_radio"
+            android:id="@+id/radio_multiple"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/radio_select"
             android:padding="8dp"
-            android:text="@string/radioOperation3Text" />
+            android:text="@string/radioOperationMultiple" />
 
         <RadioButton
-            android:id="@+id/Operation4_radio"
+            android:id="@+id/radio_divide"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/radio_select"
             android:padding="8dp"
-            android:text="@string/radioOperation4Text" />
+            android:text="@string/radioOperationDivide" />
     </RadioGroup>
 
     <CheckBox

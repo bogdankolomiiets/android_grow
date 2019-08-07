@@ -2,10 +2,10 @@
     <string name="app_name" translatable="false">Practice One</string>
     <string name="field1">Number 1</string>
     <string name="field2">Number 2</string>
-    <string name="radioOperation1Text">Plus</string>
-    <string name="radioOperation2Text">Minus</string>
-    <string name="radioOperation3Text">Divide</string>
-    <string name="radioOperation4Text">Multiple</string>
+    <string name="radioOperationPlus">Plus</string>
+    <string name="radioOperationMinus">Minus</string>
+    <string name="radioOperationDivide">Divide</string>
+    <string name="radioOperationMultiple">Multiple</string>
     <string name="floatCheckBoxText">Use float numbers</string>
     <string name="signedCheckBoxText">Use signed numbers</string>
     <string name="ResultText">Result</string>
