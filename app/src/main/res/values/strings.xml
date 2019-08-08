@@ -8,6 +8,14 @@
     <string name="radioOperationMultiple">Multiple</string>
     <string name="floatCheckBoxText">Use float numbers</string>
     <string name="signedCheckBoxText">Use signed numbers</string>
-    <string name="ResultText">Result</string>
+    <string name="tv_ResultText">Result</string>
     <string name="btnCalculateText">Calculate</string>
+    <string name="clean">Clean</string>
+    <string name="operationNotFound">Operation not found</string>
+    <string name="clearDataQuestion">Clear data?</string>
+    <string name="btnYES">yes</string>
+    <string name="btnNO">no</string>
+    <string name="btnOK">ok</string>
+    <string name="cleanMessage">Data will be deleted from</string>
+    <string name="dividionByZero">Division by zero is prohibited</string>
 </resources>

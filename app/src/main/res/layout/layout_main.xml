@@ -9,10 +9,12 @@
         android:id="@+id/ET_Field1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
         android:autofillHints=""
-        android:ems="10"
         android:hint="@string/field1"
-        android:inputType="number"
+        android:inputType="numberSigned|numberDecimal"
         android:paddingTop="8dp" />
 
     <EditText
@@ -20,25 +22,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ET_Field1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/field2"
-        android:inputType="number" />
+        android:inputType="numberSigned|numberDecimal" />
 
     <RadioGroup
-        android:id="@+id/Operation_RD"
+        android:id="@+id/operationGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ET_Field2"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical">
+        android:layout_below="@id/ET_Field2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:paddingTop="16dp">
 
         <RadioButton
             android:id="@+id/radio_plus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/radio_select"
+            android:onClick="setOperationSing"
             android:padding="8dp"
             android:text="@string/radioOperationPlus" />
 
@@ -47,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/radio_select"
+            android:onClick="setOperationSing"
             android:padding="8dp"
             android:text="@string/radioOperationMinus" />
 
@@ -55,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/radio_select"
+            android:onClick="setOperationSing"
             android:padding="8dp"
             android:text="@string/radioOperationMultiple" />
 
@@ -63,43 +73,51 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/radio_select"
+            android:onClick="setOperationSing"
             android:padding="8dp"
             android:text="@string/radioOperationDivide" />
     </RadioGroup>
 
     <CheckBox
-        android:id="@+id/Float_checkBox"
+        android:id="@+id/float_checkBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Operation_RD"
+        android:layout_below="@id/operationGroup"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
         android:checked="true"
         android:text="@string/floatCheckBoxText" />
 
     <CheckBox
-        android:id="@+id/Signed_checkBox"
+        android:id="@+id/signed_checkBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Float_checkBox"
+        android:layout_below="@id/float_checkBox"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
         android:checked="true"
         android:text="@string/signedCheckBoxText" />
 
     <TextView
-        android:id="@+id/TV_Result"
+        android:id="@+id/tv_Result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Signed_checkBox"
+        android:layout_below="@id/signed_checkBox"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
-        android:text="@string/ResultText" />
+        android:text="@string/tv_ResultText"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btn_Calculate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TV_Result"
+        android:layout_below="@id/tv_Result"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="297dp"
-        android:onClick="calculate"
         android:text="@string/btnCalculateText" />
 </RelativeLayout>

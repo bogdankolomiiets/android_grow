@@ -34,73 +34,66 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/LLForRadioButtons"
+    <RadioButton
+        android:id="@+id/radio_plus"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:layout_below="@id/topLL"
-        android:layout_above="@id/Float_checkBox">
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:button="@drawable/radio_select"
+        android:gravity="center_horizontal"
+        android:onClick="setOperationSing"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="@string/radioOperationPlus" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+    <RadioButton
+        android:id="@+id/radio_minus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/radio_plus"
+        android:layout_marginTop="0dp"
+        android:button="@drawable/radio_select"
+        android:onClick="setOperationSing"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="@string/radioOperationMinus" />
 
-            <RadioButton
-                android:id="@+id/radio_plus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@drawable/radio_select"
-                android:text="@string/radioOperationPlus" />
+    <RadioButton
+        android:id="@+id/radio_multiple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radio_plus"
+        android:layout_alignParentStart="true"
+        android:button="@drawable/radio_select"
+        android:onClick="setOperationSing"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="@string/radioOperationMultiple" />
 
-            <RadioButton
-                android:id="@+id/radio_minus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|end"
-                android:layout_weight="1"
-                android:button="@drawable/radio_select"
-                android:text="@string/radioOperationMinus" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radio_multiple"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@drawable/radio_select"
-                android:text="@string/radioOperationMultiple" />
-
-            <RadioButton
-                android:id="@+id/radio_divide"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@drawable/radio_select"
-                android:text="@string/radioOperationDivide" />
-        </LinearLayout>
-    </LinearLayout>
+    <RadioButton
+        android:id="@+id/radio_divide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/radio_select"
+        android:onClick="setOperationSing"
+        android:text="@string/radioOperationDivide" />
 
     <CheckBox
-        android:id="@+id/Float_checkBox"
+        android:id="@+id/float_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:checked="true"
         android:text="@string/floatCheckBoxText"
-        android:layout_above="@id/Signed_checkBox"/>
+        android:layout_above="@id/signed_checkBox"/>
 
     <CheckBox
-        android:id="@+id/Signed_checkBox"
+        android:id="@+id/signed_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -119,11 +112,10 @@
         android:layout_alignParentEnd="true">
 
         <TextView
-            android:id="@+id/TV_Result"
+            android:id="@+id/tv_Result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Signed_checkBox"
-            android:text="@string/ResultText"
+            android:text="@string/tv_ResultText"
             android:layout_weight="1"/>
 
         <Button
@@ -131,7 +123,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="calculate"
             android:text="@string/btnCalculateText" />
     </LinearLayout>
 
