@@ -1,13 +1,12 @@
 package com.example.practiceone;
 
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,13 +15,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.snackbar.Snackbar;
+import java.text.NumberFormat;
 
 public class Main_activity extends AppCompatActivity implements View.OnClickListener{
 
@@ -36,9 +33,9 @@ public class Main_activity extends AppCompatActivity implements View.OnClickList
     private CheckBox float_checkBox;
     private CheckBox signed_checkBox;
     private Button btn_Calculate;
+    private RadioGroup groupOne, groupTwo;
 
-    //set up default operation sign +
-    private char operationSign;
+    private double val1, val2, result;
 
 
     @Override
@@ -52,6 +49,11 @@ public class Main_activity extends AppCompatActivity implements View.OnClickList
         radio_multiple = (RadioButton) findViewById(R.id.radio_multiple);
         radio_divide = (RadioButton) findViewById(R.id.radio_divide);
 
+        //find radioGroup
+        groupOne = (RadioGroup) findViewById(R.id.groupOne);
+        groupTwo = (RadioGroup) findViewById(R.id.groupTwo);
+
+
         //find another elements
         ET_Field1 = (EditText) findViewById(R.id.ET_Field1);
         ET_Field2 = (EditText) findViewById(R.id.ET_Field2);
@@ -59,9 +61,15 @@ public class Main_activity extends AppCompatActivity implements View.OnClickList
         btn_Calculate = (Button) findViewById(R.id.btn_Calculate);
         float_checkBox = (CheckBox) findViewById(R.id.float_checkBox);
         signed_checkBox = (CheckBox) findViewById(R.id.signed_checkBox);
+
+        //set up onClickListeners
         btn_Calculate.setOnClickListener(this);
         float_checkBox.setOnClickListener(this);
         signed_checkBox.setOnClickListener(this);
+        radio_plus.setOnClickListener(this);
+        radio_minus.setOnClickListener(this);
+        radio_multiple.setOnClickListener(this);
+        radio_divide.setOnClickListener(this);
     }
 
 
@@ -111,7 +119,6 @@ public class Main_activity extends AppCompatActivity implements View.OnClickList
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("tv_ResultText", tv_Result.getText().toString());
-        outState.putChar("operationSign", operationSign);
     }
 
     //restore values from bundle to tv_Result and operationSign
@@ -119,15 +126,14 @@ public class Main_activity extends AppCompatActivity implements View.OnClickList
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         tv_Result.setText(savedInstanceState.getString("tv_ResultText"));
-        operationSign = savedInstanceState.getChar("operationSign");
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_Calculate:
-                if (checkIfOperationSelected()) {
-                    calculate();
+                if (checkIfAnyOperationSelected() && dataValidation()) {
+                    calculate(5, 3);
                 }
                 break;
             case R.id.float_checkBox:
@@ -136,18 +142,50 @@ public class Main_activity extends AppCompatActivity implements View.OnClickList
                 } else {
                     ET_Field1.setInputType(InputType.TYPE_CLASS_NUMBER);
                 }
+                break;
             case R.id.signed_checkBox:
                 if (signed_checkBox.isChecked()){
                     ET_Field1.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
                 } else {
                     ET_Field1.setInputType(InputType.TYPE_CLASS_NUMBER);
                 }
+                break;
+            case R.id.radio_plus:
+            case R.id.radio_minus:
+                if (groupTwo.getCheckedRadioButtonId() != -1){
+                    groupTwo.clearCheck();
+                }
+                break;
+            case R.id.radio_multiple:
+            case R.id.radio_divide:
+                if (groupOne.getCheckedRadioButtonId() != -1){
+                    groupOne.clearCheck();
+                }
+                break;
         }
     }
 
-    private void calculate() {
+    private boolean dataValidation() {
+        return true;
+    }
+
+    private void calculate(double val1, double val2) {
         try {
-            //todo
+//            switch (operationGroup.getCheckedRadioButtonId()){
+//                case R.id.radio_plus:
+//                    result = val1 + val2;
+//                    break;
+//                case R.id.radio_minus:
+//                    result = val1 - val2;
+//                    break;
+//                case R.id.radio_multiple:
+//                    result = val1 * val2;
+//                    break;
+//                case R.id.radio_divide:
+//                    result = val1 / val2;
+//                    break;
+
+            tv_Result.setText(NumberFormat.getInstance().format(result));
         } catch (ArithmeticException ex){
             showErrorDialog(getResources().getString(R.string.dividionByZero));
         } catch (Exception ex){
@@ -155,30 +193,12 @@ public class Main_activity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private boolean checkIfOperationSelected() {
-        if (operationSign != '\u0000'){
+    private boolean checkIfAnyOperationSelected() {
+        if (groupOne.getCheckedRadioButtonId() != -1 || groupTwo.getCheckedRadioButtonId() != -1){
             return true;
         } else {
             Toast.makeText(this, R.string.operationNotFound, Toast.LENGTH_SHORT).show();
             return false;
-        }
-    }
-
-    //set operation sign
-    public void setOperationSing(View view){
-        switch (view.getId()){
-            case R.id.radio_plus:
-                operationSign = '+';
-                break;
-            case R.id.radio_minus:
-                operationSign = '-';
-                break;
-            case R.id.radio_multiple:
-                operationSign = '*';
-                break;
-            case R.id.radio_divide:
-                operationSign = '/';
-                break;
         }
     }
 
@@ -194,4 +214,5 @@ public class Main_activity extends AppCompatActivity implements View.OnClickList
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
 }

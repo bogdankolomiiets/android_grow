@@ -17,7 +17,7 @@
         <EditText
             android:id="@+id/ET_Field1"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:autofillHints=""
             android:hint="@string/field1"
@@ -34,89 +34,101 @@
 
     </LinearLayout>
 
-    <RadioButton
-        android:id="@+id/radio_plus"
+    <LinearLayout
+        android:id="@+id/operationLL"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/topLL"
+        android:layout_height="match_parent"
+        android:layout_above="@id/float_checkBox"
+        android:layout_below="@+id/topLL"
         android:layout_alignParentStart="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:button="@drawable/radio_select"
-        android:gravity="center_horizontal"
-        android:onClick="setOperationSing"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:text="@string/radioOperationPlus" />
+        android:orientation="horizontal">
 
-    <RadioButton
-        android:id="@+id/radio_minus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/radio_plus"
-        android:layout_marginTop="0dp"
-        android:button="@drawable/radio_select"
-        android:onClick="setOperationSing"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:text="@string/radioOperationMinus" />
+        <RadioGroup
+            android:id="@+id/groupOne"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-    <RadioButton
-        android:id="@+id/radio_multiple"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/radio_plus"
-        android:layout_alignParentStart="true"
-        android:button="@drawable/radio_select"
-        android:onClick="setOperationSing"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:text="@string/radioOperationMultiple" />
+            <RadioButton
+                android:id="@+id/radio_plus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@drawable/radio_select"
+                android:text="@string/radioOperationPlus" />
 
-    <RadioButton
-        android:id="@+id/radio_divide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/radio_select"
-        android:onClick="setOperationSing"
-        android:text="@string/radioOperationDivide" />
+            <RadioButton
+                android:id="@+id/radio_minus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@drawable/radio_select"
+                android:text="@string/radioOperationMinus" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/groupTwo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <RadioButton
+                android:id="@+id/radio_multiple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@drawable/radio_select"
+                android:text="@string/radioOperationMultiple" />
+
+            <RadioButton
+                android:id="@+id/radio_divide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@drawable/radio_select"
+                android:text="@string/radioOperationDivide" />
+        </RadioGroup>
+
+    </LinearLayout>
 
     <CheckBox
         android:id="@+id/float_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/signed_checkBox"
         android:layout_marginTop="8dp"
         android:checked="true"
-        android:text="@string/floatCheckBoxText"
-        android:layout_above="@id/signed_checkBox"/>
+        android:text="@string/floatCheckBoxText" />
 
     <CheckBox
         android:id="@+id/signed_checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:checked="true"
-        android:text="@string/signedCheckBoxText"
         android:layout_above="@id/bottomLL"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:checked="true"
+        android:text="@string/signedCheckBoxText" />
 
     <LinearLayout
-            android:id="@+id/bottomLL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/bottomLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_Result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tv_ResultText"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="@string/tv_ResultText" />
 
         <Button
             android:id="@+id/btn_Calculate"

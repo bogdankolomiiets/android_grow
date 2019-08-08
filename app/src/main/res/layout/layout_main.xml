@@ -30,23 +30,26 @@
         android:hint="@string/field2"
         android:inputType="numberSigned|numberDecimal" />
 
-    <RadioGroup
-        android:id="@+id/operationGroup"
+    <LinearLayout
+        android:id="@+id/operationLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ET_Field2"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        android:paddingTop="16dp">
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
 
+        <RadioGroup
+            android:id="@+id/groupOne"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
         <RadioButton
             android:id="@+id/radio_plus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/radio_select"
-            android:onClick="setOperationSing"
             android:padding="8dp"
             android:text="@string/radioOperationPlus" />
 
@@ -55,16 +58,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/radio_select"
-            android:onClick="setOperationSing"
             android:padding="8dp"
             android:text="@string/radioOperationMinus" />
+        </RadioGroup>
 
+        <RadioGroup
+            android:id="@+id/groupTwo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
         <RadioButton
             android:id="@+id/radio_multiple"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/radio_select"
-            android:onClick="setOperationSing"
             android:padding="8dp"
             android:text="@string/radioOperationMultiple" />
 
@@ -73,16 +80,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/radio_select"
-            android:onClick="setOperationSing"
             android:padding="8dp"
             android:text="@string/radioOperationDivide" />
-    </RadioGroup>
+        </RadioGroup>
+    </LinearLayout>
 
     <CheckBox
         android:id="@+id/float_checkBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/operationGroup"
+        android:layout_below="@id/operationLL"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
