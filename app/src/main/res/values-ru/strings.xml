@@ -19,4 +19,5 @@
     <string name="btnOK">ок</string>
     <string name="cleanMessage">Данные будут удалены из</string>
     <string name="dividionByZero">Деление на ноль запрещено</string>
+    <string name="incorrectNumberFormat">Значение не верно</string>
 </resources>

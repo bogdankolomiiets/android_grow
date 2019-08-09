@@ -6,7 +6,6 @@ import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,6 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.text.NumberFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main_activity extends AppCompatActivity implements View.OnClickListener{
 
@@ -35,6 +36,7 @@ public class Main_activity extends AppCompatActivity implements View.OnClickList
     private Button btn_Calculate;
     private RadioGroup groupOne, groupTwo;
 
+    private char operationSign;
     private double val1, val2, result;
 
 
@@ -119,6 +121,7 @@ public class Main_activity extends AppCompatActivity implements View.OnClickList
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("tv_ResultText", tv_Result.getText().toString());
+        outState.putChar("operationSign", operationSign);
     }
 
     //restore values from bundle to tv_Result and operationSign
@@ -126,6 +129,7 @@ public class Main_activity extends AppCompatActivity implements View.OnClickList
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         tv_Result.setText(savedInstanceState.getString("tv_ResultText"));
+        operationSign = savedInstanceState.getChar("operationSign");
     }
 
     @Override
@@ -133,31 +137,47 @@ public class Main_activity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()) {
             case R.id.btn_Calculate:
                 if (checkIfAnyOperationSelected() && dataValidation()) {
-                    calculate(5, 3);
+                    calculate(val1, val2);
                 }
                 break;
             case R.id.float_checkBox:
                 if (float_checkBox.isChecked()){
-                    ET_Field1.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                    ET_Field1.setInputType(getInputTypeWithFloat());
+                    ET_Field2.setInputType(getInputTypeWithFloat());
                 } else {
-                    ET_Field1.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    ET_Field1.setInputType(getInputTypeWithoutFloat());
+                    ET_Field2.setInputType(getInputTypeWithoutFloat());
                 }
                 break;
             case R.id.signed_checkBox:
                 if (signed_checkBox.isChecked()){
-                    ET_Field1.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
+                    ET_Field1.setInputType(getInputTypeWithSign());
+                    ET_Field2.setInputType(getInputTypeWithSign());
                 } else {
-                    ET_Field1.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    ET_Field1.setInputType(getInputTypeWithoutSign());
+                    ET_Field2.setInputType(getInputTypeWithoutSign());
                 }
                 break;
             case R.id.radio_plus:
+                operationSign = '+';
+                if (groupTwo.getCheckedRadioButtonId() != -1){
+                    groupTwo.clearCheck();
+                }
+                break;
             case R.id.radio_minus:
+                operationSign = '-';
                 if (groupTwo.getCheckedRadioButtonId() != -1){
                     groupTwo.clearCheck();
                 }
                 break;
             case R.id.radio_multiple:
+                operationSign = '*';
+                if (groupOne.getCheckedRadioButtonId() != -1){
+                    groupOne.clearCheck();
+                }
+                break;
             case R.id.radio_divide:
+                operationSign = '/';
                 if (groupOne.getCheckedRadioButtonId() != -1){
                     groupOne.clearCheck();
                 }
@@ -166,25 +186,76 @@ public class Main_activity extends AppCompatActivity implements View.OnClickList
     }
 
     private boolean dataValidation() {
-        return true;
+        try {
+            String temp = ET_Field1.getText().toString();
+            Pattern pattern = Pattern.compile("-?\\d*\\.?\\d*");
+            //match value from ET_Field1
+            Matcher matcher = pattern.matcher(temp);
+            if (matcher.matches()) {
+                val1 = Double.valueOf(temp);
+            } else throw new IllegalArgumentException(temp);
+            //match value from ET_Field2
+            temp = ET_Field2.getText().toString();
+            matcher = pattern.matcher(temp);
+            if (matcher.matches()) {
+                val2 = Double.valueOf(temp);
+            } else throw new IllegalArgumentException(temp);
+            return true;
+        } catch (IllegalArgumentException ex) {
+            showErrorDialog(getResources().getString(R.string.incorrectNumberFormat) + " " + ex.getMessage());
+        }
+        return false;
+    }
+
+    private int getInputTypeWithFloat(){
+        int type = signed_checkBox.isChecked() ?
+                InputType.TYPE_CLASS_NUMBER |
+                InputType.TYPE_NUMBER_FLAG_DECIMAL |
+                InputType.TYPE_NUMBER_FLAG_SIGNED :
+                InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;
+        return type;
+    }
+
+    private int getInputTypeWithoutFloat(){
+        int type = signed_checkBox.isChecked() ?
+                InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED :
+                InputType.TYPE_CLASS_NUMBER;
+        return type;
+    }
+
+    private int getInputTypeWithSign(){
+        int type = float_checkBox.isChecked() ?
+                InputType.TYPE_CLASS_NUMBER |
+                InputType.TYPE_NUMBER_FLAG_DECIMAL |
+                InputType.TYPE_NUMBER_FLAG_SIGNED :
+                InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED;
+        return type;
+    }
+
+    private int getInputTypeWithoutSign(){
+        int type = float_checkBox.isChecked() ?
+                InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL :
+                InputType.TYPE_CLASS_NUMBER;
+        return type;
     }
 
     private void calculate(double val1, double val2) {
         try {
-//            switch (operationGroup.getCheckedRadioButtonId()){
-//                case R.id.radio_plus:
-//                    result = val1 + val2;
-//                    break;
-//                case R.id.radio_minus:
-//                    result = val1 - val2;
-//                    break;
-//                case R.id.radio_multiple:
-//                    result = val1 * val2;
-//                    break;
-//                case R.id.radio_divide:
-//                    result = val1 / val2;
-//                    break;
-
+            switch (operationSign) {
+                case '+':
+                    result = val1 + val2;
+                    break;
+                case '-':
+                    result = val1 - val2;
+                    break;
+                case '*':
+                    result = val1 * val2;
+                    break;
+                case '/':
+                    if (val2 == 0) throw new ArithmeticException();
+                    result = val1 / val2;
+                    break;
+            }
             tv_Result.setText(NumberFormat.getInstance().format(result));
         } catch (ArithmeticException ex){
             showErrorDialog(getResources().getString(R.string.dividionByZero));

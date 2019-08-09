@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="checkBoxDimension">18sp</dimen>
+    <dimen name="radioButtonDimension">18sp</dimen>
+    <dimen name="calculateButtonDimension">24sp</dimen>
+    <dimen name="resultTVDimension">24sp</dimen>
+</resources>
