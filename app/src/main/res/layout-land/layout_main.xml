@@ -21,7 +21,7 @@
             android:layout_weight="1"
             android:autofillHints=""
             android:hint="@string/field1"
-            android:inputType="number" />
+            android:inputType="numberSigned|numberDecimal" />
 
         <EditText
             android:id="@+id/ET_Field2"
@@ -30,7 +30,7 @@
             android:layout_weight="1"
             android:autofillHints=""
             android:hint="@string/field2"
-            android:inputType="number" />
+            android:inputType="numberSigned|numberDecimal" />
 
     </LinearLayout>
 
@@ -58,7 +58,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:button="@drawable/radio_select"
-                android:text="@string/radioOperationPlus" />
+                android:text="@string/radioOperationPlus"
+                android:textSize="@dimen/radioButtonDimension" />
 
             <RadioButton
                 android:id="@+id/radio_minus"
@@ -66,7 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:button="@drawable/radio_select"
-                android:text="@string/radioOperationMinus" />
+                android:text="@string/radioOperationMinus"
+                android:textSize="@dimen/radioButtonDimension" />
         </RadioGroup>
 
         <RadioGroup
@@ -82,7 +84,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:button="@drawable/radio_select"
-                android:text="@string/radioOperationMultiple" />
+                android:text="@string/radioOperationMultiple"
+                android:textSize="@dimen/radioButtonDimension" />
 
             <RadioButton
                 android:id="@+id/radio_divide"
@@ -90,7 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:button="@drawable/radio_select"
-                android:text="@string/radioOperationDivide" />
+                android:text="@string/radioOperationDivide"
+                android:textSize="@dimen/radioButtonDimension" />
         </RadioGroup>
 
     </LinearLayout>
@@ -102,7 +106,8 @@
         android:layout_above="@id/signed_checkBox"
         android:layout_marginTop="8dp"
         android:checked="true"
-        android:text="@string/floatCheckBoxText" />
+        android:text="@string/floatCheckBoxText"
+        android:textSize="@dimen/checkBoxDimension" />
 
     <CheckBox
         android:id="@+id/signed_checkBox"
@@ -112,7 +117,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:checked="true"
-        android:text="@string/signedCheckBoxText" />
+        android:text="@string/signedCheckBoxText"
+        android:textSize="@dimen/checkBoxDimension" />
 
     <LinearLayout
         android:id="@+id/bottomLL"
@@ -128,14 +134,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/tv_ResultText" />
+            android:text="@string/tv_ResultText"
+            android:textSize="@dimen/resultTVDimension" />
 
         <Button
             android:id="@+id/btn_Calculate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/btnCalculateText" />
+            android:background="@drawable/button_back"
+            android:text="@string/btnCalculateText"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/calculateButtonDimension" />
     </LinearLayout>
 
 </RelativeLayout>

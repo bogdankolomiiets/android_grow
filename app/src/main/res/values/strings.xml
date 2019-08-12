@@ -18,4 +18,5 @@
     <string name="btnOK">ok</string>
     <string name="cleanMessage">Data will be deleted from</string>
     <string name="dividionByZero">Division by zero is prohibited</string>
+    <string name="incorrectNumberFormat">Incorrect number format</string>
 </resources>

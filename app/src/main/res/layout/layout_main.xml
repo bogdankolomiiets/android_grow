@@ -3,7 +3,7 @@
     android:id="@+id/main_RL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp">
+    android:layout_margin="8dp">
 
     <EditText
         android:id="@+id/ET_Field1"
@@ -45,21 +45,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-        <RadioButton
-            android:id="@+id/radio_plus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:button="@drawable/radio_select"
-            android:padding="8dp"
-            android:text="@string/radioOperationPlus" />
 
-        <RadioButton
-            android:id="@+id/radio_minus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:button="@drawable/radio_select"
-            android:padding="8dp"
-            android:text="@string/radioOperationMinus" />
+            <RadioButton
+                android:id="@+id/radio_plus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/radio_select"
+                android:padding="8dp"
+                android:text="@string/radioOperationPlus"
+                android:textSize="@dimen/radioButtonDimension" />
+
+            <RadioButton
+                android:id="@+id/radio_minus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/radio_select"
+                android:padding="8dp"
+                android:text="@string/radioOperationMinus"
+                android:textSize="@dimen/radioButtonDimension" />
         </RadioGroup>
 
         <RadioGroup
@@ -67,21 +70,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-        <RadioButton
-            android:id="@+id/radio_multiple"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:button="@drawable/radio_select"
-            android:padding="8dp"
-            android:text="@string/radioOperationMultiple" />
 
-        <RadioButton
-            android:id="@+id/radio_divide"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:button="@drawable/radio_select"
-            android:padding="8dp"
-            android:text="@string/radioOperationDivide" />
+            <RadioButton
+                android:id="@+id/radio_multiple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/radio_select"
+                android:padding="8dp"
+                android:text="@string/radioOperationMultiple"
+                android:textSize="@dimen/radioButtonDimension" />
+
+            <RadioButton
+                android:id="@+id/radio_divide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/radio_select"
+                android:padding="8dp"
+                android:text="@string/radioOperationDivide"
+                android:textSize="@dimen/radioButtonDimension" />
         </RadioGroup>
     </LinearLayout>
 
@@ -94,7 +100,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
         android:checked="true"
-        android:text="@string/floatCheckBoxText" />
+        android:text="@string/floatCheckBoxText"
+        android:textSize="@dimen/checkBoxDimension" />
 
     <CheckBox
         android:id="@+id/signed_checkBox"
@@ -105,7 +112,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
         android:checked="true"
-        android:text="@string/signedCheckBoxText" />
+        android:text="@string/signedCheckBoxText"
+        android:textSize="@dimen/checkBoxDimension" />
 
     <TextView
         android:id="@+id/tv_Result"
@@ -116,7 +124,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
         android:text="@string/tv_ResultText"
-        android:textSize="18sp" />
+        android:textSize="@dimen/resultTVDimension" />
 
     <Button
         android:id="@+id/btn_Calculate"
@@ -125,6 +133,10 @@
         android:layout_below="@id/tv_Result"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="16dp"
-        android:text="@string/btnCalculateText" />
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="0dp"
+        android:background="@drawable/button_back"
+        android:text="@string/btnCalculateText"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/calculateButtonDimension" />
 </RelativeLayout>
