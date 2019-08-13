@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_RL"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp">
 
     <EditText
-        android:id="@+id/ET_Field1"
+        android:id="@+id/firstValueEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="8dp"
         android:autofillHints=""
-        android:hint="@string/field1"
+        tools:targetApi="O"
+        android:maxLines="1"
+        android:maxLength="15"
+        android:hint="@string/firstValueText"
         android:inputType="numberSigned|numberDecimal"
         android:paddingTop="8dp" />
 
     <EditText
-        android:id="@+id/ET_Field2"
+        android:id="@+id/secondValueEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ET_Field1"
+        android:layout_below="@+id/firstValueEt"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
         android:autofillHints=""
+        android:maxLines="1"
+        android:maxLength="15"
         android:ems="10"
-        android:hint="@string/field2"
+        tools:targetApi="O"
+        android:hint="@string/secondValueText"
         android:inputType="numberSigned|numberDecimal" />
 
     <LinearLayout
         android:id="@+id/operationLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ET_Field2"
+        android:layout_below="@id/secondValueEt"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
@@ -47,21 +54,21 @@
             android:orientation="vertical">
 
             <RadioButton
-                android:id="@+id/radio_plus"
+                android:id="@+id/plusRadio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:button="@drawable/radio_select"
                 android:padding="8dp"
-                android:text="@string/radioOperationPlus"
+                android:text="@string/plusOperation"
                 android:textSize="@dimen/radioButtonDimension" />
 
             <RadioButton
-                android:id="@+id/radio_minus"
+                android:id="@+id/minusRadio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:button="@drawable/radio_select"
                 android:padding="8dp"
-                android:text="@string/radioOperationMinus"
+                android:text="@string/minusOperation"
                 android:textSize="@dimen/radioButtonDimension" />
         </RadioGroup>
 
@@ -72,27 +79,27 @@
             android:orientation="vertical">
 
             <RadioButton
-                android:id="@+id/radio_multiple"
+                android:id="@+id/multipleRadio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:button="@drawable/radio_select"
                 android:padding="8dp"
-                android:text="@string/radioOperationMultiple"
+                android:text="@string/multipleOperation"
                 android:textSize="@dimen/radioButtonDimension" />
 
             <RadioButton
-                android:id="@+id/radio_divide"
+                android:id="@+id/divideRadio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:button="@drawable/radio_select"
                 android:padding="8dp"
-                android:text="@string/radioOperationDivide"
+                android:text="@string/divideOperation"
                 android:textSize="@dimen/radioButtonDimension" />
         </RadioGroup>
     </LinearLayout>
 
     <CheckBox
-        android:id="@+id/float_checkBox"
+        android:id="@+id/floatCheckBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/operationLL"
@@ -104,10 +111,10 @@
         android:textSize="@dimen/checkBoxDimension" />
 
     <CheckBox
-        android:id="@+id/signed_checkBox"
+        android:id="@+id/signedCheckBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/float_checkBox"
+        android:layout_below="@id/floatCheckBox"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
@@ -116,27 +123,27 @@
         android:textSize="@dimen/checkBoxDimension" />
 
     <TextView
-        android:id="@+id/tv_Result"
+        android:id="@+id/resultTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/signed_checkBox"
+        android:layout_below="@id/signedCheckBox"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
-        android:text="@string/tv_ResultText"
+        android:text="@string/resultText"
         android:textSize="@dimen/resultTVDimension" />
 
     <Button
-        android:id="@+id/btn_Calculate"
+        android:id="@+id/calculateBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_Result"
+        android:layout_below="@id/resultTv"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="0dp"
         android:background="@drawable/button_back"
-        android:text="@string/btnCalculateText"
+        android:text="@string/calculateBtnText"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/calculateButtonDimension" />
 </RelativeLayout>

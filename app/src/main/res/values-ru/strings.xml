@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Practice One</string>
-    <string name="tv_ResultText">Результат</string>
-    <string name="field1">Число 1</string>
-    <string name="field2">Число 2</string>
-    <string name="radioOperationPlus">Плюс</string>
-    <string name="radioOperationMinus">Минус</string>
-    <string name="radioOperationDivide">Делить</string>
-    <string name="radioOperationMultiple">Умножить</string>
+    <string name="resultText">Результат</string>
+    <string name="firstValueText">Число 1</string>
+    <string name="secondValueText">Число 2</string>
+    <string name="plusOperation">Плюс</string>
+    <string name="minusOperation">Минус</string>
+    <string name="divideOperation">Делить</string>
+    <string name="multipleOperation">Умножить</string>
     <string name="signedCheckBoxText">Использовать знаковые числа</string>
     <string name="floatCheckBoxText">Использовать дробные числа</string>
-    <string name="btnCalculateText">Вычислить</string>
+    <string name="calculateBtnText">Вычислить</string>
     <string name="clean">Очистить</string>
     <string name="operationNotFound">Операция не выбрана</string>
     <string name="clearDataQuestion">Очистить данные?</string>
     <string name="btnYES">Да</string>
     <string name="btnNO">Нет</string>
     <string name="btnOK">ок</string>
-    <string name="cleanMessage">Данные будут удалены из</string>
-    <string name="dividionByZero">Деление на ноль запрещено</string>
+    <string name="cleanMessage">Данные будут удалены из %1$s, %2$s, %3$s</string>
+    <string name="divisionByZero">Деление на ноль запрещено</string>
     <string name="incorrectNumberFormat">Значение не верно</string>
 </resources>
