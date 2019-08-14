@@ -22,6 +22,11 @@
             android:label="@string/newTask"
             android:parentActivityName=".MainActivity">
         </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settingsText"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>
