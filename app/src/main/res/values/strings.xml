@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name" translatable="false">Practice Two</string>
+    <string name="settingsText">Settings</string>
+    <string name="storageType">Store data</string>
+    <string name="sharedPreferencesType">Shared preferences</string>
+    <string name="sqlDatabaseType">Database</string>
+    <string name="externalStorageType">External Storage</string>
+    <string name="internalStorageType">Internal Storage</string>
+    <string name="newTask">New task</string>
+    <string name="newTaskTitle">Title</string>
+    <string name="newTaskDescription">Description</string>
+    <string name="newTaskSave">Save</string>
 </resources>
