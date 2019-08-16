@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="settingsText">Настройки</string>
-    <string name="storageType">Хранить данные в:</string>
+    <string name="settingsLabelText">Настройки</string>
+    <string name="taskLabelText">Задачи</string>
+    <string name="taskAllText">Все</string>
+    <string name="taskFavoriteText">Избранные</string>
+    <string name="storageType">Место хранения данных:</string>
     <string name="sharedPreferencesType">Shared preferences</string>
-    <string name="sqlDatabaseType">Database</string>
-    <string name="externalStorageType">External Storage</string>
-    <string name="internalStorageType">Internal Storage</string>
-    <string name="newTask">Новая задача</string>
+    <string name="sqlDatabaseType">База данных</string>
+    <string name="externalStorageType">Внешнее хранилище</string>
+    <string name="internalStorageType">Внутренняя память</string>
+    <string name="newTaskLabelText">Новая задача</string>
     <string name="newTaskTitle">Имя</string>
     <string name="newTaskDescription">Описание</string>
     <string name="newTaskSave">Сохранить</string>
+    <string name="ExplanationDialogTitle">Разрешение необходимо</string>
+    <string name="ExplanationDialogMessage">Разрешение необходимо для записи данных в файл на внешнем хранилище</string>
+    <string name="okBtn">ОК</string>
+    <string name="cancelBtn">Отмена</string>
+    <string name="drawerOpen">Открыть боковое меню</string>
+    <string name="drawerClose">Закрыть боковое меню</string>
 </resources>

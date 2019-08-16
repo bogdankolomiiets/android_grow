@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/tool_bar_layout"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/storageType"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+
+        <RadioGroup
+            android:id="@+id/storeTypeRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/sharedPreferencesRadio"
+                style="@style/storeTypeRadioGroupStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sharedPreferencesType" />
+
+            <RadioButton
+                android:id="@+id/internalStorageRadio"
+                style="@style/storeTypeRadioGroupStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/internalStorageType" />
+
+            <RadioButton
+                android:id="@+id/externalStorageRadio"
+                style="@style/storeTypeRadioGroupStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/externalStorageType" />
+
+            <RadioButton
+                android:id="@+id/sqlDatabaseRadio"
+                style="@style/storeTypeRadioGroupStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sqlDatabaseType" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <include layout="@layout/navigation_layout"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

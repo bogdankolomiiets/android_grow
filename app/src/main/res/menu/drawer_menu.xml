@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tasksDrawerItem"
+        android:icon="@drawable/ic_task"
+        android:title="@string/taskLabelText" />
+    <item
+        android:id="@+id/settingsDrawerItem"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/settingsLabelText" />
+
+</menu>
