@@ -26,7 +26,7 @@ public class ExternalStoragePermissionChecker {
 
     private static void requestPermission(Activity activity) {
         ActivityCompat.requestPermissions(activity,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, RequestCodes.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, RequestCodes.STORAGE_PERMISSIONS_CODE);
     }
 
     private static void showDialogForUser(final Activity activity, Context context) {
@@ -37,12 +37,6 @@ public class ExternalStoragePermissionChecker {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 requestPermission(activity);
-            }
-        });
-        builder.setNegativeButton(R.string.cancelBtn, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
             }
         });
         builder.create().show();

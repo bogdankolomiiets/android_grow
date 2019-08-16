@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //init FloatingActionButton
         FloatingActionButton newTaskFab = findViewById(R.id.newTaskFab);
         newTaskFab.setOnClickListener(this);
+
+
+        Toast.makeText(this, getPreferences(MODE_PRIVATE).getString(Constants.STORAGE_PROVIDER, "None"), Toast.LENGTH_LONG).show();
     }
 
     private void initDrawer() {

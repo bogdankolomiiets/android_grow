@@ -1,10 +1,15 @@
 package com.example.practicetwo;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,11 +21,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import static com.example.practicetwo.Constants.*;
+
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private RadioButton sharedPreferencesRadio;
     private RadioButton internalStorageRadio;
     private RadioButton externalStorageRadio;
     private RadioButton sqlDatabaseRadio;
+    private RadioGroup storeTypeRadioGroup;
     private DrawerLayout drawerLayout;
 
 
@@ -53,31 +61,55 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initRadioButtons() {
+        //init radioGroup
+        storeTypeRadioGroup = findViewById(R.id.storeTypeRadioGroup);
+
         sharedPreferencesRadio = findViewById(R.id.sharedPreferencesRadio);
+        sharedPreferencesRadio.setTag(TAG_SHARED);
         sharedPreferencesRadio.setOnClickListener(this);
 
         internalStorageRadio = findViewById(R.id.internalStorageRadio);
+        internalStorageRadio.setTag(TAG_INTERNAL);
         internalStorageRadio.setOnClickListener(this);
 
         externalStorageRadio = findViewById(R.id.externalStorageRadio);
+        externalStorageRadio.setTag(TAG_EXTERNAL);
         externalStorageRadio.setOnClickListener(this);
 
         sqlDatabaseRadio = findViewById(R.id.sqlDatabaseRadio);
+        sqlDatabaseRadio.setTag(TAG_DATABASE);
         sqlDatabaseRadio.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.sharedPreferencesRadio:
-                break;
-            case R.id.internalStorageRadio:
-                break;
             case R.id.externalStorageRadio:
                 ExternalStoragePermissionChecker.check(this,this);
                 break;
-            case R.id.sqlDatabaseRadio:
-                break;
+        }
+    }
+
+    private void putToSharedPreferences(){
+        SharedPreferences.Editor editor = getSharedPreferences(SHARE_PREFERENCES_NAME, MODE_PRIVATE).edit();
+        editor.putString(STORAGE_PROVIDER,
+                storeTypeRadioGroup.findViewById(storeTypeRadioGroup
+                        .getCheckedRadioButtonId())
+                        .getTag()
+                        .toString());
+        editor.commit();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == RequestCodes.STORAGE_PERMISSIONS_CODE){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this, R.string.permisionGranted, Toast.LENGTH_SHORT).show();
+            } else {
+                externalStorageRadio.setChecked(false);
+                internalStorageRadio.setChecked(true);
+                Toast.makeText(this, R.string.permisionNotGranted, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -103,5 +135,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        putToSharedPreferences();
     }
 }

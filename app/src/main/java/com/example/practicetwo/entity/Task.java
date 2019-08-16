@@ -17,6 +17,9 @@ public class Task implements Constants {
     @ColumnInfo(name = COLUMN_DESCRIPTION)
     private String description;
 
+    @ColumnInfo(name = COLUMN_FAVOURITE)
+    private boolean favourite;
+
     public int getId() {
         return id;
     }
@@ -39,5 +42,13 @@ public class Task implements Constants {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
     }
 }
