@@ -19,7 +19,7 @@
     <string name="cancelBtn">Отмена</string>
     <string name="drawerOpen">Открыть боковое меню</string>
     <string name="drawerClose">Закрыть боковое меню</string>
-    <string name="permisionGranted">разрешение получено</string>
-    <string name="permisionNotGranted">РАЗРЕШЕНИЕ НЕ ПОЛУЧЕНО!!!</string>
+    <string name="permissionGranted">разрешение получено</string>
+    <string name="permissionNotGranted">РАЗРЕШЕНИЕ НЕ ПОЛУЧЕНО!!!</string>
 
 </resources>

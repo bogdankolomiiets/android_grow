@@ -1,2 +1,5 @@
 
-csquid:UselessImportCheck"8Remove this unused import 'androidx.annotation.NonNull'.(ˆÛúÜ8ÃÚ­É-
+isquid:S1301F"KReplace this "switch" statement by "if" statements to increase readability.(¿›İ”8Ù¯ÌÉ-
+W"squid:SwitchLastCaseIsDefaultCheckF""Add a default case to this switch.(¿›İ”8Ù¯ÌÉ-
+W"squid:SwitchLastCaseIsDefaultCheckU""Add a default case to this switch.(ºÖ8Â¼ÍÉ-
+isquid:S1301U"KReplace this "switch" statement by "if" statements to increase readability.(ºÖ8Â¼ÍÉ-

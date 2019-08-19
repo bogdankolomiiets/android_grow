@@ -1,11 +1,11 @@
 package com.example.practicetwo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,25 +14,37 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.practicetwo.database.TaskDatabase;
+import com.example.practicetwo.providers.DatabaseProviderImpl;
+import com.example.practicetwo.providers.ExternalStorageProviderImpl;
+import com.example.practicetwo.providers.InternalStorageProviderImpl;
+import com.example.practicetwo.providers.SharedPreferencesProviderImpl;
+import com.example.practicetwo.providers.StorageProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import static com.example.practicetwo.Constants.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
+    private StorageProvider storageProvider;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 
+        //init UI components
+        initComponents();
+
+        //init data storage provider
+        initStorageProvider();
+    }
+
+    private void initComponents() {
         initDrawer();
 
         //init FloatingActionButton
         FloatingActionButton newTaskFab = findViewById(R.id.newTaskFab);
         newTaskFab.setOnClickListener(this);
-
-
-        Toast.makeText(this, getPreferences(MODE_PRIVATE).getString(Constants.STORAGE_PROVIDER, "None"), Toast.LENGTH_LONG).show();
     }
 
     private void initDrawer() {
@@ -82,9 +94,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.newTaskFab:
-                startActivity(new Intent(this, NewTaskActivity.class));
+        if (view.getId() == R.id.newTaskFab) {
+            startActivity(new Intent(this, NewTaskActivity.class));
+        }
+    }
+
+    private void initStorageProvider() {
+        String provider = getSharedPreferences(SHARE_PREFERENCES_FILE_NAME, MODE_PRIVATE).getString(STORAGE_PROVIDER, null);
+        switch (provider){
+            case TAG_SHARED:
+                storageProvider = new SharedPreferencesProviderImpl();
+                break;
+            case TAG_INTERNAL:
+                storageProvider = new InternalStorageProviderImpl();
+                break;
+            case TAG_EXTERNAL:
+                storageProvider = new ExternalStorageProviderImpl();
+                break;
+            case TAG_DATABASE:
+                storageProvider = new DatabaseProviderImpl();
                 break;
         }
     }

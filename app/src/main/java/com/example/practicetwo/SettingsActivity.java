@@ -1,6 +1,5 @@
 package com.example.practicetwo;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -18,9 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.google.android.material.navigation.NavigationView;
-
 import static com.example.practicetwo.Constants.*;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
@@ -42,22 +38,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         setSupportActionBar(toolbar);
 
         initRadioButtons();
+        initActiveRadioButton();
         initDrawer();
-    }
-
-    private void initDrawer() {
-        drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.navigationView);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        //init toolbar
-        Toolbar toolbar = findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout,
-                toolbar, R.string.drawerOpen, R.string.drawerClose);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
     }
 
     private void initRadioButtons() {
@@ -81,34 +63,51 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         sqlDatabaseRadio.setOnClickListener(this);
     }
 
+    private void initActiveRadioButton() {
+        String tag = getSharedPreferences(SHARE_PREFERENCES_FILE_NAME, MODE_PRIVATE).getString(STORAGE_PROVIDER, null);
+        if (tag != null){
+        storeTypeRadioGroup.check(storeTypeRadioGroup.findViewWithTag(tag).getId());
+        }
+    }
+
+    private void initDrawer() {
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        //init toolbar
+        Toolbar toolbar = findViewById(R.id.toolBar);
+        setSupportActionBar(toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout,
+                toolbar, R.string.drawerOpen, R.string.drawerClose);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+    }
+
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.externalStorageRadio:
-                ExternalStoragePermissionChecker.check(this,this);
-                break;
+        if (view.getId() == R.id.externalStorageRadio) {
+            ExternalStoragePermissionChecker.check(this, this);
         }
     }
 
     private void putToSharedPreferences(){
-        SharedPreferences.Editor editor = getSharedPreferences(SHARE_PREFERENCES_NAME, MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getSharedPreferences(SHARE_PREFERENCES_FILE_NAME, MODE_PRIVATE).edit();
         editor.putString(STORAGE_PROVIDER,
-                storeTypeRadioGroup.findViewById(storeTypeRadioGroup
-                        .getCheckedRadioButtonId())
-                        .getTag()
-                        .toString());
-        editor.commit();
+                storeTypeRadioGroup.findViewById(storeTypeRadioGroup.getCheckedRadioButtonId()).getTag().toString());
+        editor.apply();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == RequestCodes.STORAGE_PERMISSIONS_CODE){
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, R.string.permisionGranted, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.permissionGranted, Toast.LENGTH_SHORT).show();
             } else {
                 externalStorageRadio.setChecked(false);
                 internalStorageRadio.setChecked(true);
-                Toast.makeText(this, R.string.permisionNotGranted, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.permissionNotGranted, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -138,8 +137,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    protected void onPause() {
+        super.onPause();
         putToSharedPreferences();
     }
 }

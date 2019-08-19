@@ -1,6 +1,4 @@
 
-k
-;app/src/main/java/com/example/practicetwo/TaskActivity.java,0\4\04f21dee174f507a2ab64ddb1f8be9b10cd34369
 j
 :app/src/main/java/com/example/practicetwo/entity/Task.java,c\1\c12f400215a84dc715fbd638d164cf589a6c73ec
 }
@@ -31,3 +29,5 @@ k
 ;app/src/main/java/com/example/practicetwo/MainActivity.java,9\0\9032c54ee588c13301a36fd80ec8ea3317a47709
 o
 ?app/src/main/java/com/example/practicetwo/SettingsActivity.java,d\5\d55d6ee88de34b1f0f7eeef855d9852b2593741a
+@
+app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164

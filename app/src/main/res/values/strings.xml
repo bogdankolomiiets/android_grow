@@ -21,6 +21,6 @@
     <string name="drawerHeaderText" translatable="false">Some text under ImageView</string>
     <string name="drawerOpen">Open navigation drawer</string>
     <string name="drawerClose">Close navigation drawer</string>
-    <string name="permisionGranted">permission granted</string>
-    <string name="permisionNotGranted">PERMISSION NOT GRANTED!!!</string>
+    <string name="permissionGranted">permission granted</string>
+    <string name="permissionNotGranted">PERMISSION NOT GRANTED!!!</string>
 </resources>
