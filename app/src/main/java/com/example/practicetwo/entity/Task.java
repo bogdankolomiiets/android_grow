@@ -1,12 +1,14 @@
 package com.example.practicetwo.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import com.example.practicetwo.Constants;
+import static com.example.practicetwo.Constants.*;
 
 @Entity
-public class Task implements Constants {
+public class Task implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = COLUMN_ID)
     private int id;
@@ -19,6 +21,16 @@ public class Task implements Constants {
 
     @ColumnInfo(name = COLUMN_FAVOURITE)
     private boolean favourite;
+
+    public Task() {
+    }
+
+    protected Task(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        description = in.readString();
+        favourite = in.readByte() != 0;
+    }
 
     public int getId() {
         return id;
@@ -51,4 +63,29 @@ public class Task implements Constants {
     public void setFavourite(boolean favourite) {
         this.favourite = favourite;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(title);
+        parcel.writeString(description);
+        parcel.writeByte((byte) (favourite ? 1 : 0));
+    }
+
+    public static final Creator<Task> CREATOR = new Creator<Task>() {
+        @Override
+        public Task createFromParcel(Parcel in) {
+            return new Task(in);
+        }
+
+        @Override
+        public Task[] newArray(int size) {
+            return new Task[size];
+        }
+    };
 }

@@ -1,11 +1,9 @@
 package com.example.practicetwo;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -25,7 +23,11 @@ import static com.example.practicetwo.Constants.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
-    private StorageProvider storageProvider;
+    private static StorageProvider storageProvider;
+
+    public static StorageProvider getStorageProvider(){
+        return storageProvider;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.newTaskFab) {
+            Intent intent = new Intent(this, NewTaskActivity.class);
             startActivity(new Intent(this, NewTaskActivity.class));
         }
     }

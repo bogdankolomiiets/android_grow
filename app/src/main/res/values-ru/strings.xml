@@ -13,6 +13,8 @@
     <string name="newTaskTitle">Имя</string>
     <string name="newTaskDescription">Описание</string>
     <string name="newTaskSave">Сохранить</string>
+    <string name="newTaskSaved">Сохранено успешно</string>
+    <string name="newTaskNotSaved">Ошибка приложения. Не сохранено</string>
     <string name="ExplanationDialogTitle">Разрешение необходимо</string>
     <string name="ExplanationDialogMessage">Разрешение необходимо для записи данных в файл на внешнем хранилище</string>
     <string name="okBtn">ОК</string>
@@ -21,5 +23,6 @@
     <string name="drawerClose">Закрыть боковое меню</string>
     <string name="permissionGranted">разрешение получено</string>
     <string name="permissionNotGranted">РАЗРЕШЕНИЕ НЕ ПОЛУЧЕНО!!!</string>
+    <string name="fieldIsEmpty">Нет всех данных</string>
 
 </resources>

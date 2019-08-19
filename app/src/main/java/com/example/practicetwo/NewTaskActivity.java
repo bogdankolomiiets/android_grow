@@ -1,22 +1,17 @@
 package com.example.practicetwo;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import com.example.practicetwo.providers.DatabaseProviderImpl;
-import com.example.practicetwo.providers.ExternalStorageProviderImpl;
-import com.example.practicetwo.providers.InternalStorageProviderImpl;
-import com.example.practicetwo.providers.SharedPreferencesProviderImpl;
+import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.providers.StorageProvider;
-
 import static com.example.practicetwo.Constants.*;
 
 public class NewTaskActivity extends AppCompatActivity {
@@ -31,6 +26,9 @@ public class NewTaskActivity extends AppCompatActivity {
 
         //init UI elements
         initElements();
+
+        //set up storage provider
+        storageProvider = MainActivity.getStorageProvider();
     }
 
     private void initElements() {
@@ -56,9 +54,25 @@ public class NewTaskActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.saveItem:
+                saveNewTaskToStorage();
+                return true;
             default:
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void saveNewTaskToStorage() {
+        String title = newTaskTitle.getText().toString();
+        String description = newTaskDescription.getText().toString();
+        if (title.length() > 0 && description.length() > 0){
+            Task task = new Task();
+            task.setTitle(title);
+            task.setDescription(description);
+            boolean result = storageProvider.setToStorage(this, task);
+            Toast.makeText(this,
+                    (result ? getString(R.string.newTaskSaved) : getString(R.string.newTaskNotSaved)),
+                    Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this, R.string.fieldIsEmpty, Toast.LENGTH_SHORT).show();
     }
 
     @Override

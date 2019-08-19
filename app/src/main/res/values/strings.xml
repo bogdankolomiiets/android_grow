@@ -13,6 +13,8 @@
     <string name="newTaskTitle">Title</string>
     <string name="newTaskDescription">Description</string>
     <string name="newTaskSave">Save</string>
+    <string name="newTaskSaved">Saved successfully</string>
+    <string name="newTaskNotSaved">Application Error. Not saved</string>
     <string name="ExplanationDialogTitle">Permission need</string>
     <string name="ExplanationDialogMessage">Permission is needed for writing data into file on external storage</string>
     <string name="okBtn">OK</string>
@@ -23,4 +25,6 @@
     <string name="drawerClose">Close navigation drawer</string>
     <string name="permissionGranted">permission granted</string>
     <string name="permissionNotGranted">PERMISSION NOT GRANTED!!!</string>
+    <string name="fieldIsEmpty">Some field is empty</string>
+
 </resources>
