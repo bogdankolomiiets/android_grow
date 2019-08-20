@@ -3,7 +3,7 @@
     <string name="settingsLabelText">Настройки</string>
     <string name="taskLabelText">Задачи</string>
     <string name="taskAllText">Все</string>
-    <string name="taskFavoriteText">Избранные</string>
+    <string name="taskFavouriteText">Избранные</string>
     <string name="storageType">Место хранения данных:</string>
     <string name="sharedPreferencesType">Shared preferences</string>
     <string name="sqlDatabaseType">База данных</string>
@@ -24,5 +24,7 @@
     <string name="permissionGranted">разрешение получено</string>
     <string name="permissionNotGranted">РАЗРЕШЕНИЕ НЕ ПОЛУЧЕНО!!!</string>
     <string name="fieldIsEmpty">Нет всех данных</string>
-
+    <string name="editTask">Изменить</string>
+    <string name="deleteTask">Удалить</string>
+    <string name="addToFavourite">Избранные</string>
 </resources>

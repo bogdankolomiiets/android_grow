@@ -13,6 +13,7 @@ public interface MainContract {
 
     interface Presenter{
         List<Task> getTaskFromStorage(StorageProvider storageProvider);
+        List<Task> getFavouriteTaskFromStorage(StorageProvider storageProvider);
         boolean saveTask(Task task);
         void onDestroy();
     }

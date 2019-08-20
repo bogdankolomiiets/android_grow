@@ -13,9 +13,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+import com.example.practicetwo.AllTaskFragment;
 import com.example.practicetwo.Constants;
+import com.example.practicetwo.CustomRecyclerView;
 import com.example.practicetwo.NewTaskActivity;
+import com.example.practicetwo.PageAdapter;
 import com.example.practicetwo.R;
 import com.example.practicetwo.RequestCodes;
 import com.example.practicetwo.SettingsActivity;
@@ -28,13 +34,26 @@ import com.example.practicetwo.providers.SharedPreferencesProviderImpl;
 import com.example.practicetwo.providers.StorageProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.List;
 import static com.example.practicetwo.Constants.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, MainContract.View{
     private DrawerLayout drawerLayout;
+    private TabLayout tabLayout;
+    private TabItem allTaskTabItem;
+    private TabItem favouriteTaskTabItem;
+    private ViewPager viewPager;
     private StorageProvider storageProvider;
     private MainPresenter mainPresenter;
+
+    private List<Task> allTaskList;
+    private List<Task> favouriteTaskList;
+
+    private RecyclerView allTaskRecyclerView;
+    private RecyclerView favouriteTaskRecyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +67,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initStorageProvider();
 
         mainPresenter = new MainPresenter();
+
+        //getting list of tasks
+        allTaskList = mainPresenter.getTaskFromStorage(storageProvider);
+        favouriteTaskList = mainPresenter.getFavouriteTaskFromStorage(storageProvider);
+
+        showTasks();
     }
 
     private void initComponents() {
@@ -56,6 +81,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //init FloatingActionButton
         FloatingActionButton newTaskFab = findViewById(R.id.newTaskFab);
         newTaskFab.setOnClickListener(this);
+
+        tabLayout = findViewById(R.id.tabLayout);
+        allTaskTabItem = findViewById(R.id.allTaskTabItem);
+        favouriteTaskTabItem = findViewById(R.id.favouriteTaskTabItem);
+        PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(), 2);
+
+        viewPager = findViewById(R.id.viewPager);
+        viewPager.setAdapter(pageAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        //init RecyclerViews
+//        allTaskRecyclerView = findViewById(R.id.allTaskRecyclerView);
+//        allTaskRecyclerView.setHasFixedSize(true);
+//        allTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        favouriteTaskRecyclerView = findViewById(R.id.favouriteTaskRecyclerView);
+//        favouriteTaskRecyclerView.setHasFixedSize(true);
+//        favouriteTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void initDrawer() {
@@ -140,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void showTasks() {
-        List<Task> taskList = mainPresenter.getTaskFromStorage(storageProvider);
+//        allTaskRecyclerView.setAdapter(new CustomRecyclerView(this, allTaskList));
+//        favouriteTaskRecyclerView.setAdapter(new CustomRecyclerView(this, favouriteTaskList));
     }
 }

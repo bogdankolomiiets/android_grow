@@ -3,7 +3,7 @@
     <string name="settingsLabelText">Settings</string>
     <string name="taskLabelText">Tasks</string>
     <string name="taskAllText">All</string>
-    <string name="taskFavoriteText">Favorite</string>
+    <string name="taskFavouriteText">Favourite</string>
     <string name="storageType">Store data:</string>
     <string name="sharedPreferencesType">Shared preferences</string>
     <string name="sqlDatabaseType">Database</string>
@@ -26,5 +26,9 @@
     <string name="permissionGranted">permission granted</string>
     <string name="permissionNotGranted">PERMISSION NOT GRANTED!!!</string>
     <string name="fieldIsEmpty">Some field is empty</string>
+    <string name="recyclerViewItemHamburger" translatable="false">&#8942;</string>
+    <string name="editTask">Edit</string>
+    <string name="deleteTask">Delete</string>
+    <string name="addToFavourite">Favourite</string>
 
 </resources>
