@@ -9,7 +9,6 @@ import java.util.List;
 
 public class SharedPreferencesProviderImpl implements StorageProvider {
     private SharedPreferences preferences;
-    private List<>
 
     @Override
     public boolean setToStorage(Context context, Task task) {

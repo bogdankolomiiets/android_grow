@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:label="@string/taskLabelText">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +23,11 @@
         <activity
             android:name=".NewTaskActivity"
             android:label="@string/newTaskLabelText"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".main.MainActivity"/>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settingsLabelText"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".main.MainActivity"/>
     </application>
 
 </manifest>

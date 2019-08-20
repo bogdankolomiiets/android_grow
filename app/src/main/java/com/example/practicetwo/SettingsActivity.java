@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import com.example.practicetwo.main.MainActivity;
 import com.google.android.material.navigation.NavigationView;
 import static com.example.practicetwo.Constants.*;
 
@@ -64,10 +65,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initActiveRadioButton() {
-        String tag = getSharedPreferences(SHARE_PREFERENCES_FILE_NAME, MODE_PRIVATE).getString(STORAGE_PROVIDER, null);
-        if (tag != null){
+        String tag = getSharedPreferences(SHARE_PREFERENCES_FILE_NAME, MODE_PRIVATE).getString(STORAGE_PROVIDER, TAG_INTERNAL);
         storeTypeRadioGroup.check(storeTypeRadioGroup.findViewWithTag(tag).getId());
-        }
     }
 
     private void initDrawer() {

@@ -1,5 +1,6 @@
 package com.example.practicetwo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,13 +12,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.practicetwo.entity.Task;
-import com.example.practicetwo.providers.StorageProvider;
+import com.example.practicetwo.main.MainActivity;
 import static com.example.practicetwo.Constants.*;
 
 public class NewTaskActivity extends AppCompatActivity {
     private EditText newTaskTitle;
     private EditText newTaskDescription;
-    private StorageProvider storageProvider;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,9 +26,6 @@ public class NewTaskActivity extends AppCompatActivity {
 
         //init UI elements
         initElements();
-
-        //set up storage provider
-        storageProvider = MainActivity.getStorageProvider();
     }
 
     private void initElements() {
@@ -38,7 +35,7 @@ public class NewTaskActivity extends AppCompatActivity {
         //find and set up toolbar
         Toolbar toolbar = findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -54,31 +51,31 @@ public class NewTaskActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.saveItem:
-                saveNewTaskToStorage();
+                putNewTaskToIntent();
                 return true;
             default:
-            return super.onOptionsItemSelected(item);
+                return super.onOptionsItemSelected(item);
         }
     }
 
-    private void saveNewTaskToStorage() {
+    private void putNewTaskToIntent() {
         String title = newTaskTitle.getText().toString();
         String description = newTaskDescription.getText().toString();
-        if (title.length() > 0 && description.length() > 0){
+        if (title.length() > 0 && description.length() > 0) {
             Task task = new Task();
             task.setTitle(title);
             task.setDescription(description);
-            boolean result = storageProvider.setToStorage(this, task);
-            Toast.makeText(this,
-                    (result ? getString(R.string.newTaskSaved) : getString(R.string.newTaskNotSaved)),
-                    Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra(TASK, task);
+            setResult(RESULT_OK, intent);
+            finish();
         } else Toast.makeText(this, R.string.fieldIsEmpty, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             newTaskTitle.setText(savedInstanceState.getString(NEW_TASK_TITLE));
             newTaskDescription.setText(savedInstanceState.getString(NEW_TASK_DESCRIPTION));
         }

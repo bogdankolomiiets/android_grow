@@ -12,6 +12,7 @@ public interface Constants {
     String TAG_INTERNAL = "INTERNAL";
     String TAG_EXTERNAL = "EXTERNAL";
     String TAG_DATABASE = "DATABASE";
+    String TASK = "TASK";
     String NEW_TASK_TITLE = "newTaskTitle";
     String NEW_TASK_DESCRIPTION = "newTaskDescription";
 }

@@ -25,9 +25,13 @@ k
 ;app/src/main/java/com/example/practicetwo/RequestCodes.java,a\7\a7501e00f892e01296676842efdb99af1249cb3d
 
 Oapp/src/main/java/com/example/practicetwo/ExternalStoragePermissionChecker.java,8\d\8d7da5faf38dae0957b668d2c59884f1a49038ef
-k
-;app/src/main/java/com/example/practicetwo/MainActivity.java,9\0\9032c54ee588c13301a36fd80ec8ea3317a47709
 o
 ?app/src/main/java/com/example/practicetwo/SettingsActivity.java,d\5\d55d6ee88de34b1f0f7eeef855d9852b2593741a
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
+p
+@app/src/main/java/com/example/practicetwo/main/MainActivity.java,a\e\aeee5b8755a0374d93f185ed0a004ea23d60aed5
+q
+Aapp/src/main/java/com/example/practicetwo/main/MainPresenter.java,4\8\486a6e6b4cfedea5f8cf1dfffec0778e8de3ed1a
+p
+@app/src/main/java/com/example/practicetwo/main/MainContract.java,1\4\141b4bf5230605908a4414546867ae57c5237f01

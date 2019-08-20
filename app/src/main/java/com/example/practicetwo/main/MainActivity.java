@@ -1,9 +1,11 @@
-package com.example.practicetwo;
+package com.example.practicetwo.main;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -11,7 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.example.practicetwo.Constants;
+import com.example.practicetwo.NewTaskActivity;
+import com.example.practicetwo.R;
+import com.example.practicetwo.RequestCodes;
+import com.example.practicetwo.SettingsActivity;
 import com.example.practicetwo.database.TaskDatabase;
+import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.providers.DatabaseProviderImpl;
 import com.example.practicetwo.providers.ExternalStorageProviderImpl;
 import com.example.practicetwo.providers.InternalStorageProviderImpl;
@@ -19,15 +28,13 @@ import com.example.practicetwo.providers.SharedPreferencesProviderImpl;
 import com.example.practicetwo.providers.StorageProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import java.util.List;
 import static com.example.practicetwo.Constants.*;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, MainContract.View{
     private DrawerLayout drawerLayout;
-    private static StorageProvider storageProvider;
-
-    public static StorageProvider getStorageProvider(){
-        return storageProvider;
-    }
+    private StorageProvider storageProvider;
+    private MainPresenter mainPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //init data storage provider
         initStorageProvider();
+
+        mainPresenter = new MainPresenter();
     }
 
     private void initComponents() {
@@ -62,6 +71,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 toolbar, R.string.drawerOpen, R.string.drawerClose);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == RequestCodes.NEW_TASK_INTENT_CODE){
+            if (resultCode == RESULT_OK){
+                Task task = data.getParcelableExtra(TASK);
+                Toast.makeText(this, task.getTitle() + "  " + task.getDescription(), Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     @Override
@@ -97,14 +116,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.newTaskFab) {
-            Intent intent = new Intent(this, NewTaskActivity.class);
-            startActivity(new Intent(this, NewTaskActivity.class));
+            startActivityForResult(new Intent(this, NewTaskActivity.class), RequestCodes.NEW_TASK_INTENT_CODE);
         }
     }
 
     private void initStorageProvider() {
-        String provider = getSharedPreferences(SHARE_PREFERENCES_FILE_NAME, MODE_PRIVATE).getString(STORAGE_PROVIDER, null);
-        switch (provider){
+        String provider = getSharedPreferences(SHARE_PREFERENCES_FILE_NAME, MODE_PRIVATE).getString(STORAGE_PROVIDER, TAG_INTERNAL);
+        switch (provider) {
             case TAG_SHARED:
                 storageProvider = new SharedPreferencesProviderImpl();
                 break;
@@ -118,5 +136,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 storageProvider = new DatabaseProviderImpl();
                 break;
         }
+    }
+
+    @Override
+    public void showTasks() {
+        List<Task> taskList = mainPresenter.getTaskFromStorage(storageProvider);
     }
 }
