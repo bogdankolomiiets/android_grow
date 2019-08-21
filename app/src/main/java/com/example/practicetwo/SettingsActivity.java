@@ -21,10 +21,8 @@ import com.google.android.material.navigation.NavigationView;
 import static com.example.practicetwo.Constants.*;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
-    private RadioButton sharedPreferencesRadio;
     private RadioButton internalStorageRadio;
     private RadioButton externalStorageRadio;
-    private RadioButton sqlDatabaseRadio;
     private RadioGroup storeTypeRadioGroup;
     private DrawerLayout drawerLayout;
 
@@ -47,7 +45,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         //init radioGroup
         storeTypeRadioGroup = findViewById(R.id.storeTypeRadioGroup);
 
-        sharedPreferencesRadio = findViewById(R.id.sharedPreferencesRadio);
+        RadioButton sharedPreferencesRadio = findViewById(R.id.sharedPreferencesRadio);
         sharedPreferencesRadio.setTag(TAG_SHARED);
         sharedPreferencesRadio.setOnClickListener(this);
 
@@ -59,7 +57,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         externalStorageRadio.setTag(TAG_EXTERNAL);
         externalStorageRadio.setOnClickListener(this);
 
-        sqlDatabaseRadio = findViewById(R.id.sqlDatabaseRadio);
+        RadioButton sqlDatabaseRadio = findViewById(R.id.sqlDatabaseRadio);
         sqlDatabaseRadio.setTag(TAG_DATABASE);
         sqlDatabaseRadio.setOnClickListener(this);
     }

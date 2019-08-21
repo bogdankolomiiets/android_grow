@@ -15,4 +15,5 @@ public interface Constants {
     String TASK = "TASK";
     String NEW_TASK_TITLE = "newTaskTitle";
     String NEW_TASK_DESCRIPTION = "newTaskDescription";
+    String TASK_FILENAME = "tasks.json";
 }

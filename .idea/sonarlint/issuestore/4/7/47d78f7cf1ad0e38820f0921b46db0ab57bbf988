@@ -1,2 +1,5 @@
 
-Isquid:S1168"+Return an empty collection instead of null.(¥¹ï8ğ’‡©É-
+Fsquid:S11486"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ö“¡Ë-
+asquid:UselessImportCheck"6Remove this unused import 'java.io.InputStreamReader'.(ãˆÎÉ8¡óñ Ë-
+jsquid:UselessImportCheck":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ8ö“¡Ë-
+Fsquid:S1148("#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8à‘Î Ë-

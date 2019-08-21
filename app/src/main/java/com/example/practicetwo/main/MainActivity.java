@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,13 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-
-import com.example.practicetwo.AllTaskFragment;
-import com.example.practicetwo.Constants;
-import com.example.practicetwo.CustomRecyclerView;
 import com.example.practicetwo.NewTaskActivity;
 import com.example.practicetwo.PageAdapter;
 import com.example.practicetwo.R;
@@ -34,45 +27,25 @@ import com.example.practicetwo.providers.SharedPreferencesProviderImpl;
 import com.example.practicetwo.providers.StorageProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.List;
 import static com.example.practicetwo.Constants.*;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener, MainContract.View{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
-    private TabLayout tabLayout;
-    private TabItem allTaskTabItem;
-    private TabItem favouriteTaskTabItem;
-    private ViewPager viewPager;
     private StorageProvider storageProvider;
-    private MainPresenter mainPresenter;
-
-    private List<Task> allTaskList;
-    private List<Task> favouriteTaskList;
-
-    private RecyclerView allTaskRecyclerView;
-    private RecyclerView favouriteTaskRecyclerView;
+    private MainPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 
-        //init UI components
-        initComponents();
-
         //init data storage provider
         initStorageProvider();
+        presenter = new MainPresenter(storageProvider);
 
-        mainPresenter = new MainPresenter();
-
-        //getting list of tasks
-        allTaskList = mainPresenter.getTaskFromStorage(storageProvider);
-        favouriteTaskList = mainPresenter.getFavouriteTaskFromStorage(storageProvider);
-
-        showTasks();
+        //init UI components
+        initComponents();
     }
 
     private void initComponents() {
@@ -82,23 +55,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FloatingActionButton newTaskFab = findViewById(R.id.newTaskFab);
         newTaskFab.setOnClickListener(this);
 
-        tabLayout = findViewById(R.id.tabLayout);
-        allTaskTabItem = findViewById(R.id.allTaskTabItem);
-        favouriteTaskTabItem = findViewById(R.id.favouriteTaskTabItem);
-        PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(), 2);
-
-        viewPager = findViewById(R.id.viewPager);
+        //init viewPager and tabLayout
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
+        PageAdapter pageAdapter = new PageAdapter(this, storageProvider, getSupportFragmentManager(), 2);
         viewPager.setAdapter(pageAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-        //init RecyclerViews
-//        allTaskRecyclerView = findViewById(R.id.allTaskRecyclerView);
-//        allTaskRecyclerView.setHasFixedSize(true);
-//        allTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
-//        favouriteTaskRecyclerView = findViewById(R.id.favouriteTaskRecyclerView);
-//        favouriteTaskRecyclerView.setHasFixedSize(true);
-//        favouriteTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void initDrawer() {
@@ -121,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == RequestCodes.NEW_TASK_INTENT_CODE){
             if (resultCode == RESULT_OK){
                 Task task = data.getParcelableExtra(TASK);
-                Toast.makeText(this, task.getTitle() + "  " + task.getDescription(), Toast.LENGTH_LONG).show();
+                presenter.saveTask(task);
             }
         }
     }
@@ -167,23 +130,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String provider = getSharedPreferences(SHARE_PREFERENCES_FILE_NAME, MODE_PRIVATE).getString(STORAGE_PROVIDER, TAG_INTERNAL);
         switch (provider) {
             case TAG_SHARED:
-                storageProvider = new SharedPreferencesProviderImpl();
+                storageProvider = new SharedPreferencesProviderImpl(this);
                 break;
             case TAG_INTERNAL:
-                storageProvider = new InternalStorageProviderImpl();
+                storageProvider = new InternalStorageProviderImpl(this);
                 break;
             case TAG_EXTERNAL:
-                storageProvider = new ExternalStorageProviderImpl();
+                storageProvider = new ExternalStorageProviderImpl(this);
                 break;
             case TAG_DATABASE:
-                storageProvider = new DatabaseProviderImpl();
+                storageProvider = new DatabaseProviderImpl(this);
                 break;
         }
-    }
-
-    @Override
-    public void showTasks() {
-//        allTaskRecyclerView.setAdapter(new CustomRecyclerView(this, allTaskList));
-//        favouriteTaskRecyclerView.setAdapter(new CustomRecyclerView(this, favouriteTaskList));
     }
 }

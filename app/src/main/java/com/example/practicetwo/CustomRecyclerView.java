@@ -30,14 +30,14 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CustomRecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CustomRecyclerView.ViewHolder holder, final int position) {
         Task task = taskList.get(position);
         holder.taskTitleTV.setText(task.getTitle());
         holder.taskDescriptionTV.setText(task.getDescription());
         holder.menuImitationHamburger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "onBindViewHolder", Toast.LENGTH_SHORT).show();
+                showPopupMenu(holder);
             }
         });
     }
@@ -50,10 +50,13 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.editItem:
+                        Toast.makeText(context, "todo", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.deleteItem:
+                        Toast.makeText(context, "todo", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.favouriteItem:
+                        Toast.makeText(context, "todo", Toast.LENGTH_LONG).show();
                         break;
                 }
                 return false;
@@ -77,18 +80,6 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
             taskTitleTV = itemView.findViewById(R.id.taskTitleTV);
             taskDescriptionTV = itemView.findViewById(R.id.taskDescriptionTV);
             menuImitationHamburger = itemView.findViewById(R.id.menuImitationHamburger);
-            menuImitationHamburger.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "menuImitationHamburger", Toast.LENGTH_SHORT).show();
-                }
-            });
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "itemView onClick", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
     }
 }

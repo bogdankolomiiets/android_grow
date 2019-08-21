@@ -1,8 +1,6 @@
 package com.example.practicetwo.main;
 
 import com.example.practicetwo.entity.Task;
-import com.example.practicetwo.providers.StorageProvider;
-
 import java.util.List;
 
 public interface MainContract {
@@ -12,8 +10,8 @@ public interface MainContract {
     }
 
     interface Presenter{
-        List<Task> getTaskFromStorage(StorageProvider storageProvider);
-        List<Task> getFavouriteTaskFromStorage(StorageProvider storageProvider);
+        List<Task> getTaskFromStorage();
+        List<Task> getFavouriteTaskFromStorage();
         boolean saveTask(Task task);
         void onDestroy();
     }

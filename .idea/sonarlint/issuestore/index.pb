@@ -35,3 +35,11 @@ q
 Aapp/src/main/java/com/example/practicetwo/main/MainPresenter.java,4\8\486a6e6b4cfedea5f8cf1dfffec0778e8de3ed1a
 p
 @app/src/main/java/com/example/practicetwo/main/MainContract.java,1\4\141b4bf5230605908a4414546867ae57c5237f01
+t
+Dapp/src/main/java/com/example/practicetwo/FavouriteTaskFragment.java,4\b\4ba19b6daed01ca94d99dbac498aadb3342c3df2
+q
+Aapp/src/main/java/com/example/practicetwo/CustomRecyclerView.java,9\2\9208f8e66da39db93f24c9afd658f19eaa106252
+n
+>app/src/main/java/com/example/practicetwo/AllTaskFragment.java,b\6\b6bd182ea33afecf0eb683a3bf81ea53a9c9cd67
+j
+:app/src/main/java/com/example/practicetwo/PageAdapter.java,f\9\f9df4fe816e3ecf6f437e995818caa80ca31e7ad
