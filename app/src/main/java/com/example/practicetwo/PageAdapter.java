@@ -6,16 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.practicetwo.providers.StorageProvider;
-
 public class PageAdapter extends FragmentPagerAdapter {
-    private StorageProvider storageProvider;
     private int numOfTabs;
     private Context context;
 
-    public PageAdapter(Context context, StorageProvider storageProvider, FragmentManager fm, int numOfTabs) {
+    public PageAdapter(Context context, FragmentManager fm, int numOfTabs) {
         super(fm);
-        this.storageProvider = storageProvider;
         this.context = context;
         this.numOfTabs = numOfTabs;
     }
@@ -24,9 +20,9 @@ public class PageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new AllTaskFragment(storageProvider);
+                return new AllTaskFragment();
             case 1:
-                return new FavouriteTaskFragment(storageProvider);
+                return new FavouriteTaskFragment();
             default:
             return null;
         }

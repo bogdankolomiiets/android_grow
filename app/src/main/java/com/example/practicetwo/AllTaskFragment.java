@@ -12,42 +12,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.main.MainContract;
 import com.example.practicetwo.main.MainPresenter;
-import com.example.practicetwo.providers.StorageProvider;
+
 import java.util.List;
 
 public class AllTaskFragment extends Fragment implements MainContract.View {
-    private StorageProvider storageProvider;
-    private List<Task> allTaskList;
     private View view;
-
-    public AllTaskFragment(){}
-
-    public AllTaskFragment(StorageProvider storageProvider){
-        super();
-        this.storageProvider = storageProvider;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        MainPresenter mainPresenter = new MainPresenter(storageProvider);
-
-        //getting list of tasks
-        allTaskList = mainPresenter.getTaskFromStorage();
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.all_task_fragment, container, false);
-        showTasks();
+        new MainPresenter(this, StorageFactory.getInstance().getFactory(view.getContext())).getAllTasks();
         return view;
     }
 
     @Override
-    public void showTasks() {
+    public void showTasks(List<Task> tasks) {
         RecyclerView allTaskRecyclerView = view.findViewById(R.id.allTaskRecyclerView);
         allTaskRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        allTaskRecyclerView.setAdapter(new CustomRecyclerView(view.getContext(), allTaskList));
+        allTaskRecyclerView.setAdapter(new CustomRecyclerView(view.getContext(), tasks));
     }
 }

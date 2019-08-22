@@ -2,7 +2,6 @@ package com.example.practicetwo.providers;
 
 import android.content.Context;
 import com.example.practicetwo.entity.Task;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseProviderImpl implements StorageProvider {
@@ -13,17 +12,27 @@ public class DatabaseProviderImpl implements StorageProvider {
     }
 
     @Override
-    public boolean setToStorage(Task task) {
-        return false;
+    public void addTask(Task task) {
+
     }
 
     @Override
-    public List<Task> getAllTaskFromStorage() {
-        return new ArrayList<>();
+    public void editTask(Task task) {
+
     }
 
     @Override
-    public List<Task> getFavouriteTaskFromStorage() {
-        return new ArrayList<>();
+    public void deleteTask(Task task) {
+
+    }
+
+    @Override
+    public List<Task> getAllTasks() {
+        return null;
+    }
+
+    @Override
+    public List<Task> getFavouriteTasks() {
+        return null;
     }
 }

@@ -1,7 +1,11 @@
 
-isquid:S1301m"KReplace this "switch" statement by "if" statements to increase readability.(¿›İ”8ôéË-
-Rsquid:S1066U"/Merge this if statement with the enclosing one.(±„‘‰ıÿÿÿÿ8ôéË-
-`squid:S2259V"BA "NullPointerException" could be thrown; "data" is nullable here.(–õ˜‹8ôéË-
-W"squid:SwitchLastCaseIsDefaultCheckm""Add a default case to this switch.(¿›İ”8ôéË-
-X"squid:SwitchLastCaseIsDefaultCheckƒ""Add a default case to this switch.(´çš8ôéË-
+Šsquid:UselessImportCheck"ZRemove this unused import 'com.example.practicetwo.providers.InternalStorageProviderImpl'.(ÀŞ‚Ãüÿÿÿÿ8Üùí¥Ë-
+isquid:S1301k"KReplace this "switch" statement by "if" statements to increase readability.(¿›İ”8ôéË-
+~squid:UselessImportCheck"SRemove this unused import 'com.example.practicetwo.providers.DatabaseProviderImpl'.(³û¤8Üùí¥Ë-
+Rsquid:S1066S"/Merge this if statement with the enclosing one.(±„‘‰ıÿÿÿÿ8ôéË-
+W"squid:SwitchLastCaseIsDefaultCheckk""Add a default case to this switch.(¿›İ”8ôéË-
+‡squid:UselessImportCheck"\Remove this unused import 'com.example.practicetwo.providers.SharedPreferencesProviderImpl'.(ï²—š8Üùí¥Ë-
 asquid:UselessImportCheck"1Remove this unused import 'android.widget.Toast'.(©›ïÍúÿÿÿÿ8™—­ Ë-
+`squid:S2259T"BA "NullPointerException" could be thrown; "data" is nullable here.(–õ˜‹8ôéË-
+Šsquid:UselessImportCheck"ZRemove this unused import 'com.example.practicetwo.providers.ExternalStorageProviderImpl'.(›ÊÂ‘ùÿÿÿÿ8Üùí¥Ë-
+~squid:UselessImportCheck"NRemove this unused import 'com.example.practicetwo.providers.StorageProvider'.(Ş‚«÷ûÿÿÿÿ8­¥ò¥Ë-

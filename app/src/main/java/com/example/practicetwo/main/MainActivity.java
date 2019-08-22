@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -18,13 +17,8 @@ import com.example.practicetwo.PageAdapter;
 import com.example.practicetwo.R;
 import com.example.practicetwo.RequestCodes;
 import com.example.practicetwo.SettingsActivity;
-import com.example.practicetwo.database.TaskDatabase;
+import com.example.practicetwo.StorageFactory;
 import com.example.practicetwo.entity.Task;
-import com.example.practicetwo.providers.DatabaseProviderImpl;
-import com.example.practicetwo.providers.ExternalStorageProviderImpl;
-import com.example.practicetwo.providers.InternalStorageProviderImpl;
-import com.example.practicetwo.providers.SharedPreferencesProviderImpl;
-import com.example.practicetwo.providers.StorageProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -32,7 +26,6 @@ import static com.example.practicetwo.Constants.*;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
-    private StorageProvider storageProvider;
     private MainPresenter presenter;
 
     @Override
@@ -40,9 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 
-        //init data storage provider
-        initStorageProvider();
-        presenter = new MainPresenter(storageProvider);
+        //init presenter
+        presenter = new MainPresenter(null, StorageFactory.getInstance().getFactory(this));
 
         //init UI components
         initComponents();
@@ -59,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
-        PageAdapter pageAdapter = new PageAdapter(this, storageProvider, getSupportFragmentManager(), 2);
+        PageAdapter pageAdapter = new PageAdapter(this, getSupportFragmentManager(), 2);
         viewPager.setAdapter(pageAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
@@ -84,15 +76,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == RequestCodes.NEW_TASK_INTENT_CODE){
             if (resultCode == RESULT_OK){
                 Task task = data.getParcelableExtra(TASK);
-                presenter.saveTask(task);
+                presenter.addTask(task);
             }
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        TaskDatabase.destroyInstance();
-        super.onDestroy();
     }
 
     @Override
@@ -123,24 +109,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view.getId() == R.id.newTaskFab) {
             startActivityForResult(new Intent(this, NewTaskActivity.class), RequestCodes.NEW_TASK_INTENT_CODE);
-        }
-    }
-
-    private void initStorageProvider() {
-        String provider = getSharedPreferences(SHARE_PREFERENCES_FILE_NAME, MODE_PRIVATE).getString(STORAGE_PROVIDER, TAG_INTERNAL);
-        switch (provider) {
-            case TAG_SHARED:
-                storageProvider = new SharedPreferencesProviderImpl(this);
-                break;
-            case TAG_INTERNAL:
-                storageProvider = new InternalStorageProviderImpl(this);
-                break;
-            case TAG_EXTERNAL:
-                storageProvider = new ExternalStorageProviderImpl(this);
-                break;
-            case TAG_DATABASE:
-                storageProvider = new DatabaseProviderImpl(this);
-                break;
         }
     }
 }

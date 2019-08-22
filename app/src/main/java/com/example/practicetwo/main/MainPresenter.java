@@ -2,32 +2,38 @@ package com.example.practicetwo.main;
 
 import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.providers.StorageProvider;
-import java.util.List;
 
 public class MainPresenter implements MainContract.Presenter {
     private StorageProvider storageProvider;
+    private MainContract.View view;
 
-    public MainPresenter(StorageProvider storageProvider) {
+    public MainPresenter(MainContract.View view, StorageProvider storageProvider) {
+        this.view = view;
         this.storageProvider = storageProvider;
     }
 
     @Override
-    public List<Task> getTaskFromStorage() {
-        return storageProvider.getAllTaskFromStorage();
+    public void getAllTasks() {
+        view.showTasks(storageProvider.getAllTasks());
     }
 
     @Override
-    public List<Task> getFavouriteTaskFromStorage() {
-        return storageProvider.getFavouriteTaskFromStorage();
+    public void getFavouriteTasks() {
+        view.showTasks(storageProvider.getFavouriteTasks());
     }
 
     @Override
-    public boolean saveTask(Task task) {
-        return storageProvider.setToStorage(task);
+    public void addTask(Task task) {
+        storageProvider.addTask(task);
     }
 
     @Override
-    public void onDestroy() {
+    public void editTask(Task task) {
+        storageProvider.editTask(task);
+    }
 
+    @Override
+    public void deleteTask(Task task) {
+        storageProvider.deleteTask(task);
     }
 }

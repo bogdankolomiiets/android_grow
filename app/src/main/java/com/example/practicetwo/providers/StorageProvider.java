@@ -4,7 +4,9 @@ import com.example.practicetwo.entity.Task;
 import java.util.List;
 
 public interface StorageProvider{
-    boolean setToStorage(Task task);
-    List<Task> getAllTaskFromStorage();
-    List<Task> getFavouriteTaskFromStorage();
+    void addTask(Task task);
+    void editTask(Task task);
+    void deleteTask(Task task);
+    List<Task> getAllTasks();
+    List<Task> getFavouriteTasks();
 }

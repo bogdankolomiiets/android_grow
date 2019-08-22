@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.practicetwo.entity.Task;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.ViewHolder> {
@@ -19,7 +21,7 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
 
     public CustomRecyclerView(Context context, List<Task> taskList){
         this.context = context;
-        this.taskList = taskList;
+        this.taskList = taskList == null ? new ArrayList<Task>() : taskList;
     }
 
     @NonNull

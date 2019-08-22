@@ -43,3 +43,5 @@ n
 >app/src/main/java/com/example/practicetwo/AllTaskFragment.java,b\6\b6bd182ea33afecf0eb683a3bf81ea53a9c9cd67
 j
 :app/src/main/java/com/example/practicetwo/PageAdapter.java,f\9\f9df4fe816e3ecf6f437e995818caa80ca31e7ad
+r
+Bapp/src/main/java/com/example/practicetwo/main/StorageFactory.java,f\e\fe978442833216a53388aad925848c0f357c03d3
