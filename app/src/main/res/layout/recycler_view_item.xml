@@ -22,17 +22,17 @@
         android:layout_below="@id/taskTitleTV"
         android:layout_alignParentStart="true"
         android:layout_marginTop="16dp"
+        android:layout_toStartOf="@id/menuImitationHamburger"
         android:text="@string/newTaskDescription" />
 
     <TextView
         android:id="@+id/menuImitationHamburger"
         style="@style/recyclerViewItemHamburger"
-        android:layout_width="30dp"
+        android:layout_width="24dp"
         android:layout_height="match_parent"
         android:layout_alignTop="@id/taskTitleTV"
         android:layout_alignBottom="@id/taskDescriptionTV"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="0dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/recyclerViewItemHamburger" />
 

@@ -8,7 +8,7 @@ public interface MainContract {
 
     interface View{
         void showTasks(List<Task> tasks);
-        void refreshView();
+        void refresh();
     }
 
     interface Presenter{

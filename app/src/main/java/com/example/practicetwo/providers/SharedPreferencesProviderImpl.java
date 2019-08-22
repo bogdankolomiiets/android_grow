@@ -2,10 +2,12 @@ package com.example.practicetwo.providers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.Toast;
 import com.example.practicetwo.Constants;
 import com.example.practicetwo.R;
 import com.example.practicetwo.entity.Task;
+import com.example.practicetwo.main.MainContract;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -15,14 +17,15 @@ import java.util.List;
 
 public class SharedPreferencesProviderImpl implements StorageProvider {
     private Context context;
+    private static List<MainContract.View> callBackViewListeners = new ArrayList<>();
     private SharedPreferences preferences;
     private List<Task> taskList;
     private Gson gson;
+    private JsonArray jsonArray;
 
     public SharedPreferencesProviderImpl(Context context) {
         this.context = context;
         preferences = context.getSharedPreferences(Constants.SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE);
-        this.taskList = new ArrayList<>();
         this.gson = new Gson();
     }
 
@@ -36,22 +39,46 @@ public class SharedPreferencesProviderImpl implements StorageProvider {
     }
 
     @Override
+    public void changeTaskFavouriteValue(Task task) {
+        readTasks();
+        for (Task t : taskList) {
+            if (t.getId().equals(task.getId())) {
+                t.setFavourite(task.isFavourite());
+                break;
+            }
+        }
+        writeTasks();
+    }
+
+    @Override
     public void editTask(Task task) {
         readTasks();
-        for (Task t : taskList){
-            if (t.getId().equals(task.getId())){
-                t.setFavourite(task.isFavourite());
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getId().equals(task.getId())) {
+                taskList.set(i, task);
+                break;
             }
-            writeTasks();
         }
+        writeTasks();
     }
 
     @Override
     public void deleteTask(Task task) {
+        readTasks();
         if (taskList.remove(task)){
             showToast(R.string.taskRemoved);
             writeTasks();
         } else showToast(R.string.taskNotRemoved);
+    }
+
+    @Override
+    public void addCallBackViewListener(MainContract.View callBackViewListener) {
+        callBackViewListeners.add(callBackViewListener);
+    }
+
+    @Override
+    public void removeCallBackViewListener(MainContract.View callBackViewListener) {
+        callBackViewListeners.remove(callBackViewListener);
     }
 
     @Override
@@ -77,9 +104,16 @@ public class SharedPreferencesProviderImpl implements StorageProvider {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString(Constants.TASKS, gson.toJson(taskList));
             editor.apply();
+            notifyViews();
             return true;
         } catch (Exception ex){
             return false;
+        }
+    }
+
+    private void notifyViews() {
+        for (MainContract.View view : callBackViewListeners) {
+            view.refresh();
         }
     }
 
@@ -87,7 +121,7 @@ public class SharedPreferencesProviderImpl implements StorageProvider {
         taskList = new ArrayList<>();
         String tasks = preferences.getString(Constants.TASKS, null);
         if (tasks != null) {
-            JsonArray jsonArray = new JsonParser().parse(tasks).getAsJsonArray();
+            jsonArray = new JsonParser().parse(tasks).getAsJsonArray();
             for (JsonElement o : jsonArray) {
                 taskList.add(gson.fromJson(o, Task.class));
             }

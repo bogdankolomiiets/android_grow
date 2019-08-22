@@ -2,6 +2,7 @@ package com.example.practicetwo.providers;
 
 import android.content.Context;
 import com.example.practicetwo.entity.Task;
+import com.example.practicetwo.main.MainContract;
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 public class InternalStorageProviderImpl implements StorageProvider {
     private Context context;
     private GsonBuilder gsonBuilder;
+    private MainContract.View callBackView;
 
     public InternalStorageProviderImpl(Context context) {
         this.context = context;
@@ -17,6 +19,11 @@ public class InternalStorageProviderImpl implements StorageProvider {
 
     @Override
     public void addTask(Task task) {
+
+    }
+
+    @Override
+    public void changeTaskFavouriteValue(Task task) {
 
     }
 
@@ -51,4 +58,14 @@ public class InternalStorageProviderImpl implements StorageProvider {
         task.setDescription("Favourite task description");
         taskList.add(task);
         return taskList;    }
+
+    @Override
+    public void addCallBackViewListener(MainContract.View callBackView) {
+        this.callBackView = callBackView;
+    }
+
+    @Override
+    public void removeCallBackViewListener(MainContract.View callBackViewListener) {
+
+    }
 }

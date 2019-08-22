@@ -3,8 +3,9 @@
     <string name="settingsLabelText">Settings</string>
     <string name="taskLabelText">Tasks</string>
     <string name="taskAllText">All</string>
-    <string name="taskFavouriteText">Make favourite</string>
+    <string name="taskFavouriteText">Favourite</string>
     <string name="ordinaryPopupText">Make ordinary</string>
+    <string name="favouritePopupText">Make favourite</string>
     <string name="storageType">Store data:</string>
     <string name="sharedPreferencesType">Shared preferences</string>
     <string name="sqlDatabaseType">Database</string>
@@ -36,5 +37,4 @@
     <string name="taskNotRemoved">Not removed!</string>
     <string name="taskNotEdited">Not edited!</string>
     <string name="taskNotSaved">Not saved!</string>
-    <string name="favouritePopupText">Favourite</string>
 </resources>
