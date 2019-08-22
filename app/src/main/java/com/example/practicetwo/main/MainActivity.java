@@ -75,8 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == RequestCodes.NEW_TASK_INTENT_CODE){
             if (resultCode == RESULT_OK){
-                Task task = data.getParcelableExtra(TASK);
-                presenter.addTask(task);
+                presenter.addTask(data.getParcelableExtra(TASK));
             }
         }
     }

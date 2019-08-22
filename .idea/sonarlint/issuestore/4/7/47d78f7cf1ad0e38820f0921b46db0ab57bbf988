@@ -1,9 +1,6 @@
 
-nsquid:UselessImportCheck
-">Remove this unused import 'com.google.gson.stream.JsonReader'.(ËÓÌ—üÿÿÿÿ8‡Ş¼¤Ë-
-jsquid:UselessImportCheck":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ8ö“¡Ë-
-`squid:UselessImportCheck"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8‡Ş¼¤Ë-
-asquid:UselessImportCheck"6Remove this unused import 'java.io.InputStreamReader'.(ãˆÎÉ8¡óñ Ë-
-_squid:UselessImportCheck"/Remove this unused import 'java.io.FileReader'.(Â¡¢äşÿÿÿÿ8‡Ş¼¤Ë-
-]squid:UselessImportCheck"-Remove this unused import 'android.util.Log'.(Ô¦Ø²øÿÿÿÿ8·¶»¤Ë-
-Fsquid:S1148("#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8à‘Î Ë-
+squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ßñíõ8Êôß¿Ë-
+squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(âŸ¤±8Êôß¿Ë-
+œsquid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ö‡€8Êôß¿Ë-
+Fsquid:S1068"+Remove this unused "context" private field.(êİç8Şšá¿Ë-
+Psquid:S1068"/Remove this unused "gsonBuilder" private field.(™Ğšşÿÿÿÿ8Şšá¿Ë-

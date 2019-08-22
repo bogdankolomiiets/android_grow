@@ -1,6 +1,8 @@
 package com.example.practicetwo.providers;
 
 import com.example.practicetwo.entity.Task;
+import com.example.practicetwo.main.MainContract;
+
 import java.util.List;
 
 public interface StorageProvider{

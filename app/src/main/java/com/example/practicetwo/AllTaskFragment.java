@@ -16,20 +16,29 @@ import com.example.practicetwo.main.MainPresenter;
 import java.util.List;
 
 public class AllTaskFragment extends Fragment implements MainContract.View {
+    private MainContract.Presenter presenter;
     private View view;
+    private RecyclerView.Adapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.all_task_fragment, container, false);
-        new MainPresenter(this, StorageFactory.getInstance().getFactory(view.getContext())).getAllTasks();
+        presenter = new MainPresenter(this, StorageFactory.getInstance().getFactory(view.getContext()));
+        presenter.getAllTasks();
         return view;
     }
 
     @Override
     public void showTasks(List<Task> tasks) {
+        adapter = new CustomRecyclerView(view.getContext(), presenter, tasks);
         RecyclerView allTaskRecyclerView = view.findViewById(R.id.allTaskRecyclerView);
         allTaskRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        allTaskRecyclerView.setAdapter(new CustomRecyclerView(view.getContext(), tasks));
+        allTaskRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void refreshView() {
+        adapter.notifyDataSetChanged();
     }
 }

@@ -18,19 +18,28 @@ import java.util.List;
 
 public class FavouriteTaskFragment extends Fragment implements MainContract.View {
     private View view;
+    private MainContract.Presenter presenter;
+    private RecyclerView.Adapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.favourite_task_fragment, container, false);
-        new MainPresenter(this, StorageFactory.getInstance().getFactory(view.getContext())).getFavouriteTasks();
+        presenter = new MainPresenter(this, StorageFactory.getInstance().getFactory(view.getContext()));
+        presenter.getFavouriteTasks();
         return view;
     }
 
     @Override
     public void showTasks(List<Task> tasks) {
+        adapter = new CustomRecyclerView(view.getContext(), presenter, tasks);
         RecyclerView favouriteTaskRecyclerView = view.findViewById(R.id.favouriteTaskRecyclerView);
         favouriteTaskRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        favouriteTaskRecyclerView.setAdapter(new CustomRecyclerView(view.getContext(), tasks));
+        favouriteTaskRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void refreshView() {
+        adapter.notifyDataSetChanged();
     }
 }

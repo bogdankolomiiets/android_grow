@@ -6,7 +6,7 @@ import com.example.practicetwo.providers.ExternalStorageProviderImpl;
 import com.example.practicetwo.providers.InternalStorageProviderImpl;
 import com.example.practicetwo.providers.SharedPreferencesProviderImpl;
 import com.example.practicetwo.providers.StorageProvider;
-import static com.example.practicetwo.Constants.SHARE_PREFERENCES_FILE_NAME;
+import static com.example.practicetwo.Constants.SHARE_PREFERENCES_NAME;
 import static com.example.practicetwo.Constants.STORAGE_PROVIDER;
 import static com.example.practicetwo.Constants.TAG_DATABASE;
 import static com.example.practicetwo.Constants.TAG_EXTERNAL;
@@ -27,7 +27,7 @@ public class StorageFactory {
     }
 
     public StorageProvider getFactory(Context context) {
-        String provider = context.getSharedPreferences(SHARE_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE).getString(STORAGE_PROVIDER, TAG_INTERNAL);
+        String provider = context.getSharedPreferences(SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE).getString(STORAGE_PROVIDER, TAG_INTERNAL);
         switch (provider) {
             case TAG_SHARED:
                 return new SharedPreferencesProviderImpl(context);

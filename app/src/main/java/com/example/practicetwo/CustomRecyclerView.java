@@ -1,25 +1,27 @@
 package com.example.practicetwo;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.practicetwo.entity.Task;
-
+import com.example.practicetwo.main.MainContract;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.ViewHolder> {
     private List<Task> taskList;
     private Context context;
+    MainContract.Presenter presenter;
 
-    public CustomRecyclerView(Context context, List<Task> taskList){
+    public CustomRecyclerView(Context context, MainContract.Presenter presenter, List<Task> taskList){
+        this.presenter = presenter;
         this.context = context;
         this.taskList = taskList == null ? new ArrayList<Task>() : taskList;
     }
@@ -47,22 +49,27 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
     private void showPopupMenu(CustomRecyclerView.ViewHolder holder) {
         PopupMenu popupMenu = new PopupMenu(context, holder.menuImitationHamburger);
         popupMenu.inflate(R.menu.recycler_view_item_menu);
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()){
-                    case R.id.editItem:
-                        Toast.makeText(context, "todo", Toast.LENGTH_LONG).show();
-                        break;
-                    case R.id.deleteItem:
-                        Toast.makeText(context, "todo", Toast.LENGTH_LONG).show();
-                        break;
-                    case R.id.favouriteItem:
-                        Toast.makeText(context, "todo", Toast.LENGTH_LONG).show();
-                        break;
-                }
-                return false;
+
+        Task task = taskList.get(holder.getAdapterPosition());
+        Log.d("TAG", task.isFavourite()+"");
+        popupMenu.getMenu().findItem(R.id.favouriteItem)
+                .setTitle(task.isFavourite() ? R.string.ordinaryPopupText : R.string.favouritePopupText);
+
+        popupMenu.setOnMenuItemClickListener(menuItem -> {
+            switch (menuItem.getItemId()){
+                case R.id.editItem:
+                    Intent intent = new Intent(context, NewTaskActivity.class);
+                    intent.putExtra(Constants.TASK, task);
+                    context.startActivity(intent);
+                    break;
+                case R.id.deleteItem:
+                    presenter.deleteTask(task);
+                    break;
+                case R.id.favouriteItem:
+                    presenter.changeFavourite(task);
+                    break;
             }
+            return false;
         });
         popupMenu.show();
     }

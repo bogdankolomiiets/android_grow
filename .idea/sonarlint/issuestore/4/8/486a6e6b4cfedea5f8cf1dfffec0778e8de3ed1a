@@ -1,10 +1,0 @@
-
-Ÿsquid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(âŸ¤±8·Ğ‹¦Ë-
-Ÿsquid:S1186#"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÅÇá´8·Ğ‹¦Ë-
-[squid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ğæ•¦Ë-
-Ksquid:S1068	"(Remove this unused "view" private field.(–âıßÿÿÿÿÿ8Ø¦Ë-
-vsquid:S1450	"SRemove the "view" field and declare it as a local variable in the relevant methods.(–âıßÿÿÿÿÿ8Ø¦Ë-
-Vsquid:S1068"3Remove this unused "storageProvider" private field.(——šœûÿÿÿÿ8Ø¦Ë-
-¤squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(à§²—ıÿÿÿÿ8·Ğ‹¦Ë-
-Ÿsquid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(£Å„8Ø¦Ë-
-¤squid:S1186("€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(á÷„øüÿÿÿÿ8·Ğ‹¦Ë-

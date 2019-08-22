@@ -1,38 +1,40 @@
 package com.example.practicetwo.providers;
 
 import android.content.Context;
+import androidx.annotation.NonNull;
+import com.example.practicetwo.database.TaskDatabase;
 import com.example.practicetwo.entity.Task;
 import java.util.List;
 
 public class DatabaseProviderImpl implements StorageProvider {
-    private Context context;
+    private TaskDatabase database;
 
-    public DatabaseProviderImpl(Context context) {
-        this.context = context;
+    public DatabaseProviderImpl(@NonNull Context context) {
+        this.database = TaskDatabase.getInstance(context);
     }
 
     @Override
     public void addTask(Task task) {
-
+        database.taskDAO().insertTask(task);
     }
 
     @Override
     public void editTask(Task task) {
-
+        database.taskDAO().updateTask(task);
     }
 
     @Override
     public void deleteTask(Task task) {
-
+        database.taskDAO().deleteTask(task);
     }
 
     @Override
     public List<Task> getAllTasks() {
-        return null;
+        return database.taskDAO().getAllTasks();
     }
 
     @Override
     public List<Task> getFavouriteTasks() {
-        return null;
+        return database.taskDAO().getFavouriteTasks();
     }
 }

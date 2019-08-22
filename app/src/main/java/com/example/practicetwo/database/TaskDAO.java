@@ -23,4 +23,7 @@ public interface TaskDAO extends Constants {
 
     @Query("SELECT * FROM " + DB_NAME)
     List<Task> getAllTasks();
+
+    @Query("SELECT * FROM " + DB_NAME + " WHERE " + COLUMN_FAVOURITE + " IS NOT NULL")
+    List<Task> getFavouriteTasks();
 }

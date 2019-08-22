@@ -2,16 +2,24 @@ package com.example.practicetwo.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import java.util.Objects;
+import java.util.UUID;
+
 import static com.example.practicetwo.Constants.*;
 
 @Entity
 public class Task implements Parcelable {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = COLUMN_ID)
-    private int id;
+    @NonNull
+    private String id;
 
     @ColumnInfo(name = COLUMN_TITLE)
     private String title;
@@ -23,20 +31,21 @@ public class Task implements Parcelable {
     private boolean favourite;
 
     public Task() {
+        this.id = UUID.randomUUID().toString();
     }
 
     protected Task(Parcel in) {
-        id = in.readInt();
+        id = in.readString();
         title = in.readString();
         description = in.readString();
         favourite = in.readByte() != 0;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -71,7 +80,7 @@ public class Task implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(id);
+        parcel.writeString(id);
         parcel.writeString(title);
         parcel.writeString(description);
         parcel.writeByte((byte) (favourite ? 1 : 0));
@@ -88,4 +97,20 @@ public class Task implements Parcelable {
             return new Task[size];
         }
     };
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return favourite == task.favourite &&
+                id.equals(task.id) &&
+                title.equals(task.title) &&
+                description.equals(task.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, favourite);
+    }
 }

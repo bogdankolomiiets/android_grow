@@ -1,3 +1,9 @@
 
-Hsquid:S1068"+Remove this unused "context" private field.(êİç8Íş¹ŸË-
-Rsquid:S1068"/Remove this unused "preferences" private field.(„€Àóûÿÿÿÿ8™ãºŸË-
+`squid:UnusedPrivateMethod,"/Remove this unused private "writeTasks" method.(å™Šõÿÿÿÿÿ8úäÄË-
+_squid:UnusedPrivateMethod0".Remove this unused private "readTasks" method.(Ÿ©Ê‹øÿÿÿÿ8™ÜçÄË-
+Hsquid:S1068"+Remove this unused "context" private field.(êİç8úäÄË-
+[squid:UselessImportCheck"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8úäÄË-
+Ÿsquid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ßñíõ8úäÄË-
+Isquid:S1168$"+Return an empty collection instead of null.(¥¹ï8úäÄË-
+Isquid:S1168)"+Return an empty collection instead of null.(¥¹ï8úäÄË-
+Rsquid:S1068"/Remove this unused "preferences" private field.(„€Àóûÿÿÿÿ8úäÄË-

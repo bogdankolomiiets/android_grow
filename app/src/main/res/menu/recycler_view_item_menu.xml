@@ -9,5 +9,5 @@
         android:title="@string/deleteTask" />
     <item
         android:id="@+id/favouriteItem"
-        android:title="@string/addToFavourite" />
+        android:title="@string/favouritePopupText" />
 </menu>

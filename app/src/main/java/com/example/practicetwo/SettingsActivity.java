@@ -63,7 +63,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initActiveRadioButton() {
-        String tag = getSharedPreferences(SHARE_PREFERENCES_FILE_NAME, MODE_PRIVATE).getString(STORAGE_PROVIDER, TAG_INTERNAL);
+        String tag = getSharedPreferences(SHARE_PREFERENCES_NAME, MODE_PRIVATE).getString(STORAGE_PROVIDER, TAG_INTERNAL);
         storeTypeRadioGroup.check(storeTypeRadioGroup.findViewWithTag(tag).getId());
     }
 
@@ -90,7 +90,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void putToSharedPreferences(){
-        SharedPreferences.Editor editor = getSharedPreferences(SHARE_PREFERENCES_FILE_NAME, MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getSharedPreferences(SHARE_PREFERENCES_NAME, MODE_PRIVATE).edit();
         editor.putString(STORAGE_PROVIDER,
                 storeTypeRadioGroup.findViewById(storeTypeRadioGroup.getCheckedRadioButtonId()).getTag().toString());
         editor.apply();
