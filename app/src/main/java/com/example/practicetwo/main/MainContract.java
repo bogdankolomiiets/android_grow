@@ -9,6 +9,7 @@ public interface MainContract {
     interface View{
         void showTasks(List<Task> tasks);
         void refresh();
+        void showActivityToEditTask(Task task);
     }
 
     interface Presenter{
@@ -16,6 +17,7 @@ public interface MainContract {
         void getFavouriteTasks();
         void addTask(Task task);
         void editTask(Task task);
+        void showEditActivity(Task task);
         void changeFavourite(Task task);
         void deleteTask(Task task);
     }

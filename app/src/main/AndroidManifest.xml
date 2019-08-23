@@ -22,7 +22,7 @@
         </activity>
 
         <activity
-            android:name=".NewTaskActivity"
+            android:name=".TaskActivity"
             android:label="@string/newTaskLabelText"
             android:parentActivityName=".main.MainActivity" />
 

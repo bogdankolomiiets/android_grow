@@ -1,8 +1,7 @@
 
-“"squid:ClassVariableVisibilityCheck"bMake menuImitationHamburger a static final constant or non-public and provide accessors if needed.(Õû”Íùÿÿÿÿ
-ƒ"squid:ClassVariableVisibilityCheck"WMake taskTitleTV a static final constant or non-public and provide accessors if needed.(ÿÅ·°
-dsquid:S1871"HThis case's code block is the same as the block for the case on line 54.(½Ò“8¶ãÏšË-
-,squid:S2176"Rename this class.(Â×Öúÿÿÿÿ
-N"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(¿›İ”
-"squid:ClassVariableVisibilityCheck"]Make taskDescriptionTV a static final constant or non-public and provide accessors if needed.(û¯µ´üÿÿÿÿ
-isquid:S1871"HThis case's code block is the same as the block for the case on line 54.(ÿ¨ƒ¤ÿÿÿÿÿ8¶ãÏšË-
+…"squid:ClassVariableVisibilityCheckS"WMake taskTitleTV a static final constant or non-public and provide accessors if needed.(ÿÅ·°
+"squid:ClassVariableVisibilityCheckT"]Make taskDescriptionTV a static final constant or non-public and provide accessors if needed.(û¯µ´üÿÿÿÿ
+wsquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(î½€Â8ø†ÃÊË-
+W"squid:SwitchLastCaseIsDefaultCheck;""Add a default case to this switch.(¿›İ”8¼ÿÉÊË-
+œ"squid:ClassVariableVisibilityCheckU"bMake menuImitationHamburger a static final constant or non-public and provide accessors if needed.(Õû”Íùÿÿÿÿ8ëŒ•ËË-
+5squid:S2176R"Rename this class.(Â×Öúÿÿÿÿ8ëŒ•ËË-

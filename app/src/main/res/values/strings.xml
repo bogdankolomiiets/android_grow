@@ -32,7 +32,7 @@
     <string name="editTask">Edit</string>
     <string name="deleteTask">Delete</string>
     <string name="taskRemoved">Removed</string>
-    <string name="taskEdited">Edited</string>
+    <string name="taskChanged">Changed</string>
     <string name="taskSaved">Saved</string>
     <string name="taskNotRemoved">Not removed!</string>
     <string name="taskNotEdited">Not edited!</string>

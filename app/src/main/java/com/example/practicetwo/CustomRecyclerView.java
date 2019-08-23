@@ -2,17 +2,17 @@ package com.example.practicetwo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.core.app.BundleCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.main.MainContract;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.ViewHolder> {
@@ -23,7 +23,7 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
     public CustomRecyclerView(Context context, MainContract.Presenter presenter, List<Task> taskList){
         this.presenter = presenter;
         this.context = context;
-        this.taskList = taskList == null ? new ArrayList<Task>() : taskList;
+        this.taskList = taskList;
     }
 
     @NonNull
@@ -48,19 +48,16 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
 
     private void showPopupMenu(CustomRecyclerView.ViewHolder holder) {
         PopupMenu popupMenu = new PopupMenu(context, holder.menuImitationHamburger);
-        popupMenu.inflate(R.menu.recycler_view_item_menu);
+        popupMenu.inflate(R.menu.menu_recycler_view_item);
 
         Task task = taskList.get(holder.getAdapterPosition());
-        Log.d("TAG", task.isFavourite()+"");
         popupMenu.getMenu().findItem(R.id.favouriteItem)
                 .setTitle(task.isFavourite() ? R.string.ordinaryPopupText : R.string.favouritePopupText);
 
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             switch (menuItem.getItemId()){
                 case R.id.editItem:
-                    Intent intent = new Intent(context, NewTaskActivity.class);
-                    intent.putExtra(Constants.TASK, task);
-                    context.startActivity(intent);
+                    presenter.showEditActivity(task);
                     break;
                 case R.id.deleteItem:
                     presenter.deleteTask(task);

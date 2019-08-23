@@ -12,9 +12,9 @@ public interface Constants {
     String TAG_INTERNAL = "INTERNAL";
     String TAG_EXTERNAL = "EXTERNAL";
     String TAG_DATABASE = "DATABASE";
-    String TASK = "TASK";
+    String TASK_EXTRA = "TASK_EXTRA";
     String TASKS = "TASKS";
-    String NEW_TASK_TITLE = "newTaskTitle";
-    String NEW_TASK_DESCRIPTION = "newTaskDescription";
+    String TASK_TITLE = "taskTitle";
+    String TASK_DESCRIPTION = "taskDescription";
     String TASK_FILENAME = "tasks.json";
 }

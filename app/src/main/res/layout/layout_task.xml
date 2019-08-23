@@ -10,7 +10,7 @@
     <include layout="@layout/tool_bar_layout"/>
 
     <EditText
-        android:id="@+id/newTaskTitle"
+        android:id="@+id/taskTitle"
         style="@style/newTaskStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         tools:targetApi="O"/>
 
     <EditText
-        android:id="@+id/newTaskDescription"
+        android:id="@+id/taskDescription"
         style="@style/newTaskStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

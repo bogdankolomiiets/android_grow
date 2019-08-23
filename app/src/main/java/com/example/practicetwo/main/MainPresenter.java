@@ -33,6 +33,11 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public void showEditActivity(Task task) {
+        view.showActivityToEditTask(task);
+    }
+
+    @Override
     public void changeFavourite(Task task) {
         task.setFavourite(task.isFavourite() ? false : true);
         storageProvider.changeTaskFavouriteValue(task);

@@ -27,7 +27,7 @@
     <string name="editTask">Изменить</string>
     <string name="deleteTask">Удалить</string>
     <string name="taskRemoved">Удалено</string>
-    <string name="taskEdited">Изменено</string>
+    <string name="taskChanged">Изменено</string>
     <string name="taskSaved">Сохранено</string>
     <string name="taskNotRemoved">Не удалено!</string>
     <string name="taskNotEdited">Не изменено!</string>

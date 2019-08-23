@@ -12,25 +12,31 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.practicetwo.entity.Task;
-import com.example.practicetwo.main.MainActivity;
 import static com.example.practicetwo.Constants.*;
 
-public class NewTaskActivity extends AppCompatActivity {
-    private EditText newTaskTitle;
-    private EditText newTaskDescription;
+public class TaskActivity extends AppCompatActivity {
+    private EditText taskTitle;
+    private EditText taskDescription;
+    private Task task;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_new_task);
+        setContentView(R.layout.layout_task);
 
         //init UI elements
         initElements();
+
+        task = getIntent().getParcelableExtra(TASK_EXTRA);
+        if (task != null){
+            taskTitle.setText(task.getTitle());
+            taskDescription.setText(task.getDescription());
+        }
     }
 
     private void initElements() {
-        newTaskTitle = findViewById(R.id.newTaskTitle);
-        newTaskDescription = findViewById(R.id.newTaskDescription);
+        taskTitle = findViewById(R.id.taskTitle);
+        taskDescription = findViewById(R.id.taskDescription);
 
         //find and set up toolbar
         Toolbar toolbar = findViewById(R.id.toolBar);
@@ -43,28 +49,32 @@ public class NewTaskActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_new_task, menu);
+        inflater.inflate(R.menu.menu_layout_task, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.saveItem) {
-            putNewTaskToIntent();
+            saveTask();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void putNewTaskToIntent() {
-        String title = newTaskTitle.getText().toString();
-        String description = newTaskDescription.getText().toString();
+    private void saveTask() {
+        String title = taskTitle.getText().toString();
+        String description = taskDescription.getText().toString();
         if (title.length() > 0 && description.length() > 0) {
-            Task task = new Task();
+            if (task == null) {
+                task = new Task();
+            }
             task.setTitle(title);
             task.setDescription(description);
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra(TASK, task);
+
+            Intent intent = new Intent(this, TaskFragment.class);
+            intent.putExtra(TASK_EXTRA, task);
             setResult(RESULT_OK, intent);
             finish();
         } else Toast.makeText(this, R.string.fieldIsEmpty, Toast.LENGTH_SHORT).show();
@@ -74,15 +84,15 @@ public class NewTaskActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState != null) {
-            newTaskTitle.setText(savedInstanceState.getString(NEW_TASK_TITLE));
-            newTaskDescription.setText(savedInstanceState.getString(NEW_TASK_DESCRIPTION));
+            taskTitle.setText(savedInstanceState.getString(TASK_TITLE));
+            taskDescription.setText(savedInstanceState.getString(TASK_DESCRIPTION));
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(NEW_TASK_TITLE, newTaskTitle.getText().toString());
-        outState.putString(NEW_TASK_DESCRIPTION, newTaskDescription.getText().toString());
+        outState.putString(TASK_TITLE, taskTitle.getText().toString());
+        outState.putString(TASK_DESCRIPTION, taskDescription.getText().toString());
     }
 }
