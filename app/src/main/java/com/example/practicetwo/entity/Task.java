@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -12,7 +11,7 @@ import androidx.room.PrimaryKey;
 import java.util.Objects;
 import java.util.UUID;
 
-import static com.example.practicetwo.Constants.*;
+import static com.example.practicetwo.util.Constants.*;
 
 @Entity
 public class Task implements Parcelable {
@@ -112,5 +111,15 @@ public class Task implements Parcelable {
     @Override
     public int hashCode() {
         return Objects.hash(id, title, description, favourite);
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", favourite=" + favourite +
+                '}';
     }
 }

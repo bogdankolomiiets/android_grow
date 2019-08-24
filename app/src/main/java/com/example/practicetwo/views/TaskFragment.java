@@ -1,4 +1,4 @@
-package com.example.practicetwo;
+package com.example.practicetwo.views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,18 +10,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.practicetwo.R;
+import com.example.practicetwo.util.RequestCodes;
+import com.example.practicetwo.TaskActivity;
 import com.example.practicetwo.entity.Task;
-import com.example.practicetwo.main.MainContract;
-import com.example.practicetwo.main.MainPresenter;
-import com.example.practicetwo.providers.StorageProvider;
+import com.example.practicetwo.TaskContract;
+import com.example.practicetwo.presenters.TaskPresenterImpl;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import java.util.List;
-import static android.app.Activity.RESULT_OK;
-import static com.example.practicetwo.Constants.TASK_EXTRA;
 
-public class TaskFragment extends Fragment implements View.OnClickListener, MainContract.View {
-    private MainContract.Presenter presenter;
-    private RecyclerView.Adapter adapter;
+import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
+import static com.example.practicetwo.util.Constants.TASK_EXTRA;
+
+public class TaskFragment extends Fragment implements View.OnClickListener, TaskContract.TaskView {
+    private TaskContract.TaskPresenter taskPresenter;
     private RecyclerView taskRecyclerView;
     private View view;
     private boolean showFavouriteTasks;
@@ -37,16 +40,10 @@ public class TaskFragment extends Fragment implements View.OnClickListener, Main
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.task_fragment, container, false);
-        StorageProvider storageProvider = StorageFactory.getInstance().getFactory(view.getContext());
-        storageProvider.addCallBackViewListener(this);
         taskRecyclerView = view.findViewById(R.id.taskRecyclerView);
         taskRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        presenter = new MainPresenter(this, storageProvider);
-        if (showFavouriteTasks) {
-            presenter.getFavouriteTasks();
-        } else {
-            presenter.getAllTasks();
-        }
+        taskPresenter = new TaskPresenterImpl(view, this, showFavouriteTasks);
+        taskPresenter.getTasks();
         return view;
     }
 
@@ -60,13 +57,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener, Main
 
     @Override
     public void showTasks(List<Task> tasks) {
-        adapter = new CustomRecyclerView(view.getContext(), presenter, tasks);
-        taskRecyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public void refresh() {
-        adapter.notifyDataSetChanged();
+        taskRecyclerView.setAdapter(taskPresenter.getAdapter());
     }
 
     @Override
@@ -80,11 +71,11 @@ public class TaskFragment extends Fragment implements View.OnClickListener, Main
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == RequestCodes.NEW_TASK_INTENT_CODE) {
             if (resultCode == RESULT_OK) {
-                presenter.addTask(data.getParcelableExtra(TASK_EXTRA));
+                taskPresenter.addTask(data.getParcelableExtra(TASK_EXTRA));
             }
         } else if (requestCode == RequestCodes.EDIT_TASK_INTENT_CODE){
             if (resultCode == RESULT_OK){
-                presenter.editTask(data.getParcelableExtra(TASK_EXTRA));
+                taskPresenter.editTask(data.getParcelableExtra(TASK_EXTRA));
             }
         }
     }

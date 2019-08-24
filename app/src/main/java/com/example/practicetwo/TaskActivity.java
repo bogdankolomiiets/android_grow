@@ -12,7 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.practicetwo.entity.Task;
-import static com.example.practicetwo.Constants.*;
+import com.example.practicetwo.views.TaskFragment;
+
+import static com.example.practicetwo.util.Constants.*;
 
 public class TaskActivity extends AppCompatActivity {
     private EditText taskTitle;

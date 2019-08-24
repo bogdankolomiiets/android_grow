@@ -35,6 +35,6 @@
     <string name="taskChanged">Changed</string>
     <string name="taskSaved">Saved</string>
     <string name="taskNotRemoved">Not removed!</string>
-    <string name="taskNotEdited">Not edited!</string>
+    <string name="taskNotChanged">Not changed!</string>
     <string name="taskNotSaved">Not saved!</string>
 </resources>

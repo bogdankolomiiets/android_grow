@@ -1,20 +1,21 @@
-package com.example.practicetwo.main;
+package com.example.practicetwo;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.practicetwo.entity.Task;
-
 import java.util.List;
 
-public interface MainContract {
+public interface TaskContract {
 
-    interface View{
+    interface TaskView {
         void showTasks(List<Task> tasks);
-        void refresh();
         void showActivityToEditTask(Task task);
     }
 
-    interface Presenter{
-        void getAllTasks();
-        void getFavouriteTasks();
+    interface TaskPresenter {
+        RecyclerView.Adapter getAdapter();
+        void refresh();
+        void getTasks();
         void addTask(Task task);
         void editTask(Task task);
         void showEditActivity(Task task);

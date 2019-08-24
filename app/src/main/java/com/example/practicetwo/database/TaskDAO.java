@@ -5,7 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-import com.example.practicetwo.Constants;
+import com.example.practicetwo.util.Constants;
 import com.example.practicetwo.entity.Task;
 import java.util.List;
 

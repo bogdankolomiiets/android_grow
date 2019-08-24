@@ -30,7 +30,7 @@
     <string name="taskChanged">Изменено</string>
     <string name="taskSaved">Сохранено</string>
     <string name="taskNotRemoved">Не удалено!</string>
-    <string name="taskNotEdited">Не изменено!</string>
+    <string name="taskNotChanged">Не изменено!</string>
     <string name="taskNotSaved">Не сохранено!</string>
     <string name="favouritePopupText">В избранное</string>
     <string name="ordinaryPopupText">В обычные</string>

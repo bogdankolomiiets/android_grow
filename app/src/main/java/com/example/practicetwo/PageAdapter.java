@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.practicetwo.views.TaskFragment;
+
 public class PageAdapter extends FragmentPagerAdapter {
     private int numOfTabs;
     private Context context;

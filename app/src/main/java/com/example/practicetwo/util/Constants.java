@@ -1,4 +1,4 @@
-package com.example.practicetwo;
+package com.example.practicetwo.util;
 
 public interface Constants {
     String DB_NAME = "task";

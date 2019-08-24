@@ -3,13 +3,13 @@ package com.example.practicetwo.providers;
 import android.content.Context;
 
 import com.example.practicetwo.entity.Task;
-import com.example.practicetwo.main.MainContract;
+import com.example.practicetwo.TaskContract;
 
 import java.util.List;
 
 public class ExternalStorageProviderImpl implements StorageProvider {
     private Context context;
-    private MainContract.View callBackView;
+    private TaskContract.TaskView callBackView;
 
     public ExternalStorageProviderImpl(Context context) {
         this.context = context;
@@ -43,15 +43,5 @@ public class ExternalStorageProviderImpl implements StorageProvider {
     @Override
     public List<Task> getFavouriteTasks() {
         return null;
-    }
-
-    @Override
-    public void addCallBackViewListener(MainContract.View callBackView) {
-        this.callBackView = callBackView;
-    }
-
-    @Override
-    public void removeCallBackViewListener(MainContract.View callBackViewListener) {
-
     }
 }

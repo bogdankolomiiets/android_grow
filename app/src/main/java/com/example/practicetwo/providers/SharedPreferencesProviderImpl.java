@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
-import com.example.practicetwo.Constants;
+import com.example.practicetwo.util.Constants;
 import com.example.practicetwo.R;
 import com.example.practicetwo.entity.Task;
-import com.example.practicetwo.main.MainContract;
+import com.example.practicetwo.TaskContract;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -17,14 +17,12 @@ import java.util.List;
 
 public class SharedPreferencesProviderImpl implements StorageProvider {
     private Context context;
-    private List<MainContract.View> callBackViewListeners = new ArrayList<>();
     private SharedPreferences preferences;
-    private List<Task> taskList;
+    private List<Task> tasksList;
     private Gson gson;
-    private JsonArray jsonArray;
 
     public SharedPreferencesProviderImpl(Context context) {
-        taskList = new ArrayList<>();
+        tasksList = new ArrayList<>();
         this.context = context;
         preferences = context.getSharedPreferences(Constants.SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE);
         this.gson = new Gson();
@@ -32,7 +30,8 @@ public class SharedPreferencesProviderImpl implements StorageProvider {
 
     @Override
     public void addTask(Task task) {
-        taskList.add(task);
+        readTasks();
+        tasksList.add(task);
         if (writeTasks()){
             showToast(R.string.taskSaved);
         } else showToast(R.string.taskNotSaved);
@@ -40,7 +39,8 @@ public class SharedPreferencesProviderImpl implements StorageProvider {
 
     @Override
     public void changeTaskFavouriteValue(Task task) {
-        for (Task t : taskList) {
+        readTasks();
+        for (Task t : tasksList) {
             if (t.getId().equals(task.getId())) {
                 t.setFavourite(task.isFavourite());
                 showToast(R.string.taskChanged);
@@ -52,9 +52,10 @@ public class SharedPreferencesProviderImpl implements StorageProvider {
 
     @Override
     public void editTask(Task task) {
-        for (int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).getId().equals(task.getId())) {
-                taskList.set(i, task);
+        readTasks();
+        for (int i = 0; i < tasksList.size(); i++) {
+            if (tasksList.get(i).getId().equals(task.getId())) {
+                tasksList.set(i, task);
                 showToast(R.string.taskChanged);
                 break;
             }
@@ -64,32 +65,24 @@ public class SharedPreferencesProviderImpl implements StorageProvider {
 
     @Override
     public void deleteTask(Task task) {
-        if (taskList.remove(task)){
+        readTasks();
+        if (tasksList.remove(task)){
             showToast(R.string.taskRemoved);
             writeTasks();
         } else showToast(R.string.taskNotRemoved);
     }
 
     @Override
-    public void addCallBackViewListener(MainContract.View callBackViewListener) {
-        callBackViewListeners.add(callBackViewListener);
-    }
-
-    @Override
-    public void removeCallBackViewListener(MainContract.View callBackViewListener) {
-        callBackViewListeners.remove(callBackViewListener);
-    }
-
-    @Override
     public List<Task> getAllTasks() {
         readTasks();
-        return taskList;
+        return tasksList;
     }
 
     @Override
     public List<Task> getFavouriteTasks() {
+        readTasks();
         List<Task> favouriteTasks = new ArrayList<>();
-            for (Task task : taskList) {
+            for (Task task : tasksList) {
                 if (task.isFavourite()) {
                     favouriteTasks.add(task);
                 }
@@ -100,7 +93,7 @@ public class SharedPreferencesProviderImpl implements StorageProvider {
     private boolean writeTasks(){
         try {
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(Constants.TASKS, gson.toJson(taskList));
+            editor.putString(Constants.TASKS, gson.toJson(tasksList));
             editor.apply();
             notifyViews();
             return true;
@@ -110,18 +103,18 @@ public class SharedPreferencesProviderImpl implements StorageProvider {
     }
 
     private void notifyViews() {
-        Log.d("TAG", callBackViewListeners.size()+"");
-        for (MainContract.View view : callBackViewListeners) {
-            view.refresh();
+        for (TaskContract.TaskPresenter taskPresenter : callBackViewListeners) {
+            taskPresenter.refresh();
         }
     }
 
     private void readTasks(){
+        tasksList.clear();
         String tasks = preferences.getString(Constants.TASKS, null);
         if (tasks != null) {
-            jsonArray = new JsonParser().parse(tasks).getAsJsonArray();
+            JsonArray jsonArray = new JsonParser().parse(tasks).getAsJsonArray();
             for (JsonElement o : jsonArray) {
-                taskList.add(gson.fromJson(o, Task.class));
+                tasksList.add(gson.fromJson(o, Task.class));
             }
         }
     }
