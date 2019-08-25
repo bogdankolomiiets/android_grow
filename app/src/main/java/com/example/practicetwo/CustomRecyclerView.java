@@ -59,13 +59,13 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
             switch (menuItem.getItemId()){
                 case R.id.editItem:
                     taskPresenter.showEditActivity(task);
-                    break;
+                    return true;
                 case R.id.deleteItem:
                     taskPresenter.deleteTask(task);
-                    break;
+                    return true;
                 case R.id.favouriteItem:
                     taskPresenter.changeFavourite(task);
-                    break;
+                    return true;
             }
             return false;
         });

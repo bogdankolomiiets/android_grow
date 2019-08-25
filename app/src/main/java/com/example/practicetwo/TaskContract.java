@@ -21,6 +21,7 @@ public interface TaskContract {
         void showEditActivity(Task task);
         void changeFavourite(Task task);
         void deleteTask(Task task);
+        void removeCallBackViewListener();
     }
 
 }

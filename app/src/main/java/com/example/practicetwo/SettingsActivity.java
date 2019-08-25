@@ -116,7 +116,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
     }
 

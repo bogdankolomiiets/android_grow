@@ -1,6 +1,7 @@
 package com.example.practicetwo.presenters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.practicetwo.CustomRecyclerView;
@@ -70,5 +71,10 @@ public class TaskPresenterImpl implements TaskContract.TaskPresenter {
     @Override
     public void deleteTask(Task task) {
         storageProvider.deleteTask(task);
+    }
+
+    @Override
+    public void removeCallBackViewListener() {
+        storageProvider.removeCallBackViewListener(this);
     }
 }

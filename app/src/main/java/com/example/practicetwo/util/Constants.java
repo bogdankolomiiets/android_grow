@@ -16,5 +16,6 @@ public interface Constants {
     String TASKS = "TASKS";
     String TASK_TITLE = "taskTitle";
     String TASK_DESCRIPTION = "taskDescription";
-    String TASK_FILENAME = "tasks.json";
+    String TASK_FILENAME = "tasks.bin";
+    String FAVOURITE_TASK = "FAVOURITE_TASK";
 }

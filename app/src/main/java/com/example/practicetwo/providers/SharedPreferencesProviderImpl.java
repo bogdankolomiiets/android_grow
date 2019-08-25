@@ -2,12 +2,10 @@ package com.example.practicetwo.providers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.widget.Toast;
 import com.example.practicetwo.util.Constants;
 import com.example.practicetwo.R;
 import com.example.practicetwo.entity.Task;
-import com.example.practicetwo.TaskContract;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -22,10 +20,10 @@ public class SharedPreferencesProviderImpl implements StorageProvider {
     private Gson gson;
 
     public SharedPreferencesProviderImpl(Context context) {
-        tasksList = new ArrayList<>();
+        this.tasksList = new ArrayList<>();
         this.context = context;
-        preferences = context.getSharedPreferences(Constants.SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE);
         this.gson = new Gson();
+        preferences = context.getSharedPreferences(Constants.SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
     @Override
@@ -99,12 +97,6 @@ public class SharedPreferencesProviderImpl implements StorageProvider {
             return true;
         } catch (Exception ex){
             return false;
-        }
-    }
-
-    private void notifyViews() {
-        for (TaskContract.TaskPresenter taskPresenter : callBackViewListeners) {
-            taskPresenter.refresh();
         }
     }
 

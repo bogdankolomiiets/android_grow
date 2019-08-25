@@ -1,9 +1,12 @@
 package com.example.practicetwo.providers;
 
+import android.util.Log;
+
 import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.TaskContract;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public interface StorageProvider{
@@ -11,6 +14,16 @@ public interface StorageProvider{
 
     default void addCallBackViewListener(TaskContract.TaskPresenter callBackViewListener){
         callBackViewListeners.add(callBackViewListener);
+    }
+
+    default void removeCallBackViewListener(TaskContract.TaskPresenter callBackViewListener){
+        callBackViewListeners.remove(callBackViewListener);
+    }
+
+    default void notifyViews() {
+        for (TaskContract.TaskPresenter taskPresenter : callBackViewListeners) {
+            taskPresenter.refresh();
+        }
     }
 
     void addTask(Task task);

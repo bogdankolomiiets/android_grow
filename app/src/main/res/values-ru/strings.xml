@@ -34,4 +34,5 @@
     <string name="taskNotSaved">Не сохранено!</string>
     <string name="favouritePopupText">В избранное</string>
     <string name="ordinaryPopupText">В обычные</string>
+    <string name="readError">Ошибка чтения</string>
 </resources>

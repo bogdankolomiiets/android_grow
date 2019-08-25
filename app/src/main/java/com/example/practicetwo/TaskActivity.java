@@ -2,6 +2,7 @@ package com.example.practicetwo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -76,7 +77,7 @@ public class TaskActivity extends AppCompatActivity {
             task.setDescription(description);
 
             Intent intent = new Intent(this, TaskFragment.class);
-            intent.putExtra(TASK_EXTRA, task);
+            intent.putExtra(TASK_EXTRA, (Parcelable) task);
             setResult(RESULT_OK, intent);
             finish();
         } else Toast.makeText(this, R.string.fieldIsEmpty, Toast.LENGTH_SHORT).show();

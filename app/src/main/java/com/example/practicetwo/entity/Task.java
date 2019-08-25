@@ -8,13 +8,14 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
 import static com.example.practicetwo.util.Constants.*;
 
 @Entity
-public class Task implements Parcelable {
+public class Task implements Parcelable, Serializable {
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = COLUMN_ID)
     @NonNull

@@ -37,4 +37,5 @@
     <string name="taskNotRemoved">Not removed!</string>
     <string name="taskNotChanged">Not changed!</string>
     <string name="taskNotSaved">Not saved!</string>
+    <string name="readError">Read error</string>
 </resources>
