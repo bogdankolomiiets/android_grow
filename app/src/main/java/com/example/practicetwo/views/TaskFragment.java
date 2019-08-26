@@ -22,8 +22,6 @@ import com.example.practicetwo.TaskContract;
 import com.example.practicetwo.presenters.TaskPresenterImpl;
 import com.example.practicetwo.util.TaskLoader;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.io.Serializable;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;

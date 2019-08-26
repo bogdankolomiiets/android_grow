@@ -1,7 +1,6 @@
 package com.example.practicetwo.presenters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.practicetwo.CustomRecyclerView;
@@ -49,7 +48,7 @@ public class TaskPresenterImpl implements TaskContract.TaskPresenter {
 
     @Override
     public void addTask(Task task) {
-        storageProvider.addTask(task);
+        storageProvider.insertTask(task);
     }
 
     @Override

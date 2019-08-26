@@ -2,9 +2,9 @@ package com.example.practicetwo.util;
 
 import android.content.Context;
 import com.example.practicetwo.providers.DatabaseProviderImpl;
-import com.example.practicetwo.providers.ExternalStorageProviderImpl;
-import com.example.practicetwo.providers.InternalStorageProviderImpl;
-import com.example.practicetwo.providers.SharedPreferencesProviderImpl;
+import com.example.practicetwo.providers.ExternalStorageProvider;
+import com.example.practicetwo.providers.InternalStorageProvider;
+import com.example.practicetwo.providers.SharedPreferencesProvider;
 import com.example.practicetwo.providers.StorageProvider;
 import static com.example.practicetwo.util.Constants.SHARE_PREFERENCES_NAME;
 import static com.example.practicetwo.util.Constants.STORAGE_PROVIDER;
@@ -30,13 +30,13 @@ public class StorageFactory {
         String provider = context.getSharedPreferences(SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE).getString(STORAGE_PROVIDER, TAG_INTERNAL);
         switch (provider) {
             case TAG_SHARED:
-                return new SharedPreferencesProviderImpl(context);
+                return new SharedPreferencesProvider(context);
             case TAG_EXTERNAL:
-                return new ExternalStorageProviderImpl(context);
+                return new ExternalStorageProvider(context);
             case TAG_DATABASE:
                 return new DatabaseProviderImpl(context);
             default:
-                return new InternalStorageProviderImpl(context);
+                return new InternalStorageProvider(context);
         }
     }
 }

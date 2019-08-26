@@ -1,12 +1,8 @@
 package com.example.practicetwo.providers;
 
-import android.util.Log;
-
 import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.TaskContract;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public interface StorageProvider{
@@ -26,7 +22,7 @@ public interface StorageProvider{
         }
     }
 
-    void addTask(Task task);
+    void insertTask(Task task);
     void changeTaskFavouriteValue(Task task);
     void editTask(Task task);
     void deleteTask(Task task);
