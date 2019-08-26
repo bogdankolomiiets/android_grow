@@ -20,8 +20,4 @@ public abstract class TaskDatabase extends RoomDatabase {
         }
         return instance;
     }
-
-    public static void destroyInstance(){
-        instance = null;
-    }
 }

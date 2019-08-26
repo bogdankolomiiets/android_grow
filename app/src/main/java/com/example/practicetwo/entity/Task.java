@@ -16,7 +16,7 @@ import static com.example.practicetwo.util.Constants.*;
 
 @Entity
 public class Task implements Parcelable, Serializable {
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey()
     @ColumnInfo(name = COLUMN_ID)
     @NonNull
     private String id;
@@ -35,7 +35,7 @@ public class Task implements Parcelable, Serializable {
     }
 
     protected Task(Parcel in) {
-        id = in.readString();
+        id = Objects.requireNonNull(in.readString());
         title = in.readString();
         description = in.readString();
         favourite = in.readByte() != 0;

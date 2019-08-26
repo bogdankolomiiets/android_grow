@@ -34,17 +34,11 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
         Task task = tasksList.get(position);
         holder.taskTitleTV.setText(task.getTitle());
         holder.taskDescriptionTV.setText(task.getDescription());
-        holder.menuImitationHamburger.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu(holder);
-            }
-        });
+        holder.menuImitationHamburger.setOnClickListener(view -> showPopupMenu(holder));
     }
 
     public void setData(List<Task> tasksList){
         this.tasksList = tasksList;
-        notifyDataSetChanged();
     }
 
     private void showPopupMenu(CustomRecyclerView.ViewHolder holder) {

@@ -36,12 +36,7 @@ public class ExternalStoragePermissionChecker {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(R.string.explanationDialogTitle);
         builder.setMessage(R.string.explanationDialogMessage);
-        builder.setPositiveButton(R.string.okBtn, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                requestPermission(activity);
-            }
-        });
+        builder.setPositiveButton(R.string.okBtn, (dialogInterface, i) -> requestPermission(activity));
         builder.create().show();
     }
 }
