@@ -84,10 +84,10 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
     }
 
     protected void showToast(int msg){
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 
     protected void showToast(String msg){
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 }

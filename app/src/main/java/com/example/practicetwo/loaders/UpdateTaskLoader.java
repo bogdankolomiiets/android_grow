@@ -1,30 +1,41 @@
-package com.example.practicetwo.util;
+package com.example.practicetwo.loaders;
 
 import android.content.Context;
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
 
 import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.providers.StorageProvider;
+import com.example.practicetwo.util.Constants;
+
 import java.util.List;
 
-public class TaskLoader extends AsyncTaskLoader<List<Task>> {
-    private static final String TAG = TaskLoader.class.getName();
-    private Context context;
+public class UpdateTaskLoader extends AsyncTaskLoader<List<Task>> {
     private StorageProvider storageProvider;
     private boolean showFavouriteTasks;
+    private Task taskToUpdate;
 
-    public TaskLoader(@NonNull Context context, StorageProvider storageProvider, boolean showFavouriteTasks) {
+    @Override
+    protected void onStartLoading() {
+        super.onStartLoading();
+        forceLoad();
+    }
+
+
+    public UpdateTaskLoader(@NonNull Context context, StorageProvider storageProvider, boolean showFavouriteTasks, Bundle bundle) {
         super(context);
         this.storageProvider = storageProvider;
         this.showFavouriteTasks = showFavouriteTasks;
-        this.context = context;
+        taskToUpdate = bundle.getParcelable(Constants.TASK);
     }
 
     @Nullable
     @Override
     public List<Task> loadInBackground() {
+        storageProvider.editTask(taskToUpdate);
         return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
     }
 }

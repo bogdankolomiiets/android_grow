@@ -2,6 +2,7 @@ package com.example.practicetwo.util;
 
 public interface Constants {
     String DB_NAME = "task";
+    String TASK = "TASK";
     String COLUMN_ID = "task_id";
     String COLUMN_TITLE = "task_title";
     String COLUMN_DESCRIPTION = "task_description";

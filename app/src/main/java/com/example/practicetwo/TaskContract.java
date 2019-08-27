@@ -5,15 +5,15 @@ import com.example.practicetwo.entity.Task;
 public interface TaskContract {
 
     interface TaskView {
-        void showActivityToEditTask(Task task);
         CustomRecyclerView getAdapter();
+        void updateView();
+        void showActivityToEditTask(Task task);
     }
 
     interface TaskPresenter {
-        void refresh();
-        void getTasks();
-        void addTask(Task task);
-        void editTask(Task task);
+        void refreshData();
+        void insertTask(Task task);
+        void updateTask(Task task);
         void showEditActivity(Task task);
         void changeFavourite(Task task);
         void deleteTask(Task task);

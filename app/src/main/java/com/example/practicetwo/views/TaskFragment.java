@@ -30,8 +30,8 @@ import static com.example.practicetwo.util.Constants.TASK_EXTRA;
 
 public class TaskFragment extends Fragment implements View.OnClickListener, TaskContract.TaskView {
     private TaskContract.TaskPresenter taskPresenter;
-    private CustomRecyclerView adapter;
     private View view;
+    private CustomRecyclerView adapter;
     private boolean showFavouriteTasks;
 
     public TaskFragment() {
@@ -50,8 +50,8 @@ public class TaskFragment extends Fragment implements View.OnClickListener, Task
         }
         view = inflater.inflate(R.layout.task_fragment, container, false);
         taskPresenter = new TaskPresenterImpl(view, this, showFavouriteTasks, getLoaderManager());
-        taskPresenter.getTasks();
 
+        adapter = new CustomRecyclerView(this.getContext(), taskPresenter, new ArrayList<>());
         RecyclerView taskRecyclerView = view.findViewById(R.id.taskRecyclerView);
         taskRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         taskRecyclerView.setAdapter(adapter);
@@ -68,6 +68,21 @@ public class TaskFragment extends Fragment implements View.OnClickListener, Task
     }
 
     @Override
+    public CustomRecyclerView getAdapter() {
+        return adapter;
+    }
+
+    @Override
+    public void updateView() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    @Override
     public void showActivityToEditTask(Task task) {
         Intent intent = new Intent(getContext(), TaskActivity.class);
         intent.putExtra(TASK_EXTRA, (Parcelable) task);
@@ -75,20 +90,14 @@ public class TaskFragment extends Fragment implements View.OnClickListener, Task
     }
 
     @Override
-    public CustomRecyclerView getAdapter() {
-        adapter = new CustomRecyclerView(this.getContext(), taskPresenter, new ArrayList<>());
-        return adapter;
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == RequestCodes.NEW_TASK_INTENT_CODE) {
             if (resultCode == RESULT_OK) {
-                taskPresenter.addTask(data.getParcelableExtra(TASK_EXTRA));
+                taskPresenter.insertTask(data.getParcelableExtra(TASK_EXTRA));
             }
         } else if (requestCode == RequestCodes.EDIT_TASK_INTENT_CODE) {
             if (resultCode == RESULT_OK) {
-                taskPresenter.editTask(data.getParcelableExtra(TASK_EXTRA));
+                taskPresenter.updateTask(data.getParcelableExtra(TASK_EXTRA));
             }
         }
     }

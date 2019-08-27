@@ -18,7 +18,7 @@ public interface StorageProvider{
 
     default void notifyViews() {
         for (TaskContract.TaskPresenter taskPresenter : callBackViewListeners) {
-            taskPresenter.refresh();
+            taskPresenter.refreshData();
         }
     }
 
