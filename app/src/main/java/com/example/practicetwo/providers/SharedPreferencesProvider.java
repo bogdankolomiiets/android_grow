@@ -1,7 +1,9 @@
 package com.example.practicetwo.providers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.View;
 
 import com.example.practicetwo.util.Constants;
 import com.example.practicetwo.entity.Task;
@@ -16,8 +18,8 @@ public class SharedPreferencesProvider extends BaseStorageProviderImpl {
     private SharedPreferences preferences;
     private Gson gson;
 
-    public SharedPreferencesProvider(Context context) {
-        super(context);
+    public SharedPreferencesProvider(View view) {
+        super(view);
         tasksList = new ArrayList<>();
         this.gson = new Gson();
         preferences = context.getSharedPreferences(Constants.SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE);

@@ -1,6 +1,8 @@
 package com.example.practicetwo.providers;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.practicetwo.R;
@@ -11,10 +13,13 @@ import java.util.List;
 public abstract class BaseStorageProviderImpl implements StorageProvider {
     public List<Task> tasksList;
     public Context context;
+    private View view;
 
-    public BaseStorageProviderImpl(Context context) {
+
+    public BaseStorageProviderImpl(View view) {
         this.tasksList = new ArrayList<>();
-        this.context = context;
+        this.context = view.getContext();
+        this.view = view;
     }
 
     protected abstract boolean writeTasks();
@@ -84,10 +89,10 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
     }
 
     protected void showToast(int msg){
-//        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+        view.post(() -> Toast.makeText(context, msg, Toast.LENGTH_SHORT).show());
     }
 
     protected void showToast(String msg){
-//        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+        view.post(() -> Toast.makeText(context, msg, Toast.LENGTH_SHORT).show());
     }
 }

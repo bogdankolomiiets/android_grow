@@ -6,20 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface StorageProvider{
-    List<TaskContract.TaskPresenter> callBackViewListeners = new ArrayList<>();
-
-    default void addCallBackViewListener(TaskContract.TaskPresenter callBackViewListener){
-        callBackViewListeners.add(callBackViewListener);
-    }
-
-    default void removeCallBackViewListener(TaskContract.TaskPresenter callBackViewListener){
-        callBackViewListeners.remove(callBackViewListener);
-    }
-
+//    List<TaskContract.TaskPresenter> callBackViewListeners = new ArrayList<>();
+//
+//    default void addCallBackViewListener(TaskContract.TaskPresenter callBackViewListener){
+//        callBackViewListeners.add(callBackViewListener);
+//    }
+//
+//    default void removeCallBackViewListener(TaskContract.TaskPresenter callBackViewListener){
+//        callBackViewListeners.remove(callBackViewListener);
+//    }
+//
     default void notifyViews() {
-        for (TaskContract.TaskPresenter taskPresenter : callBackViewListeners) {
-            taskPresenter.refreshData();
-        }
+//        for (TaskContract.TaskPresenter taskPresenter : callBackViewListeners) {
+//            taskPresenter.refreshData();
+//        }
     }
 
     void insertTask(Task task);
