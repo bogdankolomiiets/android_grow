@@ -9,8 +9,6 @@ Tapp/src/main/java/com/example/practicetwo/providers/InternalStorageProviderImpl
 Vapp/src/main/java/com/example/practicetwo/providers/SharedPreferencesProviderImpl.java,1\0\10820e18b6bf5574f50e47198086b11329eb9084
 „
 Tapp/src/main/java/com/example/practicetwo/providers/ExternalStorageProviderImpl.java,9\3\935f5da3c5c98e07b615b0139d054be6aef33aa7
-n
->app/src/main/java/com/example/practicetwo/NewTaskActivity.java,c\4\c4e4daa2b63a3301703ebb16ecf63b16d851880b
 x
 Happ/src/main/java/com/example/practicetwo/providers/StorageProvider.java,1\3\13785368333fc1a24cdd55d2b6be95ae34a7793d
 o
@@ -35,15 +33,15 @@ q
 Aapp/src/main/java/com/example/practicetwo/main/MainPresenter.java,4\8\486a6e6b4cfedea5f8cf1dfffec0778e8de3ed1a
 p
 @app/src/main/java/com/example/practicetwo/main/MainContract.java,1\4\141b4bf5230605908a4414546867ae57c5237f01
-t
-Dapp/src/main/java/com/example/practicetwo/FavouriteTaskFragment.java,4\b\4ba19b6daed01ca94d99dbac498aadb3342c3df2
 q
 Aapp/src/main/java/com/example/practicetwo/CustomRecyclerView.java,9\2\9208f8e66da39db93f24c9afd658f19eaa106252
-n
->app/src/main/java/com/example/practicetwo/AllTaskFragment.java,b\6\b6bd182ea33afecf0eb683a3bf81ea53a9c9cd67
 j
 :app/src/main/java/com/example/practicetwo/PageAdapter.java,f\9\f9df4fe816e3ecf6f437e995818caa80ca31e7ad
 m
 =app/src/main/java/com/example/practicetwo/StorageFactory.java,5\d\5d9f2bc870d9f31dca91a11fd695bc97a1a6e9c6
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+k
+;app/src/main/java/com/example/practicetwo/TaskActivity.java,0\4\04f21dee174f507a2ab64ddb1f8be9b10cd34369
+k
+;app/src/main/java/com/example/practicetwo/TaskFragment.java,4\b\4b9b6202398a1c5dd7c10af6956d54435aacf04c
