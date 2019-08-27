@@ -1,25 +1,23 @@
-package com.example.practicetwo.main;
+package com.example.practicetwo;
 
 import com.example.practicetwo.entity.Task;
 
-import java.util.List;
+public interface TaskContract {
 
-public interface MainContract {
-
-    interface View{
-        void showTasks(List<Task> tasks);
-        void refresh();
+    interface TaskView {
         void showActivityToEditTask(Task task);
+        CustomRecyclerView getAdapter();
     }
 
-    interface Presenter{
-        void getAllTasks();
-        void getFavouriteTasks();
+    interface TaskPresenter {
+        void refresh();
+        void getTasks();
         void addTask(Task task);
         void editTask(Task task);
         void showEditActivity(Task task);
         void changeFavourite(Task task);
         void deleteTask(Task task);
+        void removeCallBackViewListener();
     }
 
 }

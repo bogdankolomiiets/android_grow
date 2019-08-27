@@ -1,4 +1,4 @@
-package com.example.practicetwo;
+package com.example.practicetwo.util;
 
 public class RequestCodes {
     public static final int STORAGE_PERMISSIONS_CODE = 1;

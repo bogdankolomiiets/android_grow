@@ -1,16 +1,31 @@
 package com.example.practicetwo.providers;
 
 import com.example.practicetwo.entity.Task;
-import com.example.practicetwo.main.MainContract;
+import com.example.practicetwo.TaskContract;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface StorageProvider{
-    void addTask(Task task);
+    List<TaskContract.TaskPresenter> callBackViewListeners = new ArrayList<>();
+
+    default void addCallBackViewListener(TaskContract.TaskPresenter callBackViewListener){
+        callBackViewListeners.add(callBackViewListener);
+    }
+
+    default void removeCallBackViewListener(TaskContract.TaskPresenter callBackViewListener){
+        callBackViewListeners.remove(callBackViewListener);
+    }
+
+    default void notifyViews() {
+        for (TaskContract.TaskPresenter taskPresenter : callBackViewListeners) {
+            taskPresenter.refresh();
+        }
+    }
+
+    void insertTask(Task task);
     void changeTaskFavouriteValue(Task task);
     void editTask(Task task);
     void deleteTask(Task task);
-    void addCallBackViewListener(MainContract.View callBackViewListener);
-    void removeCallBackViewListener(MainContract.View callBackViewListener);
     List<Task> getAllTasks();
     List<Task> getFavouriteTasks();
 }

@@ -1,4 +1,4 @@
-package com.example.practicetwo.main;
+package com.example.practicetwo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +11,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
-import com.example.practicetwo.PageAdapter;
-import com.example.practicetwo.R;
-import com.example.practicetwo.SettingsActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 

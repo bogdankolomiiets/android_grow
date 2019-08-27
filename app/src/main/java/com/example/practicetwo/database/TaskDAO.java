@@ -5,7 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-import com.example.practicetwo.Constants;
+import com.example.practicetwo.util.Constants;
 import com.example.practicetwo.entity.Task;
 import java.util.List;
 
@@ -24,6 +24,6 @@ public interface TaskDAO extends Constants {
     @Query("SELECT * FROM " + DB_NAME)
     List<Task> getAllTasks();
 
-    @Query("SELECT * FROM " + DB_NAME + " WHERE " + COLUMN_FAVOURITE + " IS NOT NULL")
+    @Query("SELECT * FROM " + DB_NAME + " WHERE " + COLUMN_FAVOURITE + " = 1")
     List<Task> getFavouriteTasks();
 }

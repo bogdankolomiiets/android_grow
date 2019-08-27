@@ -1,39 +1,68 @@
 package com.example.practicetwo.providers;
 
 import android.content.Context;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+
+import com.example.practicetwo.R;
 import com.example.practicetwo.database.TaskDatabase;
 import com.example.practicetwo.entity.Task;
-import com.example.practicetwo.main.MainContract;
 
 import java.util.List;
 
 public class DatabaseProviderImpl implements StorageProvider {
+    private Context context;
     private TaskDatabase database;
-    private MainContract.View callBackView;
 
     public DatabaseProviderImpl(@NonNull Context context) {
+        this.context = context;
         this.database = TaskDatabase.getInstance(context);
     }
 
+//    public static DatabaseProviderImpl getInstance(Context context) {
+//        if (provider == null) {
+//            provider = new DatabaseProviderImpl(context);
+//        }
+//        return provider;
+//    }
+
     @Override
-    public void addTask(Task task) {
-        database.taskDAO().insertTask(task);
+    public void insertTask(Task task) {
+        try {
+            database.taskDAO().insertTask(task);
+            showToast(R.string.taskSaved);
+            notifyViews();
+        } catch (Exception ex) {
+            showToast(R.string.taskNotSaved);
+        }
     }
 
     @Override
     public void changeTaskFavouriteValue(Task task) {
-        database.taskDAO().updateTask(task);
+        editTask(task);
     }
 
     @Override
     public void editTask(Task task) {
-
+        try {
+            database.taskDAO().updateTask(task);
+            showToast(R.string.taskChanged);
+            notifyViews();
+        } catch (Exception ex) {
+            showToast(R.string.taskNotChanged);
+        }
     }
 
     @Override
     public void deleteTask(Task task) {
-        database.taskDAO().deleteTask(task);
+        try {
+            database.taskDAO().deleteTask(task);
+            showToast(R.string.taskRemoved);
+            notifyViews();
+        } catch (Exception ex) {
+            showToast(R.string.taskNotRemoved);
+        }
     }
 
     @Override
@@ -46,13 +75,8 @@ public class DatabaseProviderImpl implements StorageProvider {
         return database.taskDAO().getFavouriteTasks();
     }
 
-    @Override
-    public void addCallBackViewListener(MainContract.View callBackView) {
-        this.callBackView = callBackView;
+    private void showToast(int msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void removeCallBackViewListener(MainContract.View callBackViewListener) {
-
-    }
 }

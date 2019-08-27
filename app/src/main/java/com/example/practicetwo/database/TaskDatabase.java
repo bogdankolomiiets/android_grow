@@ -4,7 +4,7 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import com.example.practicetwo.Constants;
+import com.example.practicetwo.util.Constants;
 import com.example.practicetwo.entity.Task;
 
 @Database(entities = {Task.class}, version = 1)
@@ -19,9 +19,5 @@ public abstract class TaskDatabase extends RoomDatabase {
                     .build();
         }
         return instance;
-    }
-
-    public static void destroyInstance(){
-        instance = null;
     }
 }

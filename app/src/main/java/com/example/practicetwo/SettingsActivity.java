@@ -16,9 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import com.example.practicetwo.main.MainActivity;
+
+import com.example.practicetwo.util.ExternalStoragePermissionChecker;
+import com.example.practicetwo.util.RequestCodes;
 import com.google.android.material.navigation.NavigationView;
-import static com.example.practicetwo.Constants.*;
+import static com.example.practicetwo.util.Constants.*;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private RadioButton internalStorageRadio;
@@ -114,7 +116,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
     }
 
