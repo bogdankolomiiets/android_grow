@@ -74,12 +74,7 @@ public class TaskFragment extends Fragment implements View.OnClickListener, Task
 
     @Override
     public void updateView() {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                adapter.notifyDataSetChanged();
-            }
-        });
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -126,6 +121,6 @@ public class TaskFragment extends Fragment implements View.OnClickListener, Task
     @Override
     public void onDestroy() {
         super.onDestroy();
-        taskPresenter.removeCallBackViewListener();
+//        taskPresenter.removeCallBackViewListener();
     }
 }

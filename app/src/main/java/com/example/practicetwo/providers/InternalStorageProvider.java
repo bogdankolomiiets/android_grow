@@ -1,6 +1,7 @@
 package com.example.practicetwo.providers;
 
 import android.content.Context;
+import android.view.View;
 
 import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.util.Constants;
@@ -15,8 +16,8 @@ import java.util.ArrayList;
 public class InternalStorageProvider extends BaseStorageProviderImpl {
     private File file;
 
-    public InternalStorageProvider(Context context) {
-        super(context);
+    public InternalStorageProvider(View view) {
+        super(view);
         tasksList = new ArrayList<>();
         initFile();
     }

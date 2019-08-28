@@ -39,9 +39,4 @@ public class DeleteTaskLoader extends AsyncTaskLoader<List<Task>> {
         return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
     }
 
-    @Override
-    public void deliverResult(@Nullable List<Task> data) {
-        super.deliverResult(data);
-
-    }
 }

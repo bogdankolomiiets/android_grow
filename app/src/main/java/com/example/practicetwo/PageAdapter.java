@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.practicetwo.views.TaskFragment;
 
+
 public class PageAdapter extends FragmentPagerAdapter {
     private int numOfTabs;
     private Context context;
@@ -30,6 +31,8 @@ public class PageAdapter extends FragmentPagerAdapter {
             return null;
         }
     }
+
+
 
     @Override
     public int getCount() {

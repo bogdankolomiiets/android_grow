@@ -1,6 +1,7 @@
 package com.example.practicetwo.providers;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,10 +15,12 @@ import java.util.List;
 public class DatabaseProviderImpl implements StorageProvider {
     private Context context;
     private TaskDatabase database;
+    private View view;
 
-    public DatabaseProviderImpl(@NonNull Context context) {
-        this.context = context;
+    public DatabaseProviderImpl(View view) {
+        this.context = view.getContext();
         this.database = TaskDatabase.getInstance(context);
+        this.view = view;
     }
 
 //    public static DatabaseProviderImpl getInstance(Context context) {
@@ -76,7 +79,6 @@ public class DatabaseProviderImpl implements StorageProvider {
     }
 
     private void showToast(int msg) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+        view.post(() -> Toast.makeText(context, msg, Toast.LENGTH_SHORT).show());
     }
-
 }

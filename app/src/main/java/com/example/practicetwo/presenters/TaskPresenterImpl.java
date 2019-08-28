@@ -36,12 +36,14 @@ public class TaskPresenterImpl implements TaskContract.TaskPresenter, LoaderMana
     private LoaderManager loaderManager;
     private Bundle loaderBundle;
 
+    public TaskPresenterImpl(){}
+
     public TaskPresenterImpl(View view, TaskContract.TaskView taskView, boolean showFavouriteTasks, LoaderManager loaderManager) {
         Log.d("TAG", "TaskPresenterImpl: showFavouriteTasks = " + showFavouriteTasks);
         this.taskView = taskView;
         this.context = view.getContext();
-        this.storageProvider = StorageFactory.getInstance().getFactory(context);
-        storageProvider.addCallBackViewListener(this);
+        this.storageProvider = StorageFactory.getInstance().getFactory(view);
+//        storageProvider.addCallBackViewListener(this);
         this.showFavouriteTasks = showFavouriteTasks;
         this.loaderManager = loaderManager;
         loaderManager.initLoader(R.integer.GET_LOADER, Bundle.EMPTY, this);
@@ -49,7 +51,12 @@ public class TaskPresenterImpl implements TaskContract.TaskPresenter, LoaderMana
     }
 
     @Override
-    public void refreshData() {
+    public void refresh() {
+        //todo
+    }
+
+    @Override
+    public void notifyAdapter() {
         taskView.updateView();
     }
 
@@ -77,7 +84,6 @@ public class TaskPresenterImpl implements TaskContract.TaskPresenter, LoaderMana
         task.setFavourite(!task.isFavourite());
         loaderBundle.clear();
         loaderBundle.putParcelable(Constants.TASK, task);
-        Log.d(TAG, "changeFavourite: " + task.isFavourite());
         loaderManager.restartLoader(R.integer.UPDATE_FAVOURITE_LOADER, loaderBundle, this);
     }
 
@@ -87,11 +93,11 @@ public class TaskPresenterImpl implements TaskContract.TaskPresenter, LoaderMana
         loaderBundle.putParcelable(Constants.TASK, task);
         loaderManager.restartLoader(R.integer.DELETE_LOADER, loaderBundle, this);
     }
-
-    @Override
-    public void removeCallBackViewListener() {
-        storageProvider.removeCallBackViewListener(this);
-    }
+//
+//    @Override
+//    public void removeCallBackViewListener() {
+//        storageProvider.removeCallBackViewListener(this);
+//    }
 
     @NonNull
     @Override
@@ -101,12 +107,12 @@ public class TaskPresenterImpl implements TaskContract.TaskPresenter, LoaderMana
                 return new GetTaskLoader(context, storageProvider, showFavouriteTasks);
             case R.integer.INSERT_LOADER:
                 return new InsertTaskLoader(context, storageProvider, showFavouriteTasks, args);
+            case R.integer.DELETE_LOADER:
+                return new DeleteTaskLoader(context, storageProvider, showFavouriteTasks, args);
             case R.integer.UPDATE_LOADER:
                 return new UpdateTaskLoader(context, storageProvider, showFavouriteTasks, args);
             case R.integer.UPDATE_FAVOURITE_LOADER:
                 return new UpdateFavouriteTaskLoader(context, storageProvider, showFavouriteTasks, args);
-            case R.integer.DELETE_LOADER:
-                return new DeleteTaskLoader(context, storageProvider, showFavouriteTasks, args);
             default:
                 return null;
         }
@@ -114,10 +120,10 @@ public class TaskPresenterImpl implements TaskContract.TaskPresenter, LoaderMana
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Task>> loader, List<Task> data) {
-        Log.d(TAG, "onLoadFinished: ");
         taskView.getAdapter().setData(data);
-        storageProvider.notifyViews();
+        notifyAdapter();
     }
+
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<Task>> loader) {
