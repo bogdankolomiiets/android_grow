@@ -116,6 +116,14 @@ public class TaskFragment extends Fragment implements View.OnClickListener, Task
     }
 
     @Override
+    public void setRetainInstance(boolean retain) {
+        super.setRetainInstance(retain);
+    }
+
+
+
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         taskPresenter.removeCallBackViewListener();

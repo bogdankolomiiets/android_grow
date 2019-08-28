@@ -1,5 +1,7 @@
 
-^squid:S2259Z"BA "NullPointerException" could be thrown; "data" is nullable here.(Ï‰Ò÷ûÿÿÿÿ
-esquid:CallToDeprecatedMethod4"8Remove this use of "getLoaderManager"; it is deprecated.(Êåæ¾þÿÿÿÿ
-Ksquid:S1066Y"/Merge this if statement with the enclosing one.(±„‘‰ýÿÿÿÿ
-Ysquid:S2259V"BA "NullPointerException" could be thrown; "data" is nullable here.(¥ìèç
+esquid:S2259d"BA "NullPointerException" could be thrown; "data" is nullable here.(˜¦‘ûÿÿÿÿÿ8™¹¦™Í-
+Esquid:S1604M"(Make this anonymous inner class a lambda(»¬ãS8ÓÂ¼™Í-
+Fsquid:S1185w"(Remove this method to simply inherit it.(Ý«ÝÝ8÷ÿÞšÍ-
+`squid:S2259`"BA "NullPointerException" could be thrown; "data" is nullable here.(¹äˆŽ8™¹¦™Í-
+Rsquid:S1066c"/Merge this if statement with the enclosing one.(±„‘‰ýÿÿÿÿ8™¹¦™Í-
+lsquid:CallToDeprecatedMethod4"8Remove this use of "getLoaderManager"; it is deprecated.(Êåæ¾þÿÿÿÿ8ýœÿšÍ-

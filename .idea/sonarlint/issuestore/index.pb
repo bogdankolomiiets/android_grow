@@ -47,3 +47,9 @@ q
 Aapp/src/main/java/com/example/practicetwo/views/TaskFragment.java,5\3\5383292cfa6275ad891fa67284ef8054ff03ec49
 {
 Kapp/src/main/java/com/example/practicetwo/presenters/TaskPresenterImpl.java,8\7\870b9eaac8d30058293c0f79d7a6a66e7618a700
+€
+Papp/src/main/java/com/example/practicetwo/loaders/UpdateFavouriteTaskLoader.java,3\0\30ddd8935f726bb26a84d554ef3953c0e46cb9d6
+€
+Papp/src/main/java/com/example/practicetwo/providers/ExternalStorageProvider.java,4\f\4ff3aa6309556f42cc313f93b2d9337e089460d9
+k
+;app/src/main/java/com/example/practicetwo/MainActivity.java,9\0\9032c54ee588c13301a36fd80ec8ea3317a47709
