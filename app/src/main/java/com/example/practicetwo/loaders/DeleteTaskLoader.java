@@ -38,5 +38,4 @@ public class DeleteTaskLoader extends AsyncTaskLoader<List<Task>> {
         storageProvider.deleteTask(taskIdToDelete);
         return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
     }
-
 }

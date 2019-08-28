@@ -2,6 +2,8 @@ package com.example.practicetwo.providers;
 
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
+import android.widget.Adapter;
 
 import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.util.Constants;
@@ -65,8 +67,9 @@ public class ExternalStorageProvider extends BaseStorageProviderImpl {
                      ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)){
                 if (fileInputStream.available() > 0) {
                     Object tempObject = objectInputStream.readObject();
-                    if (tempObject instanceof List<?>)
-                        tasksList.addAll((List<Task>) tempObject);
+                    if (tempObject instanceof ArrayList) {
+                        tasksList = ((ArrayList<Task>) tempObject);
+                    }
                     }
                 } catch (IOException | ClassNotFoundException ex) {
                     showToast(ex.toString());

@@ -32,8 +32,10 @@ public class DatabaseProviderImpl implements StorageProvider {
     @Override
     public void changeTaskFavouriteValue(String taskId) {
         Task task = database.taskDAO().getTask(taskId);
-        task.setFavourite(!task.isFavourite());
-        updateTask(task);
+        if (task != null) {
+            task.setFavourite(!task.isFavourite());
+            updateTask(task);
+        }
     }
 
     @Override

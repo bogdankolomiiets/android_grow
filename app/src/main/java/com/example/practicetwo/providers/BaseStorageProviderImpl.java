@@ -69,6 +69,7 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
                 break;
             }
         }
+        writeTasks();
     }
 
     @Override

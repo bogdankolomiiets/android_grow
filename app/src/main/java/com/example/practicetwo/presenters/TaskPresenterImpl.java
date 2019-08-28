@@ -34,7 +34,6 @@ public class TaskPresenterImpl implements TaskContract.TaskPresenter, LoaderMana
     private Bundle loaderBundle;
 
     public TaskPresenterImpl(View view, TaskContract.TaskView taskView, boolean showFavouriteTasks, LoaderManager loaderManager) {
-        Log.d("TAG", "TaskPresenterImpl: showFavouriteTasks = " + showFavouriteTasks);
         this.taskView = taskView;
         this.context = view.getContext();
         this.storageProvider = StorageFactory.getInstance().getFactory(context);
@@ -75,7 +74,6 @@ public class TaskPresenterImpl implements TaskContract.TaskPresenter, LoaderMana
 
     @Override
     public void changeFavourite(String taskId) {
-//        task.setFavourite(!task.isFavourite());
         loaderBundle.clear();
         loaderBundle.putString(Constants.TASK, taskId);
         loaderManager.restartLoader(R.integer.UPDATE_FAVOURITE_LOADER, loaderBundle, this);
