@@ -14,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExternalStorageProvider extends BaseStorageProviderImpl {
     private File file;
@@ -58,18 +59,13 @@ public class ExternalStorageProvider extends BaseStorageProviderImpl {
     protected void readTasks() {
         if (checkEnvironment()) {
             tasksList.clear();
-            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                try (FileInputStream fileInputStream = new FileInputStream(file);
-                     ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
-                    if (fileInputStream.available() > 0) {
-                        Object tempObject = objectInputStream.readObject();
-                        if (tempObject instanceof ArrayList) {
-                            tasksList.addAll((ArrayList<Task>) tempObject);
-                        }
-                    }
-                } catch (IOException | ClassNotFoundException ex) {
-                    showToast(ex.toString());
+            try (FileInputStream fileInputStream = new FileInputStream(file);
+                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+                if (fileInputStream.available() > 0) {
+                    tasksList.addAll((List<Task>) objectInputStream.readObject());
                 }
+            } catch (IOException | ClassNotFoundException ex) {
+                showToast(ex.toString());
             }
         } else showToast(Environment.getExternalStorageState());
     }

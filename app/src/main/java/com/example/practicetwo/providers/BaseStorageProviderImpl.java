@@ -16,7 +16,6 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
     public final Context context;
 
     public BaseStorageProviderImpl(Context context) {
-        this.tasksList = new ArrayList<>();
         this.context = context;
     }
 

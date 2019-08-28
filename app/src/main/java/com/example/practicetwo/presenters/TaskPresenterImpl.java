@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -110,8 +111,6 @@ public class TaskPresenterImpl
                 return null;
         }
     }
-
-
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Task>> loader, List<Task> data) {

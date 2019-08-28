@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class InternalStorageProvider extends BaseStorageProviderImpl {
     private File file;
@@ -48,7 +49,7 @@ public class InternalStorageProvider extends BaseStorageProviderImpl {
         try (FileInputStream fileInputStream = context.openFileInput(file.getName());
              ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)){
         if (fileInputStream.available() > 0) {
-                tasksList.addAll((ArrayList<Task>) objectInputStream.readObject());
+                tasksList.addAll((List<Task>) objectInputStream.readObject());
             }
         } catch (IOException | ClassNotFoundException ex) {
             showToast(ex.toString());
