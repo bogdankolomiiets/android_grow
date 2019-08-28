@@ -24,7 +24,10 @@ import com.example.practicetwo.loaders.GetTaskLoader;
 
 import java.util.List;
 
-public class TaskPresenterImpl implements TaskContract.TaskPresenter, LoaderManager.LoaderCallbacks<List<Task>> {
+public class TaskPresenterImpl
+        implements  TaskContract.TaskPresenter,
+                    LoaderManager.LoaderCallbacks<List<Task>> {
+
     private static final String TAG = TaskPresenterImpl.class.getName();
     private final Context context;
     private StorageProvider storageProvider;
@@ -33,7 +36,10 @@ public class TaskPresenterImpl implements TaskContract.TaskPresenter, LoaderMana
     private final LoaderManager loaderManager;
     private Bundle loaderBundle;
 
-    public TaskPresenterImpl(View view, TaskContract.TaskView taskView, boolean showFavouriteTasks, LoaderManager loaderManager) {
+    public TaskPresenterImpl(View view,
+                             TaskContract.TaskView taskView,
+                             boolean showFavouriteTasks,
+                             LoaderManager loaderManager) {
         this.taskView = taskView;
         this.context = view.getContext();
         this.storageProvider = StorageFactory.getInstance().getFactory(context);
@@ -104,6 +110,8 @@ public class TaskPresenterImpl implements TaskContract.TaskPresenter, LoaderMana
                 return null;
         }
     }
+
+
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Task>> loader, List<Task> data) {

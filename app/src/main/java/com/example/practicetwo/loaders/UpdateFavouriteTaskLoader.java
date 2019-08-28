@@ -35,7 +35,8 @@ public class UpdateFavouriteTaskLoader extends AsyncTaskLoader<List<Task>> {
     @Nullable
     @Override
     public List<Task> loadInBackground() {
-        storageProvider.changeTaskFavouriteValue(taskIdToUpdateFav);
-        return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
+        if (storageProvider.changeTaskFavouriteValue(taskIdToUpdateFav)) {
+            return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
+        } else return null;
     }
 }

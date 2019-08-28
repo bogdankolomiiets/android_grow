@@ -2,8 +2,6 @@ package com.example.practicetwo.providers;
 
 import android.content.Context;
 import android.os.Environment;
-import android.util.Log;
-import android.widget.Adapter;
 
 import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.util.Constants;
@@ -16,8 +14,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class ExternalStorageProvider extends BaseStorageProviderImpl {
     private File file;
@@ -46,9 +42,9 @@ public class ExternalStorageProvider extends BaseStorageProviderImpl {
         if (checkEnvironment()) {
             try (FileOutputStream fileOutputStream = new FileOutputStream(file);
                  ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
-                    objectOutputStream.writeObject((Serializable) tasksList);
-                    return true;
-                } catch (IOException ex) {
+                objectOutputStream.writeObject((Serializable) tasksList);
+                return true;
+            } catch (IOException ex) {
                 showToast(ex.toString());
                 return false;
             }
@@ -64,12 +60,12 @@ public class ExternalStorageProvider extends BaseStorageProviderImpl {
             tasksList.clear();
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                 try (FileInputStream fileInputStream = new FileInputStream(file);
-                     ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)){
-                if (fileInputStream.available() > 0) {
-                    Object tempObject = objectInputStream.readObject();
-                    if (tempObject instanceof ArrayList) {
-                        tasksList = ((ArrayList<Task>) tempObject);
-                    }
+                     ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+                    if (fileInputStream.available() > 0) {
+                        Object tempObject = objectInputStream.readObject();
+                        if (tempObject instanceof ArrayList) {
+                            tasksList.addAll((ArrayList<Task>) tempObject);
+                        }
                     }
                 } catch (IOException | ClassNotFoundException ex) {
                     showToast(ex.toString());

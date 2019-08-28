@@ -4,10 +4,10 @@ import com.example.practicetwo.entity.Task;
 import java.util.List;
 
 public interface StorageProvider{
-    void insertTask(Task task);
-    void updateTask(Task task);
-    void deleteTask(String taskId);
-    void changeTaskFavouriteValue(String taskId);
+    boolean insertTask(Task task);
+    boolean updateTask(Task task);
+    boolean deleteTask(String taskId);
+    boolean changeTaskFavouriteValue(String taskId);
     List<Task> getAllTasks();
     List<Task> getFavouriteTasks();
 }

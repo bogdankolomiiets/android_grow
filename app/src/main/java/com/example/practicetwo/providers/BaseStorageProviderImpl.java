@@ -2,6 +2,7 @@ package com.example.practicetwo.providers;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.practicetwo.R;
@@ -24,52 +25,59 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
     protected abstract void readTasks();
 
     @Override
-    public void insertTask(Task task) {
+    public boolean insertTask(Task task) {
         readTasks();
         tasksList.add(task);
         if (writeTasks()){
             showToast(R.string.taskSaved);
-        } else showToast(R.string.taskNotSaved);
+            return true;
+        } else {
+            showToast(R.string.taskNotSaved);
+            return false;
+        }
     }
 
     @Override
-    public void changeTaskFavouriteValue(String taskIs) {
+    public boolean changeTaskFavouriteValue(String taskIs) {
         readTasks();
         for (Task tempTask : tasksList) {
             if (tempTask.getId().equals(taskIs)) {
                 tempTask.setFavourite(!tempTask.isFavourite());
                 showToast(R.string.taskChanged);
-                break;
+                writeTasks();
+                return true;
             }
         }
-        writeTasks();
+        return false;
     }
 
     @Override
-    public void updateTask(Task task) {
+    public boolean updateTask(Task task) {
         readTasks();
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).getId().equals(task.getId())) {
                 tasksList.set(i, task);
                 showToast(R.string.taskChanged);
-                break;
+                writeTasks();
+                return true;
             }
         }
-        writeTasks();
+        return false;
     }
 
     @Override
-    public void deleteTask(String taskId) {
+    public boolean deleteTask(String taskId) {
         readTasks();
         Iterator iterator = tasksList.listIterator();
         while (iterator.hasNext()){
             if (((Task)iterator.next()).getId().equals(taskId)){
                 iterator.remove();
                 showToast(R.string.taskRemoved);
-                break;
+                writeTasks();
+                return true;
             }
         }
-        writeTasks();
+       return false;
     }
 
     @Override

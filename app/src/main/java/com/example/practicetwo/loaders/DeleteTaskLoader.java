@@ -35,7 +35,8 @@ public class DeleteTaskLoader extends AsyncTaskLoader<List<Task>> {
     @Nullable
     @Override
     public List<Task> loadInBackground() {
-        storageProvider.deleteTask(taskIdToDelete);
-        return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
+        if (storageProvider.deleteTask(taskIdToDelete)) {
+            return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
+        } else return null;
     }
 }

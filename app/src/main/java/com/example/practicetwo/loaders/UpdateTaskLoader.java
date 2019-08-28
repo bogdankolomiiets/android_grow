@@ -2,6 +2,7 @@ package com.example.practicetwo.loaders;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,7 +36,8 @@ public class UpdateTaskLoader extends AsyncTaskLoader<List<Task>> {
     @Nullable
     @Override
     public List<Task> loadInBackground() {
-        storageProvider.updateTask(taskToUpdate);
-        return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
+        if (storageProvider.updateTask(taskToUpdate)) {
+            return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
+        } else return null;
     }
 }

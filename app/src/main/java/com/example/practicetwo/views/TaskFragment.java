@@ -30,7 +30,9 @@ import java.util.ArrayList;
 import static android.app.Activity.RESULT_OK;
 import static com.example.practicetwo.util.Constants.TASK_EXTRA;
 
-public class TaskFragment extends Fragment implements View.OnClickListener, TaskContract.TaskView {
+public class TaskFragment extends Fragment
+                          implements View.OnClickListener,
+                                     TaskContract.TaskView {
     private TaskContract.TaskPresenter taskPresenter;
     private View view;
     private CustomRecyclerView adapter;
@@ -46,7 +48,9 @@ public class TaskFragment extends Fragment implements View.OnClickListener, Task
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             showFavouriteTasks = savedInstanceState.getBoolean(Constants.FAVOURITE_TASK);
         }
