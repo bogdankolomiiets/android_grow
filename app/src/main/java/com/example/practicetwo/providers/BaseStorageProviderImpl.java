@@ -1,25 +1,22 @@
 package com.example.practicetwo.providers;
 
-import android.app.Activity;
 import android.content.Context;
-import android.view.View;
+import android.os.Handler;
 import android.widget.Toast;
 
 import com.example.practicetwo.R;
 import com.example.practicetwo.entity.Task;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class BaseStorageProviderImpl implements StorageProvider {
     public List<Task> tasksList;
-    public Context context;
-    private View view;
+    public final Context context;
 
-
-    public BaseStorageProviderImpl(View view) {
+    public BaseStorageProviderImpl(Context context) {
         this.tasksList = new ArrayList<>();
-        this.context = view.getContext();
-        this.view = view;
+        this.context = context;
     }
 
     protected abstract boolean writeTasks();
@@ -36,11 +33,11 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
     }
 
     @Override
-    public void changeTaskFavouriteValue(Task task) {
+    public void changeTaskFavouriteValue(String taskIs) {
         readTasks();
-        for (Task t : tasksList) {
-            if (t.getId().equals(task.getId())) {
-                t.setFavourite(task.isFavourite());
+        for (Task tempTask : tasksList) {
+            if (tempTask.getId().equals(taskIs)) {
+                tempTask.setFavourite(!tempTask.isFavourite());
                 showToast(R.string.taskChanged);
                 break;
             }
@@ -49,7 +46,7 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
     }
 
     @Override
-    public void editTask(Task task) {
+    public void updateTask(Task task) {
         readTasks();
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).getId().equals(task.getId())) {
@@ -62,12 +59,16 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
     }
 
     @Override
-    public void deleteTask(Task task) {
+    public void deleteTask(String taskId) {
         readTasks();
-        if (tasksList.remove(task)){
-            showToast(R.string.taskRemoved);
-            writeTasks();
-        } else showToast(R.string.taskNotRemoved);
+        Iterator iterator = tasksList.listIterator();
+        while (iterator.hasNext()){
+            if (((Task)iterator.next()).getId().equals(taskId)){
+                iterator.remove();
+                showToast(R.string.taskRemoved);
+                break;
+            }
+        }
     }
 
     @Override
@@ -89,10 +90,11 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
     }
 
     protected void showToast(int msg){
-        view.post(() -> Toast.makeText(context, msg, Toast.LENGTH_SHORT).show());
+        new Handler(context.getMainLooper()).post(() -> Toast.makeText(context, msg, Toast.LENGTH_SHORT).show());
+
     }
 
     protected void showToast(String msg){
-        view.post(() -> Toast.makeText(context, msg, Toast.LENGTH_SHORT).show());
+        new Handler(context.getMainLooper()).post(() -> Toast.makeText(context, msg, Toast.LENGTH_SHORT).show());
     }
 }

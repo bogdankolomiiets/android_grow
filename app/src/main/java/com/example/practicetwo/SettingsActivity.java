@@ -22,12 +22,12 @@ import com.example.practicetwo.util.RequestCodes;
 import com.google.android.material.navigation.NavigationView;
 import static com.example.practicetwo.util.Constants.*;
 
-public class SettingsActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class SettingsActivity extends AppCompatActivity
+        implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private RadioButton internalStorageRadio;
     private RadioButton externalStorageRadio;
     private RadioGroup storeTypeRadioGroup;
     private DrawerLayout drawerLayout;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +65,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initActiveRadioButton() {
-        String tag = getSharedPreferences(SHARE_PREFERENCES_NAME, MODE_PRIVATE).getString(STORAGE_PROVIDER, TAG_INTERNAL);
+        String tag = getSharedPreferences(SHARE_PREFERENCES_NAME, MODE_PRIVATE)
+                    .getString(STORAGE_PROVIDER, TAG_INTERNAL);
         storeTypeRadioGroup.check(storeTypeRadioGroup.findViewWithTag(tag).getId());
     }
 

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class InsertTaskLoader extends AsyncTaskLoader<List<Task>> {
     private StorageProvider storageProvider;
-    private boolean showFavouriteTasks;
+    private final boolean showFavouriteTasks;
     private Task taskToInsert;
 
     @Override

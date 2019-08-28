@@ -15,8 +15,8 @@ import java.util.List;
 
 public class UpdateFavouriteTaskLoader extends AsyncTaskLoader<List<Task>> {
     private StorageProvider storageProvider;
-    private boolean showFavouriteTasks;
-    private Task taskToUpdateFav;
+    private final boolean showFavouriteTasks;
+    private String taskIdToUpdateFav;
 
     @Override
     protected void onStartLoading() {
@@ -29,13 +29,13 @@ public class UpdateFavouriteTaskLoader extends AsyncTaskLoader<List<Task>> {
         super(context);
         this.storageProvider = storageProvider;
         this.showFavouriteTasks = showFavouriteTasks;
-        taskToUpdateFav = bundle.getParcelable(Constants.TASK);
+        taskIdToUpdateFav = bundle.getString(Constants.TASK);
     }
 
     @Nullable
     @Override
     public List<Task> loadInBackground() {
-        storageProvider.changeTaskFavouriteValue(taskToUpdateFav);
+        storageProvider.changeTaskFavouriteValue(taskIdToUpdateFav);
         return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
     }
 }

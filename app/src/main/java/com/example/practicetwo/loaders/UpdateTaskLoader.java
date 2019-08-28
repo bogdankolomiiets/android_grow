@@ -15,7 +15,7 @@ import java.util.List;
 
 public class UpdateTaskLoader extends AsyncTaskLoader<List<Task>> {
     private StorageProvider storageProvider;
-    private boolean showFavouriteTasks;
+    private final boolean showFavouriteTasks;
     private Task taskToUpdate;
 
     @Override
@@ -35,7 +35,7 @@ public class UpdateTaskLoader extends AsyncTaskLoader<List<Task>> {
     @Nullable
     @Override
     public List<Task> loadInBackground() {
-        storageProvider.editTask(taskToUpdate);
+        storageProvider.updateTask(taskToUpdate);
         return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
     }
 }

@@ -11,14 +11,13 @@ public interface TaskContract {
     }
 
     interface TaskPresenter {
-        void refresh();
         void notifyAdapter();
+        void refresh();
         void insertTask(Task task);
         void updateTask(Task task);
         void showEditActivity(Task task);
-        void changeFavourite(Task task);
-        void deleteTask(Task task);
-//        void removeCallBackViewListener();
+        void changeFavourite(String taskId);
+        void deleteTask(String taskId);
     }
 
 }

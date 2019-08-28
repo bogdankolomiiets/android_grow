@@ -13,8 +13,8 @@ import java.util.List;
 
 public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.ViewHolder> {
     private List<Task> tasksList;
-    private Context context;
-    TaskContract.TaskPresenter taskPresenter;
+    private final Context context;
+    private final TaskContract.TaskPresenter taskPresenter;
 
     public CustomRecyclerView(Context context, TaskContract.TaskPresenter taskPresenter, List<Task> tasksList){
         this.taskPresenter = taskPresenter;
@@ -55,10 +55,10 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
                     taskPresenter.showEditActivity(task);
                     return true;
                 case R.id.deleteItem:
-                    taskPresenter.deleteTask(task);
+                    taskPresenter.deleteTask(task.getId());
                     return true;
                 case R.id.favouriteItem:
-                    taskPresenter.changeFavourite(task);
+                    taskPresenter.changeFavourite(task.getId());
                     return true;
             }
             return false;

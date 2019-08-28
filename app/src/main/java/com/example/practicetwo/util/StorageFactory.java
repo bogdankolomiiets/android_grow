@@ -1,7 +1,6 @@
 package com.example.practicetwo.util;
 
 import android.content.Context;
-import android.view.View;
 
 import com.example.practicetwo.providers.DatabaseProviderImpl;
 import com.example.practicetwo.providers.ExternalStorageProvider;
@@ -28,18 +27,17 @@ public class StorageFactory {
         return storageFactory;
     }
 
-    public StorageProvider getFactory(View view) {
-        Context context = view.getContext();
+    public StorageProvider getFactory(Context context) {
         String provider = context.getSharedPreferences(SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE).getString(STORAGE_PROVIDER, TAG_INTERNAL);
         switch (provider) {
             case TAG_SHARED:
-                return new SharedPreferencesProvider(view);
+                return new SharedPreferencesProvider(context);
             case TAG_EXTERNAL:
-                return new ExternalStorageProvider(view);
+                return new ExternalStorageProvider(context);
             case TAG_DATABASE:
-                return new DatabaseProviderImpl(view);
+                return new DatabaseProviderImpl(context);
             default:
-                return new InternalStorageProvider(view);
+                return new InternalStorageProvider(context);
         }
     }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GetTaskLoader extends AsyncTaskLoader<List<Task>> {
     private StorageProvider storageProvider;
-    private boolean showFavouriteTasks;
+    private final boolean showFavouriteTasks;
 
     @Override
     protected void onStartLoading() {

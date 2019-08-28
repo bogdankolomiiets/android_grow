@@ -41,11 +41,12 @@ public class Task implements Parcelable, Serializable {
         favourite = in.readByte() != 0;
     }
 
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -115,6 +116,7 @@ public class Task implements Parcelable, Serializable {
     }
 
     @Override
+    @NonNull
     public String toString() {
         return "Task{" +
                 "id='" + id + '\'' +

@@ -3,8 +3,6 @@ package com.example.practicetwo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,12 +13,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.practicetwo.entity.Task;
-import com.example.practicetwo.presenters.TaskPresenterImpl;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
 
     @Override
@@ -39,7 +36,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
-        PageAdapter pageAdapter = new PageAdapter(this, getSupportFragmentManager(), 2);
+        PageAdapter pageAdapter = new PageAdapter(
+                this,
+                getSupportFragmentManager(),
+                2);
         viewPager.setAdapter(pageAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }

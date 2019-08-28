@@ -6,12 +6,14 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.practicetwo.CustomRecyclerView;
 import com.example.practicetwo.R;
@@ -65,6 +67,25 @@ public class TaskFragment extends Fragment implements View.OnClickListener, Task
         //init FloatingActionButton
         FloatingActionButton newTaskFab = view.getRootView().findViewById(R.id.newTaskFab);
         newTaskFab.setOnClickListener(this);
+
+        //addOnPageChangeListener for viewPager
+        ViewPager viewPager = view.getRootView().findViewById(R.id.viewPager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                taskPresenter.refresh();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
@@ -108,19 +129,5 @@ public class TaskFragment extends Fragment implements View.OnClickListener, Task
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(Constants.FAVOURITE_TASK, showFavouriteTasks);
-    }
-
-    @Override
-    public void setRetainInstance(boolean retain) {
-        super.setRetainInstance(retain);
-    }
-
-
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-//        taskPresenter.removeCallBackViewListener();
     }
 }

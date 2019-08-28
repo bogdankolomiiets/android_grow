@@ -11,8 +11,8 @@ import com.example.practicetwo.views.TaskFragment;
 
 
 public class PageAdapter extends FragmentPagerAdapter {
-    private int numOfTabs;
-    private Context context;
+    private final int numOfTabs;
+    private final Context context;
 
     public PageAdapter(Context context, FragmentManager fm, int numOfTabs) {
         super(fm);

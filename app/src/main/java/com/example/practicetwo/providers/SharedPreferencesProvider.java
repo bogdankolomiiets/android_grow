@@ -1,9 +1,7 @@
 package com.example.practicetwo.providers;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.View;
 
 import com.example.practicetwo.util.Constants;
 import com.example.practicetwo.entity.Task;
@@ -18,19 +16,12 @@ public class SharedPreferencesProvider extends BaseStorageProviderImpl {
     private SharedPreferences preferences;
     private Gson gson;
 
-    public SharedPreferencesProvider(View view) {
-        super(view);
+    public SharedPreferencesProvider(Context context) {
+        super(context);
         tasksList = new ArrayList<>();
         this.gson = new Gson();
         preferences = context.getSharedPreferences(Constants.SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
-
-//    public static SharedPreferencesProvider getInstance(Context context){
-//        if (provider == null) {
-//            provider = new SharedPreferencesProvider(context);
-//        }
-//        return provider;
-//    }
 
     @Override
     protected boolean writeTasks() {
@@ -38,7 +29,6 @@ public class SharedPreferencesProvider extends BaseStorageProviderImpl {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString(Constants.TASKS, gson.toJson(tasksList));
             editor.apply();
-            notifyViews();
             return true;
         } catch (Exception ex) {
             return false;

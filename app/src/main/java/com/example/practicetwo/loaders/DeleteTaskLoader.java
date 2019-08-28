@@ -15,8 +15,8 @@ import java.util.List;
 
 public class DeleteTaskLoader extends AsyncTaskLoader<List<Task>> {
     private StorageProvider storageProvider;
-    private boolean showFavouriteTasks;
-    private Task taskToDelete;
+    private final boolean showFavouriteTasks;
+    private String taskIdToDelete;
 
     @Override
     protected void onStartLoading() {
@@ -29,13 +29,13 @@ public class DeleteTaskLoader extends AsyncTaskLoader<List<Task>> {
         super(context);
         this.storageProvider = storageProvider;
         this.showFavouriteTasks = showFavouriteTasks;
-        taskToDelete = bundle.getParcelable(Constants.TASK);
+        taskIdToDelete = bundle.getString(Constants.TASK);
     }
 
     @Nullable
     @Override
     public List<Task> loadInBackground() {
-        storageProvider.deleteTask(taskToDelete);
+        storageProvider.deleteTask(taskIdToDelete);
         return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
     }
 
