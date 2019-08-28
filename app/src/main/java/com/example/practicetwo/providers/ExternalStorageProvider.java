@@ -20,8 +20,7 @@ public class ExternalStorageProvider extends BaseStorageProviderImpl {
     private File file;
 
     public ExternalStorageProvider(Context context) {
-        super(context);
-        tasksList = new ArrayList<>();
+        super(context, new ArrayList<>());
     }
 
     private boolean checkEnvironment() {
@@ -59,9 +58,9 @@ public class ExternalStorageProvider extends BaseStorageProviderImpl {
     protected void readTasks() {
         if (checkEnvironment()) {
             tasksList.clear();
-            try (FileInputStream fileInputStream = new FileInputStream(file);
-                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            try (FileInputStream fileInputStream = new FileInputStream(file)) {
                 if (fileInputStream.available() > 0) {
+                    ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
                     tasksList.addAll((List<Task>) objectInputStream.readObject());
                 }
             } catch (IOException | ClassNotFoundException ex) {

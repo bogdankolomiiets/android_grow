@@ -2,7 +2,6 @@ package com.example.practicetwo.loaders;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,11 +11,8 @@ import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.providers.StorageProvider;
 import com.example.practicetwo.util.Constants;
 
-import java.util.List;
-
-public class UpdateTaskLoader extends AsyncTaskLoader<List<Task>> {
+public class UpdateTaskLoader extends AsyncTaskLoader<Object> {
     private StorageProvider storageProvider;
-    private final boolean showFavouriteTasks;
     private Task taskToUpdate;
 
     @Override
@@ -26,18 +22,15 @@ public class UpdateTaskLoader extends AsyncTaskLoader<List<Task>> {
     }
 
 
-    public UpdateTaskLoader(@NonNull Context context, StorageProvider storageProvider, boolean showFavouriteTasks, Bundle bundle) {
+    public UpdateTaskLoader(@NonNull Context context, StorageProvider storageProvider, Bundle bundle) {
         super(context);
         this.storageProvider = storageProvider;
-        this.showFavouriteTasks = showFavouriteTasks;
         taskToUpdate = bundle.getParcelable(Constants.TASK);
     }
 
     @Nullable
     @Override
-    public List<Task> loadInBackground() {
-        if (storageProvider.updateTask(taskToUpdate)) {
-            return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
-        } else return null;
+    public Boolean loadInBackground() {
+        return storageProvider.updateTask(taskToUpdate);
     }
 }
