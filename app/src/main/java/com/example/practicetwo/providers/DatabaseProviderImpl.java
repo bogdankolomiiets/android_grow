@@ -23,9 +23,9 @@ public class DatabaseProviderImpl implements StorageProvider {
     public void insertTask(Task task) {
         try {
             database.taskDAO().insertTask(task);
-            showToast(R.string.taskSaved);
+            showToast(R.string.taskInserted);
         } catch (Exception ex) {
-            showToast(R.string.taskNotSaved);
+            showToast(R.string.taskNotInserted);
         }
     }
 
@@ -35,16 +35,16 @@ public class DatabaseProviderImpl implements StorageProvider {
         if (task != null) {
             task.setFavourite(!task.isFavourite());
             updateTask(task);
-        } else showToast(R.string.taskNotChanged);
+        } else showToast(R.string.taskNotUpdated);
     }
 
     @Override
     public void updateTask(Task task) {
         try {
             database.taskDAO().updateTask(task);
-            showToast(R.string.taskChanged);
+            showToast(R.string.taskUpdated);
         } catch (Exception ex) {
-            showToast(R.string.taskNotChanged);
+            showToast(R.string.taskNotUpdated);
         }
     }
 

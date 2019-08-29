@@ -26,7 +26,7 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
 
     @Override
     public void insertTask(Task task) {
-        readTasks();
+//        readTasks();
         tasksList.add(task);
         if (writeTasks()) {
             showToast(R.string.taskSaved);
@@ -37,11 +37,11 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
 
     @Override
     public void changeTaskFavouriteValue(String taskIs) {
-        readTasks();
+//        readTasks();
         for (Task tempTask : tasksList) {
             if (tempTask.getId().equals(taskIs)) {
                 tempTask.setFavourite(!tempTask.isFavourite());
-                showToast(R.string.taskChanged);
+                showToast(R.string.taskUpdated);
                 writeTasks();
                 return;
             }
@@ -50,11 +50,11 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
 
     @Override
     public void updateTask(Task task) {
-        readTasks();
+//        readTasks();
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).getId().equals(task.getId())) {
                 tasksList.set(i, task);
-                showToast(R.string.taskChanged);
+                showToast(R.string.taskUpdated);
                 writeTasks();
                 return;
             }
@@ -63,7 +63,7 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
 
     @Override
     public void deleteTask(String taskId) {
-        readTasks();
+//        readTasks();
         Iterator iterator = tasksList.listIterator();
         while (iterator.hasNext()){
             if (((Task)iterator.next()).getId().equals(taskId)){

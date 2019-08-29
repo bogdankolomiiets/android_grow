@@ -3,6 +3,7 @@ package com.example.practicetwo.views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,8 +51,8 @@ public class TaskFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        Log.d("TAG", "onCreateView: ");
         view = inflater.inflate(R.layout.task_fragment, container, false);
-
         if (savedInstanceState != null){
             isFavouriteTasks = savedInstanceState.getBoolean(Constants.FAVOURITE_TASK);
         }

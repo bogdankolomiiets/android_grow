@@ -1,7 +1,6 @@
 package com.example.practicetwo;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +39,8 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
 
     public void setData(List<Task> tasksList){
         this.tasksList = tasksList;
+        notifyDataSetChanged();
     }
-
 
     private void showPopupMenu(CustomRecyclerView.ViewHolder holder) {
         PopupMenu popupMenu = new PopupMenu(context, holder.menuImitationHamburger);

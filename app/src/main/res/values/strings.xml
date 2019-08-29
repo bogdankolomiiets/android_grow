@@ -29,9 +29,11 @@
     <string name="editTask">Edit</string>
     <string name="deleteTask">Delete</string>
     <string name="taskRemoved">Removed</string>
-    <string name="taskChanged">Changed</string>
+    <string name="taskInserted">Inserted</string>
+    <string name="taskNotInserted">Not inserted!</string>
+    <string name="taskUpdated">Updated</string>
+    <string name="taskNotUpdated">Not updated!</string>
     <string name="taskSaved">Saved</string>
     <string name="taskNotRemoved">Not removed!</string>
-    <string name="taskNotChanged">Not changed!</string>
     <string name="taskNotSaved">Not saved!</string>
 </resources>

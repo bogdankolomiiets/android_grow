@@ -33,7 +33,7 @@ public class InternalStorageProvider extends BaseStorageProviderImpl {
     @Override
     protected boolean writeTasks() {
         try (FileOutputStream fileOutputStream = context.openFileOutput(file.getName(), Context.MODE_PRIVATE);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             objectOutputStream.writeObject(tasksList);
             return true;
         } catch (IOException ex) {
@@ -45,10 +45,10 @@ public class InternalStorageProvider extends BaseStorageProviderImpl {
     @Override
     protected void readTasks() {
         tasksList.clear();
-        try (FileInputStream fileInputStream = context.openFileInput(file.getName())){
-        if (fileInputStream.available() > 0) {
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            tasksList.addAll((List<Task>) objectInputStream.readObject());
+        try (FileInputStream fileInputStream = context.openFileInput(file.getName())) {
+            if (fileInputStream.available() > 0) {
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+                tasksList.addAll((List<Task>) objectInputStream.readObject());
             }
         } catch (IOException | ClassNotFoundException ex) {
             showToast(ex.toString());

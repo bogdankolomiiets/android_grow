@@ -13,28 +13,17 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.practicetwo.util.Constants;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
-    private PageAdapter pageAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
-
-        if (savedInstanceState != null) {
-            pageAdapter = savedInstanceState.getParcelable(Constants.PAGE_ADAPTER);
-        } else {
-            pageAdapter = new PageAdapter(
-                    this,
-                    getSupportFragmentManager(),
-                    2);
-        }
 
         //init UI components
         initComponents();
@@ -47,6 +36,10 @@ public class MainActivity extends AppCompatActivity
         ViewPager viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
+        PageAdapter pageAdapter = new PageAdapter(
+                this,
+                getSupportFragmentManager(),
+                2);
         viewPager.setAdapter(pageAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
@@ -88,11 +81,5 @@ public class MainActivity extends AppCompatActivity
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable(Constants.PAGE_ADAPTER, pageAdapter.saveState());
     }
 }

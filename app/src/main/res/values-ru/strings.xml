@@ -24,10 +24,12 @@
     <string name="editTask">Изменить</string>
     <string name="deleteTask">Удалить</string>
     <string name="taskRemoved">Удалено</string>
-    <string name="taskChanged">Изменено</string>
+    <string name="taskInserted">Добавлено</string>
+    <string name="taskNotInserted">Не добавлено!</string>
+    <string name="taskUpdated">Обновлено</string>
+    <string name="taskNotUpdated">Не обновлено!</string>
     <string name="taskSaved">Сохранено</string>
     <string name="taskNotRemoved">Не удалено!</string>
-    <string name="taskNotChanged">Не изменено!</string>
     <string name="taskNotSaved">Не сохранено!</string>
     <string name="favouritePopupText">В избранное</string>
     <string name="ordinaryPopupText">В обычные</string>
