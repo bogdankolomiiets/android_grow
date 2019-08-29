@@ -19,5 +19,4 @@ public interface Constants {
     String TASK_DESCRIPTION = "taskDescription";
     String TASK_FILENAME = "tasks.bin";
     String FAVOURITE_TASK = "FAVOURITE_TASK";
-    String PAGE_ADAPTER = "PAGE_ADAPTER";
 }

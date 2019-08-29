@@ -15,11 +15,11 @@ public class GetTaskLoader extends AsyncTaskLoader<List<Task>> {
     private StorageProvider storageProvider;
     private final boolean isFavouriteTasks;
 
-    @Override
-    protected void onStartLoading() {
-        super.onStartLoading();
-        forceLoad();
-    }
+//    @Override
+//    protected void onStartLoading() {
+//        super.onStartLoading();
+//        forceLoad();
+//    }
 
 
     public GetTaskLoader(@NonNull Context context, StorageProvider storageProvider, boolean isFavouriteTasks) {

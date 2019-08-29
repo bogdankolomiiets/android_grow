@@ -18,13 +18,6 @@ public class InsertTaskLoader extends AsyncTaskLoader<List<Task>> {
     private Task taskToInsert;
     private boolean isFavouriteTasks;
 
-    @Override
-    protected void onStartLoading() {
-        super.onStartLoading();
-        forceLoad();
-    }
-
-
     public InsertTaskLoader(@NonNull Context context, StorageProvider storageProvider, Bundle bundle, boolean isFavouriteTasks) {
         super(context);
         this.storageProvider = storageProvider;

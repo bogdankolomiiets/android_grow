@@ -17,7 +17,7 @@ public class InternalStorageProvider extends BaseStorageProviderImpl {
     private File file;
 
     public InternalStorageProvider(Context context) {
-        super(context, new ArrayList<>());
+        super(context);
         initFile();
     }
 
@@ -44,7 +44,7 @@ public class InternalStorageProvider extends BaseStorageProviderImpl {
 
     @Override
     protected void readTasks() {
-        tasksList.clear();
+        tasksList = new ArrayList<>();
         try (FileInputStream fileInputStream = context.openFileInput(file.getName())) {
             if (fileInputStream.available() > 0) {
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);

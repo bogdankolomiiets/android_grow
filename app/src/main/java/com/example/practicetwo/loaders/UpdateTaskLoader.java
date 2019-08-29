@@ -18,13 +18,6 @@ public class UpdateTaskLoader extends AsyncTaskLoader<List<Task>> {
     private Task taskToUpdate;
     private boolean isFavouriteTasks;
 
-    @Override
-    protected void onStartLoading() {
-        super.onStartLoading();
-        forceLoad();
-    }
-
-
     public UpdateTaskLoader(@NonNull Context context, StorageProvider storageProvider, Bundle bundle, boolean isFavouriteTasks) {
         super(context);
         this.storageProvider = storageProvider;

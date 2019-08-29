@@ -10,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.practicetwo.CustomRecyclerView;
 import com.example.practicetwo.R;
 import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.TaskContract;
@@ -45,13 +47,13 @@ public class TaskPresenterImpl
         this.storageProvider = StorageFactory.getInstance().getFactory(context);
         this.isFavouriteTasks = isFavouriteTasks;
         this.loaderManager = loaderManager;
-        loaderManager.initLoader(R.integer.GET_LOADER, Bundle.EMPTY, this);
+        loaderManager.restartLoader(R.integer.GET_LOADER, Bundle.EMPTY, this).forceLoad();
         loaderBundle = new Bundle();
     }
 
     @Override
     public void refresh() {
-        loaderManager.restartLoader(R.integer.GET_LOADER, Bundle.EMPTY, this);
+        loaderManager.restartLoader(R.integer.GET_LOADER, Bundle.EMPTY, this).forceLoad();
         Log.d("TAG", "refresh: ");
     }
 
@@ -64,23 +66,20 @@ public class TaskPresenterImpl
     @Override
     public void insertTask(Task task) {
         Log.d("TAG", "insertTask: ");
-//        loaderBundle.clear();
-//        loaderBundle.putParcelable(Constants.TASK, task);
-//        loaderManager.restartLoader(R.integer.INSERT_LOADER, loaderBundle, this);
-        InsertTask insertTask = new InsertTask();
-        insertTask.execute(task);
+        loaderBundle.clear();
+        loaderBundle.putParcelable(Constants.TASK, task);
+        loaderManager.restartLoader(R.integer.INSERT_LOADER, loaderBundle, this).forceLoad();
     }
 
     @Override
     public void updateTask(Task task) {
-        Log.d("TAG", "updateTask: ");
-        UpdateTask updateTask = new UpdateTask();
-        updateTask.execute(task);
+        loaderBundle.clear();
+        loaderBundle.putParcelable(Constants.TASK, task);
+        loaderManager.restartLoader(R.integer.UPDATE_LOADER, loaderBundle, this).forceLoad();
     }
 
     @Override
     public void showEditActivity(Task task) {
-        Log.d("TAG", "showEditActivity: ");
         taskView.showActivityToEditTask(task);
     }
 
@@ -89,7 +88,7 @@ public class TaskPresenterImpl
         Log.d("TAG", "changeFavourite: ");
         loaderBundle.clear();
         loaderBundle.putString(Constants.TASK, taskId);
-        loaderManager.restartLoader(R.integer.UPDATE_FAVOURITE_LOADER, loaderBundle, this);
+        loaderManager.restartLoader(R.integer.UPDATE_FAVOURITE_LOADER, loaderBundle, this).forceLoad();
     }
 
     @Override
@@ -97,13 +96,12 @@ public class TaskPresenterImpl
         Log.d("TAG", "deleteTask: ");
         loaderBundle.clear();
         loaderBundle.putString(Constants.TASK, taskId);
-        loaderManager.restartLoader(R.integer.DELETE_LOADER, loaderBundle, this);
+        loaderManager.restartLoader(R.integer.DELETE_LOADER, loaderBundle, this).forceLoad();
     }
 
     @NonNull
     @Override
     public Loader<List<Task>> onCreateLoader(int id, @Nullable Bundle args) {
-        Log.d("TAG", "onCreateLoader: ");
         switch (id) {
             case R.integer.INSERT_LOADER:
                 Log.d("TAG", "onCreateLoader: insert");
@@ -124,43 +122,11 @@ public class TaskPresenterImpl
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Task>> loader, List<Task> data) {
-        Log.d("TAG", "onLoadFinished: ");
         taskView.getAdapter().setData(data);
         notifyAdapter();
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<Task>> loader) {
-
-    }
-
-    class InsertTask extends AsyncTask<Task, Void, List<Task>> {
-
-        @Override
-        protected List<Task> doInBackground(Task... tasks) {
-            storageProvider.insertTask(tasks[0]);
-            return isFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
-        }
-
-        @Override
-        protected void onPostExecute(List<Task> taskList) {
-            super.onPostExecute(taskList);
-            taskView.getAdapter().setData(taskList);
-        }
-    }
-
-    class UpdateTask extends AsyncTask<Task, Void, List<Task>>{
-
-        @Override
-        protected List<Task> doInBackground(Task... tasks) {
-            storageProvider.updateTask(tasks[0]);
-            return isFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
-        }
-
-        @Override
-        protected void onPostExecute(List<Task> taskList) {
-            super.onPostExecute(taskList);
-            taskView.getAdapter().setData(taskList);
-        }
     }
 }

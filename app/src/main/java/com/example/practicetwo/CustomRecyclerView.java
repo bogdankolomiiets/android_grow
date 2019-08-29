@@ -39,7 +39,6 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
 
     public void setData(List<Task> tasksList){
         this.tasksList = tasksList;
-        notifyDataSetChanged();
     }
 
     private void showPopupMenu(CustomRecyclerView.ViewHolder holder) {

@@ -2,7 +2,6 @@ package com.example.practicetwo.providers;
 
 import android.content.Context;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.practicetwo.R;
@@ -15,9 +14,9 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
     public List<Task> tasksList;
     public final Context context;
 
-    public BaseStorageProviderImpl(Context context, List<Task> tasksList) {
+    public BaseStorageProviderImpl(Context context) {
         this.context = context;
-        this.tasksList = tasksList;
+        this.tasksList = new ArrayList<>();
     }
 
     protected abstract boolean writeTasks();
@@ -26,7 +25,7 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
 
     @Override
     public void insertTask(Task task) {
-//        readTasks();
+        readTasks();
         tasksList.add(task);
         if (writeTasks()) {
             showToast(R.string.taskSaved);
@@ -37,7 +36,7 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
 
     @Override
     public void changeTaskFavouriteValue(String taskIs) {
-//        readTasks();
+        readTasks();
         for (Task tempTask : tasksList) {
             if (tempTask.getId().equals(taskIs)) {
                 tempTask.setFavourite(!tempTask.isFavourite());
@@ -50,7 +49,7 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
 
     @Override
     public void updateTask(Task task) {
-//        readTasks();
+        readTasks();
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).getId().equals(task.getId())) {
                 tasksList.set(i, task);
@@ -63,7 +62,7 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
 
     @Override
     public void deleteTask(String taskId) {
-//        readTasks();
+        readTasks();
         Iterator iterator = tasksList.listIterator();
         while (iterator.hasNext()){
             if (((Task)iterator.next()).getId().equals(taskId)){

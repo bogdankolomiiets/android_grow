@@ -20,7 +20,7 @@ public class ExternalStorageProvider extends BaseStorageProviderImpl {
     private File file;
 
     public ExternalStorageProvider(Context context) {
-        super(context, new ArrayList<>());
+        super(context);
     }
 
     private boolean checkEnvironment() {
@@ -57,7 +57,7 @@ public class ExternalStorageProvider extends BaseStorageProviderImpl {
     @Override
     protected void readTasks() {
         if (checkEnvironment()) {
-            tasksList.clear();
+            tasksList = new ArrayList<>();
             try (FileInputStream fileInputStream = new FileInputStream(file)) {
                 if (fileInputStream.available() > 0) {
                     ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);

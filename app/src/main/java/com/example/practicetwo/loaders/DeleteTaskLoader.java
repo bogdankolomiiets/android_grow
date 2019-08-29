@@ -18,13 +18,6 @@ public class DeleteTaskLoader extends AsyncTaskLoader<List<Task>> {
     private String taskIdToDelete;
     private boolean isFavouriteTasks;
 
-    @Override
-    protected void onStartLoading() {
-        super.onStartLoading();
-        forceLoad();
-    }
-
-
     public DeleteTaskLoader(@NonNull Context context, StorageProvider storageProvider, Bundle bundle, boolean isFavouriteTasks) {
         super(context);
         this.storageProvider = storageProvider;

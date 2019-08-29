@@ -17,8 +17,7 @@ public class SharedPreferencesProvider extends BaseStorageProviderImpl {
     private Gson gson;
 
     public SharedPreferencesProvider(Context context) {
-        super(context, new ArrayList<>());
-        tasksList = new ArrayList<>();
+        super(context);
         this.gson = new Gson();
         preferences = context.getSharedPreferences(Constants.SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
@@ -37,7 +36,7 @@ public class SharedPreferencesProvider extends BaseStorageProviderImpl {
 
     @Override
     protected void readTasks() {
-        tasksList.clear();
+        tasksList = new ArrayList<>();
         String tasks = preferences.getString(Constants.TASKS, null);
         if (tasks != null) {
             JsonArray jsonArray = new JsonParser().parse(tasks).getAsJsonArray();
