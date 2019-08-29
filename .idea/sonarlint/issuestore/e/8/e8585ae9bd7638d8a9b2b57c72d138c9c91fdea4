@@ -1,10 +1,4 @@
 
-?squid:S1148#"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
-]squid:S2118."AMake the "java.util.List" class "Serializable" or don't write it.(·çŠàÿÿÿÿÿ
-Fsquid:S2093I"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
-Fsquid:S2093+"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
+]squid:S2118&"AMake the "java.util.List" class "Serializable" or don't write it.(·çŠàÿÿÿÿÿ
 ]
-squid:S899!"BDo something with the "boolean" value returned by "createNewFile".(Ğ’Íùÿÿÿÿ
-?squid:S1148?"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ë°ãøûÿÿÿÿ
-?squid:S1148V"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+squid:S899"BDo something with the "boolean" value returned by "createNewFile".(Ğ’Íùÿÿÿÿ

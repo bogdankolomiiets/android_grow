@@ -1,13 +1,3 @@
 
-?squid:S1148c"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-Fsquid:S20932"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
-]squid:S21185"AMake the "java.util.List" class "Serializable" or don't write it.(·çŠàÿÿÿÿÿ
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Ð‹ª…ùÿÿÿÿ
-hsquid:S3776P"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(×­¥
-esquid:S20953"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(–ž¯­
-gsquid:S20954"PUse try-with-resources or close this "ObjectOutputStream" in a "finally" clause.(Œ¹„â
-]
-squid:S899$"BDo something with the "boolean" value returned by "createNewFile".(Ð’Íùÿÿÿÿ
-Fsquid:S2093V"*Change this "try" to a try-with-resources.(¡»¢üùÿÿÿÿ
-?squid:S1148&"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-?squid:S1148F"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+d
+squid:S899 "BDo something with the "boolean" value returned by "createNewFile".(Ð’Íùÿÿÿÿ8òù«½Í-

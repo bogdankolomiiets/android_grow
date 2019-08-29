@@ -1,6 +1,7 @@
 
-…"squid:ClassVariableVisibilityCheckK"WMake taskTitleTV a static final constant or non-public and provide accessors if needed.(ÿÅ·°
-"squid:ClassVariableVisibilityCheckL"]Make taskDescriptionTV a static final constant or non-public and provide accessors if needed.(û¯µ´üÿÿÿÿ
-œ"squid:ClassVariableVisibilityCheckM"bMake menuImitationHamburger a static final constant or non-public and provide accessors if needed.(Õû”Íùÿÿÿÿ8ëŒ•ËË-
-W"squid:SwitchLastCaseIsDefaultCheck5""Add a default case to this switch.(¿›İ”8¼ÿÉÊË-
-5squid:S2176J"Rename this class.(Â×Öúÿÿÿÿ8ëŒ•ËË-
+"squid:ClassVariableVisibilityCheckM"]Make taskDescriptionTV a static final constant or non-public and provide accessors if needed.(û¯µ´üÿÿÿÿ
+W"squid:SwitchLastCaseIsDefaultCheck6""Add a default case to this switch.(¿›İ”8ûä—ÁÍ-
+œ"squid:ClassVariableVisibilityCheckN"bMake menuImitationHamburger a static final constant or non-public and provide accessors if needed.(Õû”Íùÿÿÿÿ8ëŒ•ËË-
+]squid:UselessImportCheck"-Remove this unused import 'android.util.Log'.(Ô¦Ø²øÿÿÿÿ8ğ€ÁÍ-
+Œ"squid:ClassVariableVisibilityCheckL"WMake taskTitleTV a static final constant or non-public and provide accessors if needed.(ÿÅ·°8ûä—ÁÍ-
+5squid:S2176K"Rename this class.(Â×Öúÿÿÿÿ8ûä—ÁÍ-

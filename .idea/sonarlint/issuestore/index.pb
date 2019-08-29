@@ -53,3 +53,9 @@ Papp/src/main/java/com/example/practicetwo/loaders/UpdateFavouriteTaskLoader.jav
 Papp/src/main/java/com/example/practicetwo/providers/ExternalStorageProvider.java,4\f\4ff3aa6309556f42cc313f93b2d9337e089460d9
 k
 ;app/src/main/java/com/example/practicetwo/MainActivity.java,9\0\9032c54ee588c13301a36fd80ec8ea3317a47709
+r
+Bapp/src/main/java/com/example/practicetwo/util/StorageFactory.java,7\9\797ff14feec8231000eb556f119dc73e28c02fe6
+„
+Tapp/src/main/java/com/example/practicetwo/util/ExternalStoragePermissionChecker.java,c\d\cd09044ed97371806593d9a93c382c906390f8e1
+p
+@app/src/main/java/com/example/practicetwo/util/RequestCodes.java,3\b\3b7f108d4ae2d157fcd88a6e571baf1eb5a84973
