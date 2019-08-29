@@ -2,11 +2,9 @@ package com.example.practicetwo.presenters;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,24 +27,23 @@ import java.util.List;
 
 public class TaskPresenterImpl
         implements  TaskContract.TaskPresenter,
-                    LoaderManager.LoaderCallbacks<Object> {
+                    LoaderManager.LoaderCallbacks<List<Task>> {
 
-    private static final String TAG = TaskPresenterImpl.class.getName();
-    private final Context context;
+    private Context context;
     private StorageProvider storageProvider;
-    private final TaskContract.TaskView taskView;
-    private final boolean showFavouriteTasks;
-    private final LoaderManager loaderManager;
+    private TaskContract.TaskView taskView;
+    private final boolean isFavouriteTasks;
+    private LoaderManager loaderManager;
     private Bundle loaderBundle;
 
     public TaskPresenterImpl(View view,
                              TaskContract.TaskView taskView,
-                             boolean showFavouriteTasks,
+                             boolean isFavouriteTasks,
                              LoaderManager loaderManager) {
         this.taskView = taskView;
         this.context = view.getContext();
         this.storageProvider = StorageFactory.getInstance().getFactory(context);
-        this.showFavouriteTasks = showFavouriteTasks;
+        this.isFavouriteTasks = isFavouriteTasks;
         this.loaderManager = loaderManager;
         loaderManager.initLoader(R.integer.GET_LOADER, Bundle.EMPTY, this);
         loaderBundle = new Bundle();
@@ -97,33 +94,29 @@ public class TaskPresenterImpl
 
     @NonNull
     @Override
-    public Loader<Object> onCreateLoader(int id, @Nullable Bundle args) {
+    public Loader<List<Task>> onCreateLoader(int id, @Nullable Bundle args) {
         switch (id) {
             case R.integer.INSERT_LOADER:
-                return new InsertTaskLoader(context, storageProvider, args);
+                return new InsertTaskLoader(context, storageProvider, args, isFavouriteTasks);
             case R.integer.DELETE_LOADER:
-                return new DeleteTaskLoader(context, storageProvider, args);
+                return new DeleteTaskLoader(context, storageProvider, args, isFavouriteTasks);
             case R.integer.UPDATE_LOADER:
-                return new UpdateTaskLoader(context, storageProvider, args);
+                return new UpdateTaskLoader(context, storageProvider, args, isFavouriteTasks);
             case R.integer.UPDATE_FAVOURITE_LOADER:
-                return new UpdateFavouriteTaskLoader(context, storageProvider, args);
+                return new UpdateFavouriteTaskLoader(context, storageProvider, args, isFavouriteTasks);
             default:
-                return new GetTaskLoader(context, storageProvider, showFavouriteTasks);
+                return new GetTaskLoader(context, storageProvider, isFavouriteTasks);
         }
     }
 
     @Override
-    public void onLoadFinished(@NonNull Loader<Object> loader, Object data) {
-        if (loader.getId() != R.integer.GET_LOADER){
-            loaderManager.restartLoader(R.integer.GET_LOADER, Bundle.EMPTY, this);
-            return;
-        }
-            taskView.getAdapter().setData((List<Task>) data);
+    public void onLoadFinished(@NonNull Loader<List<Task>> loader, List<Task> data) {
+            taskView.getAdapter().setData(data);
             notifyAdapter();
     }
 
     @Override
-    public void onLoaderReset(@NonNull Loader<Object> loader) {
+    public void onLoaderReset(@NonNull Loader<List<Task>> loader) {
 
     }
 }

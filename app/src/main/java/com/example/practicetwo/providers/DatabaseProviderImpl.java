@@ -20,48 +20,41 @@ public class DatabaseProviderImpl implements StorageProvider {
     }
 
     @Override
-    public boolean insertTask(Task task) {
+    public void insertTask(Task task) {
         try {
             database.taskDAO().insertTask(task);
             showToast(R.string.taskSaved);
-            return true;
         } catch (Exception ex) {
             showToast(R.string.taskNotSaved);
-            return false;
         }
     }
 
     @Override
-    public boolean changeTaskFavouriteValue(String taskId) {
+    public void changeTaskFavouriteValue(String taskId) {
         Task task = database.taskDAO().getTask(taskId);
         if (task != null) {
             task.setFavourite(!task.isFavourite());
             updateTask(task);
-            return true;
-        } else return false;
+        } else showToast(R.string.taskNotChanged);
     }
 
     @Override
-    public boolean updateTask(Task task) {
+    public void updateTask(Task task) {
         try {
             database.taskDAO().updateTask(task);
             showToast(R.string.taskChanged);
-            return true;
         } catch (Exception ex) {
             showToast(R.string.taskNotChanged);
-            return false;
         }
     }
 
     @Override
-    public boolean deleteTask(String taskId) {
+    public void deleteTask(String taskId) {
         try {
             database.taskDAO().deleteTask(taskId);
             showToast(R.string.taskRemoved);
-            return true;
         } catch (Exception ex) {
             showToast(R.string.taskNotRemoved);
-            return false;
         }
     }
 

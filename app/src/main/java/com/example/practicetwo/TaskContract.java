@@ -1,5 +1,7 @@
 package com.example.practicetwo;
 
+import android.os.Parcelable;
+
 import com.example.practicetwo.entity.Task;
 
 public interface TaskContract {
@@ -10,7 +12,7 @@ public interface TaskContract {
         void showActivityToEditTask(Task task);
     }
 
-    interface TaskPresenter {
+    interface TaskPresenter{
         void notifyAdapter();
         void refresh();
         void insertTask(Task task);

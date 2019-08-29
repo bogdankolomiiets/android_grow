@@ -11,9 +11,9 @@ import com.example.practicetwo.providers.StorageProvider;
 
 import java.util.List;
 
-public class GetTaskLoader extends AsyncTaskLoader<Object> {
+public class GetTaskLoader extends AsyncTaskLoader<List<Task>> {
     private StorageProvider storageProvider;
-    private final boolean showFavouriteTasks;
+    private final boolean isFavouriteTasks;
 
     @Override
     protected void onStartLoading() {
@@ -22,15 +22,15 @@ public class GetTaskLoader extends AsyncTaskLoader<Object> {
     }
 
 
-    public GetTaskLoader(@NonNull Context context, StorageProvider storageProvider, boolean showFavouriteTasks) {
+    public GetTaskLoader(@NonNull Context context, StorageProvider storageProvider, boolean isFavouriteTasks) {
         super(context);
         this.storageProvider = storageProvider;
-        this.showFavouriteTasks = showFavouriteTasks;
+        this.isFavouriteTasks = isFavouriteTasks;
     }
 
     @Nullable
     @Override
     public List<Task> loadInBackground() {
-        return showFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
+        return isFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
     }
 }

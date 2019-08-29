@@ -25,50 +25,44 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
     protected abstract void readTasks();
 
     @Override
-    public boolean insertTask(Task task) {
+    public void insertTask(Task task) {
         readTasks();
-        if (tasksList.add(task)) {
-            if (writeTasks()) {
-                showToast(R.string.taskSaved);
-                return true;
-            }
-            return false;
+        tasksList.add(task);
+        if (writeTasks()) {
+            showToast(R.string.taskSaved);
         } else {
             showToast(R.string.taskNotSaved);
-            return false;
         }
     }
 
     @Override
-    public boolean changeTaskFavouriteValue(String taskIs) {
+    public void changeTaskFavouriteValue(String taskIs) {
         readTasks();
         for (Task tempTask : tasksList) {
             if (tempTask.getId().equals(taskIs)) {
                 tempTask.setFavourite(!tempTask.isFavourite());
                 showToast(R.string.taskChanged);
                 writeTasks();
-                return true;
+                return;
             }
         }
-        return false;
     }
 
     @Override
-    public boolean updateTask(Task task) {
+    public void updateTask(Task task) {
         readTasks();
         for (int i = 0; i < tasksList.size(); i++) {
             if (tasksList.get(i).getId().equals(task.getId())) {
                 tasksList.set(i, task);
                 showToast(R.string.taskChanged);
                 writeTasks();
-                return true;
+                return;
             }
         }
-        return false;
     }
 
     @Override
-    public boolean deleteTask(String taskId) {
+    public void deleteTask(String taskId) {
         readTasks();
         Iterator iterator = tasksList.listIterator();
         while (iterator.hasNext()){
@@ -76,10 +70,9 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
                 iterator.remove();
                 showToast(R.string.taskRemoved);
                 writeTasks();
-                return true;
+                return;
             }
         }
-       return false;
     }
 
     @Override

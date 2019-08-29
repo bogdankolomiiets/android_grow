@@ -35,14 +35,14 @@ public class TaskFragment extends Fragment
     private TaskContract.TaskPresenter taskPresenter;
     private View view;
     private CustomRecyclerView adapter;
-    private boolean showFavouriteTasks;
+    private boolean isFavouriteTasks;
 
     public TaskFragment() {
     }
 
-    public TaskFragment(boolean showFavouriteTasks) {
+    public TaskFragment(boolean isFavouriteTasks) {
         super();
-        this.showFavouriteTasks = showFavouriteTasks;
+        this.isFavouriteTasks = isFavouriteTasks;
     }
 
     @Nullable
@@ -50,12 +50,13 @@ public class TaskFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            showFavouriteTasks = savedInstanceState.getBoolean(Constants.FAVOURITE_TASK);
-        }
         view = inflater.inflate(R.layout.task_fragment, container, false);
-        taskPresenter = new TaskPresenterImpl(view, this, showFavouriteTasks, getLoaderManager());
 
+        if (savedInstanceState != null){
+            isFavouriteTasks = savedInstanceState.getBoolean(Constants.FAVOURITE_TASK);
+        }
+
+        taskPresenter = new TaskPresenterImpl(view, this, isFavouriteTasks, getLoaderManager());
         adapter = new CustomRecyclerView(this.getContext(), taskPresenter, new ArrayList<>());
         RecyclerView taskRecyclerView = view.findViewById(R.id.taskRecyclerView);
         taskRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -131,6 +132,6 @@ public class TaskFragment extends Fragment
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(Constants.FAVOURITE_TASK, showFavouriteTasks);
+        outState.putBoolean(Constants.FAVOURITE_TASK, isFavouriteTasks);
     }
 }

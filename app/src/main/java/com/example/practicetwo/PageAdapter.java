@@ -13,26 +13,28 @@ import com.example.practicetwo.views.TaskFragment;
 public class PageAdapter extends FragmentPagerAdapter {
     private final int numOfTabs;
     private final Context context;
+    private TaskFragment allTaskFragment;
+    private TaskFragment favTaskFragment;
 
     public PageAdapter(Context context, FragmentManager fm, int numOfTabs) {
         super(fm);
         this.context = context;
         this.numOfTabs = numOfTabs;
+        allTaskFragment = new TaskFragment(false);
+        favTaskFragment = new TaskFragment(true);
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new TaskFragment(false);
+                return allTaskFragment;
             case 1:
-                return new TaskFragment(true);
+                return favTaskFragment;
             default:
             return null;
         }
     }
-
-
 
     @Override
     public int getCount() {

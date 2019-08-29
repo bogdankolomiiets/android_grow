@@ -11,9 +11,12 @@ import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.providers.StorageProvider;
 import com.example.practicetwo.util.Constants;
 
-public class InsertTaskLoader extends AsyncTaskLoader<Object> {
+import java.util.List;
+
+public class InsertTaskLoader extends AsyncTaskLoader<List<Task>> {
     private StorageProvider storageProvider;
     private Task taskToInsert;
+    private boolean isFavouriteTasks;
 
     @Override
     protected void onStartLoading() {
@@ -22,15 +25,17 @@ public class InsertTaskLoader extends AsyncTaskLoader<Object> {
     }
 
 
-    public InsertTaskLoader(@NonNull Context context, StorageProvider storageProvider, Bundle bundle) {
+    public InsertTaskLoader(@NonNull Context context, StorageProvider storageProvider, Bundle bundle, boolean isFavouriteTasks) {
         super(context);
         this.storageProvider = storageProvider;
         taskToInsert = bundle.getParcelable(Constants.TASK);
+        this.isFavouriteTasks = isFavouriteTasks;
     }
 
     @Nullable
     @Override
-    public Boolean loadInBackground() {
-        return storageProvider.insertTask(taskToInsert);
+    public List<Task> loadInBackground() {
+        storageProvider.insertTask(taskToInsert);
+        return isFavouriteTasks ? storageProvider.getFavouriteTasks() : storageProvider.getAllTasks();
     }
 }
