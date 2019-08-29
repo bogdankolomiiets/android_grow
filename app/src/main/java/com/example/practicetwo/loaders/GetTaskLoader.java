@@ -11,7 +11,7 @@ import com.example.practicetwo.providers.StorageProvider;
 
 import java.util.List;
 
-public class GetTaskLoader extends AsyncTaskLoader<List<Task>> {
+public class GetTaskLoader extends AsyncTaskLoader<Object> {
     private StorageProvider storageProvider;
     private final boolean showFavouriteTasks;
 

@@ -42,6 +42,7 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
         this.tasksList = tasksList;
     }
 
+
     private void showPopupMenu(CustomRecyclerView.ViewHolder holder) {
         PopupMenu popupMenu = new PopupMenu(context, holder.menuImitationHamburger);
         popupMenu.inflate(R.menu.menu_recycler_view_item);

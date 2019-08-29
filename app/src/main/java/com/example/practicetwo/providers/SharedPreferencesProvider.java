@@ -17,7 +17,7 @@ public class SharedPreferencesProvider extends BaseStorageProviderImpl {
     private Gson gson;
 
     public SharedPreferencesProvider(Context context) {
-        super(context);
+        super(context, new ArrayList<>());
         tasksList = new ArrayList<>();
         this.gson = new Gson();
         preferences = context.getSharedPreferences(Constants.SHARE_PREFERENCES_NAME, Context.MODE_PRIVATE);

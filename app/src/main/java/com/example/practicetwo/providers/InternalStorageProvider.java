@@ -17,8 +17,7 @@ public class InternalStorageProvider extends BaseStorageProviderImpl {
     private File file;
 
     public InternalStorageProvider(Context context) {
-        super(context);
-        tasksList = new ArrayList<>();
+        super(context, new ArrayList<>());
         initFile();
     }
 
@@ -46,10 +45,10 @@ public class InternalStorageProvider extends BaseStorageProviderImpl {
     @Override
     protected void readTasks() {
         tasksList.clear();
-        try (FileInputStream fileInputStream = context.openFileInput(file.getName());
-             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)){
+        try (FileInputStream fileInputStream = context.openFileInput(file.getName())){
         if (fileInputStream.available() > 0) {
-                tasksList.addAll((List<Task>) objectInputStream.readObject());
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            tasksList.addAll((List<Task>) objectInputStream.readObject());
             }
         } catch (IOException | ClassNotFoundException ex) {
             showToast(ex.toString());

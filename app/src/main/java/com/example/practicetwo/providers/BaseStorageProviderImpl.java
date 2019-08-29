@@ -15,8 +15,9 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
     public List<Task> tasksList;
     public final Context context;
 
-    public BaseStorageProviderImpl(Context context) {
+    public BaseStorageProviderImpl(Context context, List<Task> tasksList) {
         this.context = context;
+        this.tasksList = tasksList;
     }
 
     protected abstract boolean writeTasks();
@@ -26,10 +27,12 @@ public abstract class BaseStorageProviderImpl implements StorageProvider {
     @Override
     public boolean insertTask(Task task) {
         readTasks();
-        tasksList.add(task);
-        if (writeTasks()){
-            showToast(R.string.taskSaved);
-            return true;
+        if (tasksList.add(task)) {
+            if (writeTasks()) {
+                showToast(R.string.taskSaved);
+                return true;
+            }
+            return false;
         } else {
             showToast(R.string.taskNotSaved);
             return false;
