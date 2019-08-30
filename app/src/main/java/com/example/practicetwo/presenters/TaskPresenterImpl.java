@@ -1,7 +1,6 @@
 package com.example.practicetwo.presenters;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,22 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.practicetwo.CustomRecyclerView;
 import com.example.practicetwo.R;
-import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.TaskContract;
-import com.example.practicetwo.loaders.DeleteTaskLoader;
-import com.example.practicetwo.loaders.InsertTaskLoader;
-import com.example.practicetwo.loaders.UpdateFavouriteTaskLoader;
-import com.example.practicetwo.loaders.UpdateTaskLoader;
+import com.example.practicetwo.entity.Task;
+import com.example.practicetwo.loader.MainLoader;
 import com.example.practicetwo.providers.StorageProvider;
-import com.example.practicetwo.util.Constants;
 import com.example.practicetwo.util.StorageFactory;
-import com.example.practicetwo.loaders.GetTaskLoader;
 
 import java.util.List;
+
+import static com.example.practicetwo.util.Constants.MODE;
+import static com.example.practicetwo.util.Constants.TASK;
 
 public class TaskPresenterImpl
         implements TaskContract.TaskPresenter,
@@ -47,35 +42,35 @@ public class TaskPresenterImpl
         this.storageProvider = StorageFactory.getInstance().getFactory(context);
         this.isFavouriteTasks = isFavouriteTasks;
         this.loaderManager = loaderManager;
-        loaderManager.restartLoader(R.integer.GET_LOADER, Bundle.EMPTY, this).forceLoad();
+        loaderManager.initLoader(R.integer.MAIN_LOADER, Bundle.EMPTY, this);
         loaderBundle = new Bundle();
     }
 
     @Override
     public void refresh() {
-        loaderManager.restartLoader(R.integer.GET_LOADER, Bundle.EMPTY, this).forceLoad();
         Log.d("TAG", "refresh: ");
+        loaderManager.restartLoader(R.integer.MAIN_LOADER, Bundle.EMPTY, this);
     }
 
     @Override
     public void notifyAdapter() {
-        Log.d("TAG", "notifyAdapter: ");
         taskView.updateView();
     }
 
     @Override
     public void insertTask(Task task) {
-        Log.d("TAG", "insertTask: ");
         loaderBundle.clear();
-        loaderBundle.putParcelable(Constants.TASK, task);
-        loaderManager.restartLoader(R.integer.INSERT_LOADER, loaderBundle, this).forceLoad();
+        loaderBundle.putInt(MODE, R.integer.INSERT);
+        loaderBundle.putParcelable(TASK, task);
+        loaderManager.restartLoader(R.integer.MAIN_LOADER, loaderBundle, this);
     }
 
     @Override
     public void updateTask(Task task) {
         loaderBundle.clear();
-        loaderBundle.putParcelable(Constants.TASK, task);
-        loaderManager.restartLoader(R.integer.UPDATE_LOADER, loaderBundle, this).forceLoad();
+        loaderBundle.putInt(MODE, R.integer.UPDATE);
+        loaderBundle.putParcelable(TASK, task);
+        loaderManager.restartLoader(R.integer.MAIN_LOADER, loaderBundle, this);
     }
 
     @Override
@@ -85,45 +80,31 @@ public class TaskPresenterImpl
 
     @Override
     public void changeFavourite(String taskId) {
-        Log.d("TAG", "changeFavourite: ");
         loaderBundle.clear();
-        loaderBundle.putString(Constants.TASK, taskId);
-        loaderManager.restartLoader(R.integer.UPDATE_FAVOURITE_LOADER, loaderBundle, this).forceLoad();
+        loaderBundle.putInt(MODE, R.integer.UPDATE_FAVOURITE);
+        loaderBundle.putString(TASK, taskId);
+        loaderManager.restartLoader(R.integer.MAIN_LOADER, loaderBundle, this);
     }
 
     @Override
     public void deleteTask(String taskId) {
-        Log.d("TAG", "deleteTask: ");
         loaderBundle.clear();
-        loaderBundle.putString(Constants.TASK, taskId);
-        loaderManager.restartLoader(R.integer.DELETE_LOADER, loaderBundle, this).forceLoad();
+        loaderBundle.putInt(MODE, R.integer.DELETE);
+        loaderBundle.putString(TASK, taskId);
+        loaderManager.restartLoader(R.integer.MAIN_LOADER, loaderBundle, this);
     }
 
     @NonNull
     @Override
     public Loader<List<Task>> onCreateLoader(int id, @Nullable Bundle args) {
-        switch (id) {
-            case R.integer.INSERT_LOADER:
-                Log.d("TAG", "onCreateLoader: insert");
-                return new InsertTaskLoader(context, storageProvider, args, isFavouriteTasks);
-            case R.integer.DELETE_LOADER:
-                Log.d("TAG", "onCreateLoader: delete");
-                return new DeleteTaskLoader(context, storageProvider, args, isFavouriteTasks);
-            case R.integer.UPDATE_LOADER:
-                Log.d("TAG", "onCreateLoader: update");
-                return new UpdateTaskLoader(context, storageProvider, args, isFavouriteTasks);
-            case R.integer.UPDATE_FAVOURITE_LOADER:
-                Log.d("TAG", "onCreateLoader: fav");
-                return new UpdateFavouriteTaskLoader(context, storageProvider, args, isFavouriteTasks);
-            default:
-                return new GetTaskLoader(context, storageProvider, isFavouriteTasks);
-        }
+        if (args == null) args = Bundle.EMPTY;
+        return new MainLoader(context, storageProvider, args, isFavouriteTasks);
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<Task>> loader, List<Task> data) {
         taskView.getAdapter().setData(data);
-        notifyAdapter();
+//        notifyAdapter();
     }
 
     @Override

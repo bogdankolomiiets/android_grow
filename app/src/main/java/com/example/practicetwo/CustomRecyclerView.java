@@ -6,9 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.practicetwo.entity.Task;
+
 import java.util.List;
 
 public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.ViewHolder> {
@@ -37,8 +40,10 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
         holder.menuImitationHamburger.setOnClickListener(view -> showPopupMenu(holder));
     }
 
-    public void setData(List<Task> tasksList){
-        this.tasksList = tasksList;
+    public void setData(@NonNull List<Task> tasksList) {
+        this.tasksList.clear();
+        this.tasksList.addAll(tasksList);
+        notifyDataSetChanged();
     }
 
     private void showPopupMenu(CustomRecyclerView.ViewHolder holder) {

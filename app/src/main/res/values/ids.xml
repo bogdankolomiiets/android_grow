@@ -1,7 +1,7 @@
 <resources>
-    <integer name="GET_LOADER">1</integer>
-    <integer name="INSERT_LOADER">2</integer>
-    <integer name="DELETE_LOADER">3</integer>
-    <integer name="UPDATE_LOADER">4</integer>
-    <integer name="UPDATE_FAVOURITE_LOADER">5</integer>
+    <integer name="MAIN_LOADER">1</integer>
+    <integer name="INSERT">2</integer>
+    <integer name="DELETE">3</integer>
+    <integer name="UPDATE">4</integer>
+    <integer name="UPDATE_FAVOURITE">5</integer>
 </resources>

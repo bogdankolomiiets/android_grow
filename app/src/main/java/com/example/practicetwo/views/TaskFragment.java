@@ -3,7 +3,6 @@ package com.example.practicetwo.views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +10,19 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.practicetwo.CustomRecyclerView;
 import com.example.practicetwo.R;
+import com.example.practicetwo.TaskActivity;
+import com.example.practicetwo.TaskContract;
+import com.example.practicetwo.entity.Task;
+import com.example.practicetwo.presenters.TaskPresenterImpl;
 import com.example.practicetwo.util.Constants;
 import com.example.practicetwo.util.RequestCodes;
-import com.example.practicetwo.TaskActivity;
-import com.example.practicetwo.entity.Task;
-import com.example.practicetwo.TaskContract;
-import com.example.practicetwo.presenters.TaskPresenterImpl;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -51,7 +51,6 @@ public class TaskFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        Log.d("TAG", "onCreateView: ");
         view = inflater.inflate(R.layout.task_fragment, container, false);
         if (savedInstanceState != null){
             isFavouriteTasks = savedInstanceState.getBoolean(Constants.FAVOURITE_TASK);
@@ -60,8 +59,11 @@ public class TaskFragment extends Fragment
         taskPresenter = new TaskPresenterImpl(view, this, isFavouriteTasks, getLoaderManager());
         adapter = new CustomRecyclerView(this.getContext(), taskPresenter, new ArrayList<>());
         RecyclerView taskRecyclerView = view.findViewById(R.id.taskRecyclerView);
-        taskRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        taskRecyclerView.setLayoutManager(layoutManager);
         taskRecyclerView.setAdapter(adapter);
+        DividerItemDecoration divider = new DividerItemDecoration(view.getContext(), layoutManager.getOrientation());
+        taskRecyclerView.addItemDecoration(divider);
 
         return view;
     }

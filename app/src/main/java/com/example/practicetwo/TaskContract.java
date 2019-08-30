@@ -1,7 +1,5 @@
 package com.example.practicetwo;
 
-import android.os.Parcelable;
-
 import com.example.practicetwo.entity.Task;
 
 public interface TaskContract {
