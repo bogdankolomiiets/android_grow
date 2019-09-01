@@ -1,5 +1,5 @@
 package com.example.practicetwo.util;
 
-public interface VisibleFragmentUpdater {
+public interface VisibleFragmentDataUpdater {
     void updateFragment();
 }

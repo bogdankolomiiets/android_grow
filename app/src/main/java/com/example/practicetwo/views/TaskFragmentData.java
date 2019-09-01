@@ -21,7 +21,7 @@ import com.example.practicetwo.TaskContract;
 import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.presenters.TaskPresenterImpl;
 import com.example.practicetwo.util.Constants;
-import com.example.practicetwo.util.VisibleFragmentUpdater;
+import com.example.practicetwo.util.VisibleFragmentDataUpdater;
 import com.example.practicetwo.util.RequestCodes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -31,19 +31,18 @@ import static android.app.Activity.RESULT_OK;
 import static com.example.practicetwo.util.Constants.TASK_EXTRA;
 import static com.example.practicetwo.util.RequestCodes.NEW_TASK_INTENT_CODE;
 
-public class TaskFragment extends Fragment
+public class TaskFragmentData extends Fragment
                           implements TaskContract.TaskView,
-                                     VisibleFragmentUpdater {
+        VisibleFragmentDataUpdater {
 
     private TaskContract.TaskPresenter taskPresenter;
-    private View view;
     private CustomRecyclerView adapter;
     private boolean isFavouriteTasks;
 
-    public TaskFragment() {
+    public TaskFragmentData() {
     }
 
-    public TaskFragment(boolean isFavouriteTasks) {
+    public TaskFragmentData(boolean isFavouriteTasks) {
         super();
         this.isFavouriteTasks = isFavouriteTasks;
     }
@@ -53,7 +52,8 @@ public class TaskFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.task_fragment, container, false);
+        View view = inflater.inflate(R.layout.task_fragment, container, false);
+
         if (savedInstanceState != null){
             isFavouriteTasks = savedInstanceState.getBoolean(Constants.FAVOURITE_TASK);
         }
@@ -64,17 +64,14 @@ public class TaskFragment extends Fragment
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         taskRecyclerView.setLayoutManager(layoutManager);
         taskRecyclerView.setAdapter(adapter);
+
+        //setup divider
         DividerItemDecoration divider = new DividerItemDecoration(view.getContext(), layoutManager.getOrientation());
         taskRecyclerView.addItemDecoration(divider);
 
         //init FloatingActionButton
         FloatingActionButton newTaskFab = view.findViewById(R.id.newTaskFab);
-        newTaskFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivityForResult(new Intent(view.getContext(), TaskActivity.class), NEW_TASK_INTENT_CODE);
-            }
-        });
+        newTaskFab.setOnClickListener(view1 -> startActivityForResult(new Intent(view1.getContext(), TaskActivity.class), NEW_TASK_INTENT_CODE));
 
         return view;
     }
@@ -86,21 +83,9 @@ public class TaskFragment extends Fragment
 
     @Override
     public void updateFragment() {
+        if (taskPresenter != null)
         taskPresenter.refreshData();
     }
-
-    //    @Override
-//    public void onStart() {
-//        super.onStart();
-//        viewPager2 = view.getRootView().findViewById(R.id.viewPager2);
-//        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-//            @Override
-//            public void onPageSelected(int position) {
-//                super.onPageSelected(position);
-//                taskPresenter.refreshData();
-//            }
-//        });
-//    }
 
     @Override
     public void showActivityToEditTask(Task task) {
@@ -111,13 +96,16 @@ public class TaskFragment extends Fragment
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == RequestCodes.NEW_TASK_INTENT_CODE) {
-            if (resultCode == RESULT_OK) {
-                taskPresenter.insertTask(data.getParcelableExtra(TASK_EXTRA));
-            }
-        } else if (requestCode == RequestCodes.EDIT_TASK_INTENT_CODE) {
-            if (resultCode == RESULT_OK) {
-                taskPresenter.updateTask(data.getParcelableExtra(TASK_EXTRA));
+        Task tempTask = data.getParcelableExtra(TASK_EXTRA);
+        if (tempTask != null) {
+            if (requestCode == RequestCodes.NEW_TASK_INTENT_CODE) {
+                if (resultCode == RESULT_OK) {
+                    taskPresenter.insertTask(tempTask);
+                }
+            } else if (requestCode == RequestCodes.EDIT_TASK_INTENT_CODE) {
+                if (resultCode == RESULT_OK) {
+                    taskPresenter.updateTask(tempTask);
+                }
             }
         }
     }

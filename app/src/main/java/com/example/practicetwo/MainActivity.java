@@ -2,7 +2,6 @@ package com.example.practicetwo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -14,8 +13,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.practicetwo.util.VisibleFragmentUpdater;
-import com.example.practicetwo.views.TaskFragment;
+import com.example.practicetwo.util.VisibleFragmentDataUpdater;
+import com.example.practicetwo.views.TaskFragmentData;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -26,7 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
-    private List<TaskFragment> fragments;
+    private List<TaskFragmentData> fragments;
     private int[] tabTitles;
 
     @Override
@@ -37,22 +36,20 @@ public class MainActivity extends AppCompatActivity
         initTabTitles();
         initFragments();
 
-        //init UI components
-        initComponents();
+        initUiComponents();
     }
-
-    private void initFragments() {
-        fragments = new ArrayList<>();
-        fragments.add(new TaskFragment(false));
-        fragments.add(new TaskFragment(true));
-    }
-
 
     private void initTabTitles() {
         tabTitles = new int[] {R.string.taskAllText, R.string.taskFavouriteText};
     }
 
-    private void initComponents() {
+    private void initFragments() {
+        fragments = new ArrayList<>();
+        fragments.add(new TaskFragmentData(false));
+        fragments.add(new TaskFragmentData(true));
+    }
+
+    private void initUiComponents() {
         initDrawer();
 
         //init viewPager2 and tabLayout
@@ -62,8 +59,7 @@ public class MainActivity extends AppCompatActivity
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
-                VisibleFragmentUpdater updater = (VisibleFragmentUpdater) pageAdapter.getFragment(position);
-                Log.d("TAG", "onPageSelected: ");
+                VisibleFragmentDataUpdater updater = (VisibleFragmentDataUpdater) pageAdapter.getFragment(position);
                 updater.updateFragment();
             }
         });

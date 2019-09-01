@@ -17,6 +17,5 @@ public interface TaskContract {
         void changeFavourite(String taskId);
         void deleteTask(String taskId);
     }
-
 }
 

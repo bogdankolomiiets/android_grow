@@ -11,7 +11,6 @@ import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.providers.StorageProvider;
 import com.example.practicetwo.util.Constants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.practicetwo.R.integer.DELETE;
