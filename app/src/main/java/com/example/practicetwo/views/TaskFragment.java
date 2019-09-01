@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.practicetwo.CustomRecyclerView;
 import com.example.practicetwo.R;
@@ -22,6 +21,7 @@ import com.example.practicetwo.TaskContract;
 import com.example.practicetwo.entity.Task;
 import com.example.practicetwo.presenters.TaskPresenterImpl;
 import com.example.practicetwo.util.Constants;
+import com.example.practicetwo.util.VisibleFragmentUpdater;
 import com.example.practicetwo.util.RequestCodes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -29,10 +29,12 @@ import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 import static com.example.practicetwo.util.Constants.TASK_EXTRA;
+import static com.example.practicetwo.util.RequestCodes.NEW_TASK_INTENT_CODE;
 
 public class TaskFragment extends Fragment
-                          implements View.OnClickListener,
-                                     TaskContract.TaskView {
+                          implements TaskContract.TaskView,
+                                     VisibleFragmentUpdater {
+
     private TaskContract.TaskPresenter taskPresenter;
     private View view;
     private CustomRecyclerView adapter;
@@ -65,34 +67,16 @@ public class TaskFragment extends Fragment
         DividerItemDecoration divider = new DividerItemDecoration(view.getContext(), layoutManager.getOrientation());
         taskRecyclerView.addItemDecoration(divider);
 
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         //init FloatingActionButton
-        FloatingActionButton newTaskFab = view.getRootView().findViewById(R.id.newTaskFab);
-        newTaskFab.setOnClickListener(this);
-
-        //addOnPageChangeListener for viewPager
-        ViewPager viewPager = view.getRootView().findViewById(R.id.viewPager);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        FloatingActionButton newTaskFab = view.findViewById(R.id.newTaskFab);
+        newTaskFab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                taskPresenter.refresh();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+            public void onClick(View view) {
+                startActivityForResult(new Intent(view.getContext(), TaskActivity.class), NEW_TASK_INTENT_CODE);
             }
         });
+
+        return view;
     }
 
     @Override
@@ -101,9 +85,22 @@ public class TaskFragment extends Fragment
     }
 
     @Override
-    public void updateView() {
-        adapter.notifyDataSetChanged();
+    public void updateFragment() {
+        taskPresenter.refreshData();
     }
+
+    //    @Override
+//    public void onStart() {
+//        super.onStart();
+//        viewPager2 = view.getRootView().findViewById(R.id.viewPager2);
+//        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+//            @Override
+//            public void onPageSelected(int position) {
+//                super.onPageSelected(position);
+//                taskPresenter.refreshData();
+//            }
+//        });
+//    }
 
     @Override
     public void showActivityToEditTask(Task task) {
@@ -122,13 +119,6 @@ public class TaskFragment extends Fragment
             if (resultCode == RESULT_OK) {
                 taskPresenter.updateTask(data.getParcelableExtra(TASK_EXTRA));
             }
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.newTaskFab) {
-            startActivityForResult(new Intent(getContext(), TaskActivity.class), RequestCodes.NEW_TASK_INTENT_CODE);
         }
     }
 

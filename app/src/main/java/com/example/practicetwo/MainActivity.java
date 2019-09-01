@@ -2,6 +2,7 @@ package com.example.practicetwo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -11,37 +12,66 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.practicetwo.util.VisibleFragmentUpdater;
+import com.example.practicetwo.views.TaskFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
+    private List<TaskFragment> fragments;
+    private int[] tabTitles;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
 
+        initTabTitles();
+        initFragments();
+
         //init UI components
         initComponents();
+    }
+
+    private void initFragments() {
+        fragments = new ArrayList<>();
+        fragments.add(new TaskFragment(false));
+        fragments.add(new TaskFragment(true));
+    }
+
+
+    private void initTabTitles() {
+        tabTitles = new int[] {R.string.taskAllText, R.string.taskFavouriteText};
     }
 
     private void initComponents() {
         initDrawer();
 
-        //init viewPager and tabLayout
-        ViewPager viewPager = findViewById(R.id.viewPager);
+        //init viewPager2 and tabLayout
+        ViewPager2 viewPager2 = findViewById(R.id.viewPager2);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(viewPager);
-        PageAdapter pageAdapter = new PageAdapter(
-                this,
-                getSupportFragmentManager(),
-                2);
-        viewPager.setAdapter(pageAdapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager(), getLifecycle(), fragments);
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                VisibleFragmentUpdater updater = (VisibleFragmentUpdater) pageAdapter.getFragment(position);
+                Log.d("TAG", "onPageSelected: ");
+                updater.updateFragment();
+            }
+        });
+
+        viewPager2.setAdapter(pageAdapter);
+        TabLayoutMediator layoutMediator = new TabLayoutMediator(tabLayout, viewPager2,
+                (tab, position) -> tab.setText(tabTitles[position]));
+        layoutMediator.attach();
     }
 
     private void initDrawer() {

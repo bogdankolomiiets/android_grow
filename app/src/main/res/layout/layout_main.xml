@@ -15,20 +15,6 @@
             android:id="@id/toolBar"
             layout="@layout/tool_bar_layout" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/newTaskFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="40dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:elevation="4dp"
-            app:fabSize="auto"
-            app:srcCompat="@android:drawable/ic_menu_add" />
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
@@ -37,8 +23,8 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"/>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="0dp"

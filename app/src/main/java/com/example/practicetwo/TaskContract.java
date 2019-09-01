@@ -6,13 +6,11 @@ public interface TaskContract {
 
     interface TaskView {
         CustomRecyclerView getAdapter();
-        void updateView();
         void showActivityToEditTask(Task task);
     }
 
     interface TaskPresenter{
-        void notifyAdapter();
-        void refresh();
+        void refreshData();
         void insertTask(Task task);
         void updateTask(Task task);
         void showEditActivity(Task task);

@@ -1,57 +1,38 @@
 package com.example.practicetwo;
 
-import android.content.Context;
-
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.practicetwo.views.TaskFragment;
 
+import java.util.List;
 
-public class PageAdapter extends FragmentPagerAdapter {
-    private final int numOfTabs;
-    private final Context context;
-    private TaskFragment allTaskFragment;
-    private TaskFragment favTaskFragment;
 
-    public PageAdapter(Context context, FragmentManager fm, int numOfTabs) {
-        super(fm);
-        this.context = context;
-        this.numOfTabs = numOfTabs;
-        allTaskFragment = new TaskFragment(false);
-        favTaskFragment = new TaskFragment(true);
+public class PageAdapter extends FragmentStateAdapter {
+    private List<TaskFragment> fragments;
+
+    public PageAdapter(FragmentManager fragmentManager, Lifecycle lifecycle, List<TaskFragment> fragments) {
+        super(fragmentManager, lifecycle);
+        this.fragments = fragments;
+    }
+
+    public Fragment getFragment(int position){
+        return fragments.get(position);
+    }
+
+    @NonNull
+    @Override
+    public Fragment createFragment(int position) {
+        return fragments.get(position);
     }
 
     @Override
-    public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return allTaskFragment;
-            case 1:
-                return favTaskFragment;
-            default:
-            return null;
-        }
+    public int getItemCount() {
+        return fragments.size();
     }
 
-    @Override
-    public int getCount() {
-        return numOfTabs;
-    }
-
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-        switch (position){
-            case 0:
-                return context.getString(R.string.taskAllText);
-            case 1:
-                return context.getString(R.string.taskFavouriteText);
-            default:
-                return null;
-        }
-    }
 
 }
