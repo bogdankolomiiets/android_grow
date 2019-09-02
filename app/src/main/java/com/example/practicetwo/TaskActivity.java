@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.example.practicetwo.entity.Task;
-import com.example.practicetwo.views.TaskFragmentData;
+import com.example.practicetwo.views.TaskFragment;
 
 import static com.example.practicetwo.util.Constants.*;
 
@@ -76,7 +76,7 @@ public class TaskActivity extends AppCompatActivity {
             task.setTitle(title);
             task.setDescription(description);
 
-            Intent intent = new Intent(this, TaskFragmentData.class);
+            Intent intent = new Intent(this, TaskFragment.class);
             intent.putExtra(TASK_EXTRA, (Parcelable) task);
             setResult(RESULT_OK, intent);
             finish();

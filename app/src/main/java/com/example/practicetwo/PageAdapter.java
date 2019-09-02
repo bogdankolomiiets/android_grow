@@ -6,15 +6,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.practicetwo.views.TaskFragmentData;
+import com.example.practicetwo.views.TaskFragment;
 
 import java.util.List;
 
 
 public class PageAdapter extends FragmentStateAdapter {
-    private List<TaskFragmentData> fragments;
+    private List<TaskFragment> fragments;
 
-    public PageAdapter(FragmentManager fragmentManager, Lifecycle lifecycle, List<TaskFragmentData> fragments) {
+    public PageAdapter(FragmentManager fragmentManager, Lifecycle lifecycle, List<TaskFragment> fragments) {
         super(fragmentManager, lifecycle);
         this.fragments = fragments;
     }

@@ -14,7 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.practicetwo.util.VisibleFragmentDataUpdater;
-import com.example.practicetwo.views.TaskFragmentData;
+import com.example.practicetwo.views.TaskFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -25,7 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
-    private List<TaskFragmentData> fragments;
+    private List<TaskFragment> fragments;
     private int[] tabTitles;
 
     @Override
@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity
 
     private void initFragments() {
         fragments = new ArrayList<>();
-        fragments.add(new TaskFragmentData(false));
-        fragments.add(new TaskFragmentData(true));
+        fragments.add(new TaskFragment(false));
+        fragments.add(new TaskFragment(true));
     }
 
     private void initUiComponents() {

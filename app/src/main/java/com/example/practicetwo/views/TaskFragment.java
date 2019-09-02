@@ -31,7 +31,7 @@ import static android.app.Activity.RESULT_OK;
 import static com.example.practicetwo.util.Constants.TASK_EXTRA;
 import static com.example.practicetwo.util.RequestCodes.NEW_TASK_INTENT_CODE;
 
-public class TaskFragmentData extends Fragment
+public class TaskFragment extends Fragment
                           implements TaskContract.TaskView,
         VisibleFragmentDataUpdater {
 
@@ -39,10 +39,10 @@ public class TaskFragmentData extends Fragment
     private CustomRecyclerView adapter;
     private boolean isFavouriteTasks;
 
-    public TaskFragmentData() {
+    public TaskFragment() {
     }
 
-    public TaskFragmentData(boolean isFavouriteTasks) {
+    public TaskFragment(boolean isFavouriteTasks) {
         super();
         this.isFavouriteTasks = isFavouriteTasks;
     }
@@ -85,6 +85,11 @@ public class TaskFragmentData extends Fragment
     public void updateFragment() {
         if (taskPresenter != null)
         taskPresenter.refreshData();
+    }
+
+    @Override
+    public void notifyAdapter() {
+        adapter.notifyDataSetChanged();
     }
 
     @Override

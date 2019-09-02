@@ -98,6 +98,7 @@ public class TaskPresenterImpl
     @Override
     public void onLoadFinished(@NonNull Loader<List<Task>> loader, List<Task> data) {
         taskView.getAdapter().setData(data);
+        taskView.notifyAdapter();
     }
 
     @Override
